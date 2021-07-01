@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { categoryDB } from '../../../../shared/tables/category';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { CategoryService } from 'src/app/shared/service/category.service';
 
 @Component({
   selector: 'app-category',
@@ -11,8 +12,14 @@ export class CategoryComponent implements OnInit {
   public closeResult: string;
   public categories = []
 
-  constructor(private modalService: NgbModal) {
-    this.categories = categoryDB.category;
+  constructor(
+    private modalService: NgbModal,
+    private categoriesService: CategoryService
+  ) {
+    this.categoriesService.getCategories().subscribe((categories: []) => {
+      console.log("Categories: ", categories);
+      this.categories = categories;
+    })
   }
 
   open(content) {
@@ -22,6 +29,7 @@ export class CategoryComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -31,7 +39,6 @@ export class CategoryComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
 
   public settings = {
     actions: {
@@ -52,7 +59,7 @@ export class CategoryComponent implements OnInit {
         title: 'Status',
         type: 'html',
       },
-      category: {
+      category_Name: {
         title: 'Category',
       }
     },
@@ -60,5 +67,4 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

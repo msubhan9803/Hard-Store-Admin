@@ -14,6 +14,9 @@ import { NavService } from './service/nav.service';
 import { WINDOW_PROVIDERS } from './service/windows.service';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
+import { EnvironmentUrlService } from './service/enviroment-url.service';
+import { CategoryService } from './service/category.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,9 +31,15 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
-  providers: [NavService, WINDOW_PROVIDERS],
+  providers: [
+    NavService,
+    CategoryService,
+    EnvironmentUrlService,
+    WINDOW_PROVIDERS
+  ],
   exports: [FeatherIconsComponent, ToggleFullscreenDirective]
 })
 export class SharedModule { }
