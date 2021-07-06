@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { categoryDB } from '../../../../shared/tables/category';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from 'src/app/shared/service/category.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-category',
@@ -10,16 +11,18 @@ import { CategoryService } from 'src/app/shared/service/category.service';
 })
 export class CategoryComponent implements OnInit {
   public closeResult: string;
-  public categories = []
+  public categories = [];
+  public addCategoryForm: FormGroup;
 
   constructor(
     private modalService: NgbModal,
-    private categoriesService: CategoryService
+    private categoriesService: CategoryService,
+    private fb: FormBuilder
   ) {
     this.categoriesService.getCategories().subscribe((categories: []) => {
-      console.log("Categories: ", categories);
       this.categories = categories;
-    })
+    });
+    this.createAddCategoryForm();
   }
 
   open(content) {
@@ -40,30 +43,38 @@ export class CategoryComponent implements OnInit {
     }
   }
 
+  addCategory(e) {
+    console.log(e)
+    this.categoriesService.addCategory(e).subscribe(res => {
+      console.log("addCategory: ", res);
+    })
+  }
+
   public settings = {
     actions: {
       position: 'right'
     },
     columns: {
-      img: {
-        title: 'Image',
-        type: 'html',
-      },
-      product_name: {
-        title: 'Name'
-      },
-      price: {
-        title: 'Price'
-      },
-      status: {
-        title: 'Status',
-        type: 'html',
-      },
       category_Name: {
         title: 'Category',
-      }
+      },
+      sub_category_Name: {
+        title: 'Sub Category',
+      },
+      slug: {
+        title: 'Slug',
+        type: 'html',
+      },
     },
   };
+
+  createAddCategoryForm() {
+    this.addCategoryForm = this.fb.group({
+      category_Name: ['', Validators.required],
+      sub_category_Name: this.fb.array([]),
+      slug: ['', Validators.required]
+    })
+  }
 
   ngOnInit() {
   }

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
+import { category } from '../models/category';
 import { EnvironmentUrlService } from './enviroment-url.service';
 
 @Injectable({
@@ -26,7 +27,15 @@ export class CategoryService {
 
   // GET: category/getCategories
   public getCategories() {
-    var url = this._env.urlAddress + 'category/getCategories';
+    let url = this._env.urlAddress + 'category/getCategories';
     return this.http.get(url);
+  }
+
+  // POST: category/addCategory
+  public addCategory(categoryObj: category) {
+    let url = this._env.urlAddress + 'category/addCategory';
+    let body = JSON.stringify(categoryObj);
+
+    return this.http.post(url, body);
   }
 }
