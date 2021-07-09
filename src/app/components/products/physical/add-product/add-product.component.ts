@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { product } from 'src/app/shared/models/product';
+
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -32,6 +34,38 @@ export class AddProductComponent implements OnInit {
       price: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       code: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       size: ['', Validators.required],
+    })
+  }
+
+  createForm() {
+    this.productForm = this.fb.group({
+      type: [''],
+      title: [''],
+      description: [''],
+      brand: [null],
+      collections: this.fb.array([]),
+      category: [null],
+      sale: [null],
+      discount: [0],
+      stock: [null],
+      new: [true],
+      tags: this.fb.array([]),
+      Watch_Case_Shape: [''],
+      Glass: [''],
+      Watch_Feature: this.fb.array([]),
+      Model: [''],
+      Dial_Size: [''],
+      Watch_Case_Size: [''],
+      Movement: [''],
+      Watch_Movement_Country: [''],
+      Strap_Material: [''],
+      water_resistance: [true],
+      Color_Family: this.fb.array([]),
+      variants: this.fb.array([]),
+      Warranty: this.fb.group({
+        isWarranty: [true],
+        warrantyPeriod: [null] // number
+      })
     })
   }
 

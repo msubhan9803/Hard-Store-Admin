@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { categoryDB } from '../../../../shared/tables/category';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from 'src/app/shared/service/category.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-category',
@@ -43,11 +43,11 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  addCategory(e) {
-    console.log(e)
-    this.categoriesService.addCategory(e).subscribe(res => {
-      console.log("addCategory: ", res);
-    })
+  addCategory(e?) {
+    console.log(this.addCategoryForm.value)
+    // this.categoriesService.addCategory(e).subscribe(res => {
+    //   console.log("addCategory: ", res);
+    // })
   }
 
   public settings = {
@@ -73,7 +73,20 @@ export class CategoryComponent implements OnInit {
       category_Name: ['', Validators.required],
       sub_category_Name: this.fb.array([]),
       slug: ['', Validators.required]
-    })
+    });
+    this.subCategoryFormArray.push(this.fb.control(''))
+  }
+
+  get subCategoryFormArray(): FormArray {
+    return this.addCategoryForm.get("sub_category_Name") as FormArray
+  }
+
+  addSubCategoryForm() {
+    this.subCategoryFormArray.push(this.fb.control(''))
+  }
+
+  delSubCategoryFrom(index) {
+    this.subCategoryFormArray.removeAt(index);
   }
 
   ngOnInit() {
