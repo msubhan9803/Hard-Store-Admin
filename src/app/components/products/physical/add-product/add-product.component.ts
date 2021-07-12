@@ -42,9 +42,15 @@ export class AddProductComponent implements OnInit {
       type: [''],
       title: [''],
       description: [''],
-      brand: [null],
+      brand: this.fb.group({
+        brand_id: [''],
+        brand_Name: ['']
+      }),
       collections: this.fb.array([]),
-      category: [null],
+      category: this.fb.group({
+        category_id: [''],
+        category_Name: ['']
+      }),
       sale: [null],
       discount: [0],
       stock: [null],
