@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { product } from 'src/app/shared/models/product';
 
 @Component({
@@ -25,32 +27,67 @@ export class AddProductComponent implements OnInit {
   {
     img: "assets/images/user.png",
   }
+  ];
+
+  public config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold']
+    ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  };
+
+  public collectionsData = [
+    "Collection 1",
+    "Collection 2",
+    "Collection 3"
   ]
 
+  public dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
 
   constructor(private fb: FormBuilder) {
-    this.productForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      price: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      code: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      size: ['', Validators.required],
-    })
+    this.createForm();
   }
 
   createForm() {
     this.productForm = this.fb.group({
-      type: [''],
       title: [''],
+      type: [''],
       description: [''],
-      brand: this.fb.group({
-        brand_id: [''],
-        brand_Name: ['']
-      }),
-      collections: this.fb.array([]),
-      category: this.fb.group({
-        category_id: [''],
-        category_Name: ['']
-      }),
+      // Change
+      brand_id: [''],
+      collections: [],
+      // Change
+      category_id: [''],
       sale: [null],
       discount: [0],
       stock: [null],
@@ -68,10 +105,9 @@ export class AddProductComponent implements OnInit {
       water_resistance: [true],
       Color_Family: this.fb.array([]),
       variants: this.fb.array([]),
-      Warranty: this.fb.group({
-        isWarranty: [true],
-        warrantyPeriod: [null] // number
-      })
+      // Change
+      isWarranty: [true],
+      warrantyPeriod: [null] // number
     })
   }
 

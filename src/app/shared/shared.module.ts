@@ -17,6 +17,8 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
 import { EnvironmentUrlService } from './service/enviroment-url.service';
 import { CategoryService } from './service/category.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularEditorModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     NavService,
@@ -40,6 +44,11 @@ import { HttpClientModule } from '@angular/common/http';
     EnvironmentUrlService,
     WINDOW_PROVIDERS
   ],
-  exports: [FeatherIconsComponent, ToggleFullscreenDirective]
+  exports: [
+    FeatherIconsComponent,
+    ToggleFullscreenDirective,
+    AngularEditorModule,
+    NgMultiSelectDropDownModule
+  ]
 })
 export class SharedModule { }

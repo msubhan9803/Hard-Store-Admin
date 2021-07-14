@@ -2,22 +2,21 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <div class="card">
-        <div class="card-header">
-          <h5>Add Product</h5>
-        </div>
-        <div class="card-body">
-          <div class="row product-adding">
-            <div class="col-xl-12">
-              <form class="needs-validation" [formGroup]="productForm" novalidate>
-                <div class="add-product-form row">
-                  <div class="col-md-8">
+      <form class="needs-validation" [formGroup]="productForm" novalidate>
+        <div class="card">
+          <div class="card-header">
+            <h5>Basic Details</h5>
+          </div>
+          <div class="card-body">
+            <div class="row product-adding">
+              <div class="col-xl-12">
+                <div class="product-basic-details row">
+                  <div class="col-md-12">
                     <div class="form-group">
                       <label for="validationCustom01">Title
                         :</label>
-                      <input class="form-control" id="validationCustom01" type="text"
-                        [formControl]="productForm.controls['name']" required>
-                      <div *ngIf="productForm.controls.name.touched && productForm.controls.name.errors?.required"
+                      <input class="form-control" id="validationCustom01" type="text" formControlName="title" required>
+                      <div *ngIf="productForm.controls.title.touched && productForm.controls.title.errors?.required"
                         class="text text-danger">
                         Title Name is required.
                       </div>
@@ -25,32 +24,22 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="validationCustom02">Price :</label>
-                      <input class="form-control" id="validationCustom02" type="number"
-                        [formControl]="productForm.controls['price']" required="">
-                      <div *ngIf="productForm.controls.price.touched && productForm.controls.price.errors?.required"
+                      <label for="exampleFormControlSelect1">Type : </label>
+                      <select class="form-control digits" formControlName="type" id="exampleFormControlSelect1">
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                        <option>Extra Large</option>
+                      </select>
+                      <div *ngIf="productForm.controls.type.touched && productForm.controls.type.errors?.required"
                         class="text text-danger">
-                        Product Price is required.
+                        Title Name is required.
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="validationCustom03">Product Code
-                        :</label>
-                      <input class="form-control" id="validationCustom03" type="number"
-                        [formControl]="productForm.controls['code']" required="">
-                      <div *ngIf="productForm.controls.code.touched && productForm.controls.code.errors?.required"
-                        class="text text-danger">
-                        Product <Code></Code> is required.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="exampleFormControlSelect1">Select
-                        Size
-                        :</label>
+                      <label for="exampleFormControlSelect1">Category : </label>
                       <select class="form-control digits" id="exampleFormControlSelect1">
                         <option>Small</option>
                         <option>Medium</option>
@@ -59,40 +48,92 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Total Products :</label>
-                      <div class="qty-box1">
-                        <div class="input-group">
-                          <i class="fa fa-minus btnGtr1" (click)=decrement()></i>
-                          <input class="touchspin1 text-center" name="counter" [value]="counter" type="text">
-                          <i class="fa fa-plus btnLess1" (click)=increment()></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Add Description :</label>
-                      <div class="col-xl-8 col-sm-7 pl-0 description-sm">
-                        <ck-editor id="editor1" language="en" [fullPage]="false"></ck-editor>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <div class="form-group row mb-0 ml-1 mt-3">
-                <div class="product-buttons">
-                  <button type="button" class="btn btn-primary mr-1">Save as Draft</button>
-                  <button type="button" class="btn btn-secondary">Save</button>
-                  <button type="button" class="btn btn-light">Discard</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <div class="card">
+          <div class="card-header">
+            <h5>Product Description</h5>
+          </div>
+          <div class="card-body">
+            <div class="row product-adding">
+              <div class="col-xl-12">
+                <div class="product-basic-details row">
+                  <angular-editor [placeholder]="'Enter text here...'" formControlName="description"></angular-editor>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h5>Other Details</h5>
+          </div>
+          <div class="card-body">
+            <div class="row product-adding">
+              <div class="col-xl-12">
+                <div class="product-other-details row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Brand : </label>
+                      <select class="form-control" formControlName="brand_id" id="exampleFormControlSelect1">
+                        <option>Brand 1</option>
+                        <option>Brand 2</option>
+                        <option>Brand 3</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.brand_id.touched && productForm.controls.brand_id.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Collections : </label>
+                      <ng-multiselect-dropdown formControlName="collections" [placeholder]="'Select Collection'"
+                        [settings]="dropdownSettings" [data]="collectionsData">
+                      </ng-multiselect-dropdown>
+
+                      <div
+                        *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Discount : </label>
+                      <input formControlName="discount" class="form-control digits text-right" id="validationCustom02"
+                          type="number">
+
+                      <div
+                        *ngIf="productForm.controls.discount.touched && productForm.controls.discount.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 <!-- Container-fluid Ends-->
+
+
+
+<!-- <div class="form-group row mb-0 ml-1 mt-3">
+  <div class="product-buttons">
+    <button type="button" class="btn btn-primary mr-1">Save as Draft</button>
+    <button type="button" class="btn btn-secondary">Save</button>
+    <button type="button" class="btn btn-light">Discard</button>
+  </div>
+</div> -->
