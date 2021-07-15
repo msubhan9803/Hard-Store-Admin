@@ -63,6 +63,23 @@ export class AddProductComponent implements OnInit {
     "Collection 2",
     "Collection 3"
   ]
+  public tagsData = [
+    "Tag 1",
+    "Tag 2",
+    "Tag 3"
+  ]
+  public watchFeaturesData = [
+    "Chronograph",
+    "Compass",
+    "GPS",
+    "Countdown"
+  ]
+  public colorFamilyData = [
+    "Blue",
+    "Gold",
+    "Silver",
+    "Black"
+  ]
 
   public dropdownSettings: IDropdownSettings = {
     singleSelection: false,
@@ -89,13 +106,12 @@ export class AddProductComponent implements OnInit {
       // Change
       category_id: [''],
       sale: [null],
-      discount: [0],
       stock: [null],
       new: [true],
-      tags: this.fb.array([]),
+      tags: [],
       Watch_Case_Shape: [''],
       Glass: [''],
-      Watch_Feature: this.fb.array([]),
+      Watch_Feature: [],
       Model: [''],
       Dial_Size: [''],
       Watch_Case_Size: [''],
@@ -103,7 +119,7 @@ export class AddProductComponent implements OnInit {
       Watch_Movement_Country: [''],
       Strap_Material: [''],
       water_resistance: [true],
-      Color_Family: this.fb.array([]),
+      Color_Family: [],
       variants: this.fb.array([]),
       // Change
       isWarranty: [true],

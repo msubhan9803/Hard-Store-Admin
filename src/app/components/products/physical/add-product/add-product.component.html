@@ -26,10 +26,8 @@
                     <div class="form-group">
                       <label for="exampleFormControlSelect1">Type : </label>
                       <select class="form-control digits" formControlName="type" id="exampleFormControlSelect1">
-                        <option>Small</option>
-                        <option>Medium</option>
-                        <option>Large</option>
-                        <option>Extra Large</option>
+                        <option>Business</option>
+                        <option>Casual</option>
                       </select>
                       <div *ngIf="productForm.controls.type.touched && productForm.controls.type.errors?.required"
                         class="text text-danger">
@@ -79,6 +77,7 @@
                     <div class="form-group">
                       <label for="exampleFormControlSelect1">Brand : </label>
                       <select class="form-control" formControlName="brand_id" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
                         <option>Brand 1</option>
                         <option>Brand 2</option>
                         <option>Brand 3</option>
@@ -106,17 +105,224 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Discount : </label>
-                      <input formControlName="discount" class="form-control digits text-right" id="validationCustom02"
+                      <label for="exampleFormControlSelect1">Stock : </label>
+                      <input formControlName="stock" class="form-control digits text-right" id="validationCustom02"
                           type="number">
 
                       <div
-                        *ngIf="productForm.controls.discount.touched && productForm.controls.discount.errors?.required"
+                        *ngIf="productForm.controls.stock.touched && productForm.controls.stock.errors?.required"
                         class="text text-danger">
                         Title Name is required.
                       </div>
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">New : </label>
+                      <select class="form-control" formControlName="new" id="exampleFormControlSelect1">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.new.touched && productForm.controls.new.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Tags : </label>
+                      <ng-multiselect-dropdown formControlName="tags" [placeholder]="'Select Tags'"
+                        [settings]="dropdownSettings" [data]="tagsData">
+                      </ng-multiselect-dropdown>
+
+                      <div
+                        *ngIf="productForm.controls.tags.touched && productForm.controls.tags.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Watch Case Shape : </label>
+                      <select class="form-control" formControlName="Watch_Case_Shape" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Round</option>
+                        <option>Square</option>
+                        <option>Rectangle</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Watch_Case_Shape.touched && productForm.controls.Watch_Case_Shape.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Glass : </label>
+                      <select class="form-control" formControlName="Glass" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Sappire Crystal Glass</option>
+                        <option>Mineral</option>
+                        <option>Plexiglass</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Glass.touched && productForm.controls.Glass.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Watch Feature : </label>
+                      <ng-multiselect-dropdown formControlName="Watch_Feature" [placeholder]="'Select Watch Features'"
+                        [settings]="dropdownSettings" [data]="watchFeaturesData">
+                      </ng-multiselect-dropdown>
+
+                      <div
+                        *ngIf="productForm.controls.Watch_Feature.touched && productForm.controls.Watch_Feature.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="validationCustom01">Model
+                        :</label>
+                      <input class="form-control" id="validationCustom01" type="text" formControlName="Model" required>
+                      <div *ngIf="productForm.controls.Model.touched && productForm.controls.Model.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Dial Size : </label>
+                      <select class="form-control" formControlName="Dial_Size" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>34mm</option>
+                        <option>22mm</option>
+                        <option>18mm</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Dial_Size.touched && productForm.controls.Dial_Size.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Watch Case Size : </label>
+                      <select class="form-control" formControlName="Watch_Case_Size" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Under 20mm</option>
+                        <option>21mm to 24mm</option>
+                        <option>30mm to 34mm</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Watch_Case_Size.touched && productForm.controls.Watch_Case_Size.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Movement : </label>
+                      <select class="form-control" formControlName="Movement" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Automatic</option>
+                        <option>Digital</option>
+                        <option>Quartz</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Movement.touched && productForm.controls.Movement.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Watch Movement Country : </label>
+                      <select class="form-control" formControlName="Watch_Movement_Country" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Automatic</option>
+                        <option>Digital</option>
+                        <option>Quartz</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Watch_Movement_Country.touched && productForm.controls.Watch_Movement_Country.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Strap : </label>
+                      <select class="form-control" formControlName="Strap_Material" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Steel</option>
+                        <option>Stainless Steel</option>
+                        <option>Brass</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Strap_Material.touched && productForm.controls.Strap_Material.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Watch water resistance : </label>
+                      <select class="form-control" formControlName="water_resistance" id="exampleFormControlSelect1">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.water_resistance.touched && productForm.controls.water_resistance.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Color Family : </label>
+                      <ng-multiselect-dropdown formControlName="Color_Family" [placeholder]="'Select Color Family'"
+                        [settings]="dropdownSettings" [data]="colorFamilyData">
+                      </ng-multiselect-dropdown>
+
+                      <div
+                        *ngIf="productForm.controls.Color_Family.touched && productForm.controls.Color_Family.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h5>Variant Details</h5>
+          </div>
+          <div class="card-body">
+            <div class="row product-adding">
+              <div class="col-xl-12">
+                <div class="product-basic-details row">
+
                 </div>
               </div>
             </div>
