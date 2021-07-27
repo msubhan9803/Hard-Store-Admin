@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { product } from 'src/app/shared/models/product';
@@ -28,6 +28,7 @@ export class AddProductComponent implements OnInit {
     img: "assets/images/user.png",
   }
   ];
+  public isCollapsed = false;
 
   public config: AngularEditorConfig = {
     editable: true,
@@ -80,6 +81,12 @@ export class AddProductComponent implements OnInit {
     "Silver",
     "Black"
   ]
+  public variantsColorData = [
+    "Black",
+    "Blue",
+    "Green",
+    "White"
+  ]
 
   public dropdownSettings: IDropdownSettings = {
     singleSelection: false,
@@ -123,8 +130,30 @@ export class AddProductComponent implements OnInit {
       variants: this.fb.array([]),
       // Change
       isWarranty: [true],
-      warrantyPeriod: [null] // number
+      warrantyPeriod: [null], // number,
+      variantDummyValue: [null]
     })
+  }
+
+  collapseVariantImageArea() {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+  variantSelectFieldChangeHandler() {
+    this.variantsArray.push(this.fb.control({
+      variantColor: this.productForm.value.variantDummyValue,
+      images: []
+    }));
+    this.productForm.controls['variantDummyValue'].reset();
+  }
+
+  deleteVariant(index) {
+    console.log("index: ", index)
+    this.variantsArray.removeAt(index)
+  }
+
+  get variantsArray(): FormArray {
+    return this.productForm.get("variants") as FormArray
   }
 
   increment() {

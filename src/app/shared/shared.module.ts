@@ -19,6 +19,8 @@ import { CategoryService } from './service/category.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     RouterModule,
     HttpClientModule,
     AngularEditorModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgSelectModule,
+    NgbModule
   ],
   providers: [
     NavService,
@@ -48,7 +52,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FeatherIconsComponent,
     ToggleFullscreenDirective,
     AngularEditorModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    NgSelectModule,
+    NgbModule
   ]
 })
 export class SharedModule { }
