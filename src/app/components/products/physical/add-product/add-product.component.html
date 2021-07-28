@@ -1,5 +1,18 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
+
+  <!-- <div class="custom-dropzone" id="images-dropzone-{{arrayIndex}}" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+    <ngx-dropzone-label>
+      <div>
+        <h2>Add Images</h2>
+      </div>
+    </ngx-dropzone-label>
+    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+      [file]="f" [removable]="true" (removed)="onRemove(f)">
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-image-preview>
+  </div> -->
+
   <div class="row">
     <div class="col-sm-8">
       <form class="needs-validation" [formGroup]="productForm" novalidate>
@@ -231,6 +244,20 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
+                      <label for="exampleFormControlSelect1">Color Family : </label>
+                      <ng-select formControlName="Color_Family" [items]="colorFamilyData"
+                        [placeholder]="'Select Color Family'">
+                      </ng-select>
+
+                      <div
+                        *ngIf="productForm.controls.Color_Family.touched && productForm.controls.Color_Family.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
                       <label for="exampleFormControlSelect1">Movement : </label>
                       <select class="form-control" formControlName="Movement" id="exampleFormControlSelect1">
                         <option value="" selected="true">Select</option>
@@ -292,20 +319,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="exampleFormControlSelect1">Color Family : </label>
-                      <ng-multiselect-dropdown formControlName="Color_Family" [placeholder]="'Select Color Family'"
-                        [settings]="dropdownSettings" [data]="colorFamilyData">
-                      </ng-multiselect-dropdown>
-
-                      <div
-                        *ngIf="productForm.controls.Color_Family.touched && productForm.controls.Color_Family.errors?.required"
-                        class="text text-danger">
-                        Title Name is required.
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -321,41 +334,50 @@
 
                 <!-- Variants for loop -->
                 <div *ngIf="this.productForm.value.variants.length > 0">
-                  <div class="product-variant-details row mt-2 mb-2"
-                    *ngFor="let variant of this.variantsArray.value; let arrayIndex = index">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="exampleFormControlSelect1">Variant : </label>
-                        <ng-select formControlName="variantColor" [items]="variantsColorData">
-                        </ng-select>
 
-                        <div
-                          *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"
-                          class="text text-danger">
-                          Title Name is required.
+                  <div formArrayName="variants">
+                    <div class="product-variant-details row  align-items-center mt-2 mb-2"
+                      *ngFor="let variant of this.variantsArray.value; let arrayIndex = index">
+                      <div class="col-md-6" [formGroupName]="arrayIndex">
+                        <div class="form-group">
+                          <label for="exampleFormControlSelect1">Variant : </label>
+                          <ng-select formControlName="variantColor" [items]="variantsColorData">
+                          </ng-select>
+
+                          <div
+                            *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"
+                            class="text text-danger">
+                            Title Name is required.
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div class="col-md-6">
-                      <div class="float-left m-2">
-                        <button class="btn btn-sm btn-secondary" (click)="collapseVariantImageArea()"
-                          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-                          Toggle
-                        </button>
+                      <div class="col-md-6">
+                        <div class="float-left m-2">
+                          <button class="btn-toggle" (click)="collapseVariantImageArea()"
+                            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+                            Toggle
+                          </button>
+                        </div>
+                        <div class="float-left m-2">
+                          <i class="fa fa-trash text-black" (click)="deleteVariant(arrayIndex)"></i>
+                        </div>
                       </div>
-                      <div class="float-left m-2">
-                        <i class="fa fa-2x fa-trash text-danger" (click)="deleteVariant(arrayIndex)"></i>
-                      </div>
-                    </div>
 
-                    <div class="variant col-12">
-                      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                        <div class="card">
-                          <div class="card-body border">
-                            <button class="btn btn-sm btn-outline-primary">
-                              Add Image
-                            </button>
+                      <div class="variant col-12">
+                        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                          <div class="card">
+                            <div class="custom-dropzone" id="images-dropzone-{{arrayIndex}}" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+                              <ngx-dropzone-label>
+                                <div>
+                                  <h2>Add Images</h2>
+                                </div>
+                              </ngx-dropzone-label>
+                              <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                              </ngx-dropzone-image-preview>
+                            </div>
                           </div>
                         </div>
                       </div>

@@ -140,8 +140,8 @@ export class AddProductComponent implements OnInit {
   }
 
   variantSelectFieldChangeHandler() {
-    this.variantsArray.push(this.fb.control({
-      variantColor: this.productForm.value.variantDummyValue,
+    this.variantsArray.push(this.fb.group({
+      variantColor: [this.productForm.value.variantDummyValue],
       images: []
     }));
     this.productForm.controls['variantDummyValue'].reset();
@@ -155,6 +155,27 @@ export class AddProductComponent implements OnInit {
   get variantsArray(): FormArray {
     return this.productForm.get("variants") as FormArray
   }
+
+  onVariantImageSelect(event) {
+    console.log("selected... ", event)
+  }
+
+  onVariantImageRemove(event) {
+    console.log("removing... ", event)
+  }
+
+  files: File[] = [];
+
+	onSelect(event) {
+		console.log("here");
+		console.log(event);
+		this.files.push(...event.addedFiles);
+	}
+
+	onRemove(event) {
+		console.log(event);
+		this.files.splice(this.files.indexOf(event), 1);
+	}
 
   increment() {
     this.counter += 1;
