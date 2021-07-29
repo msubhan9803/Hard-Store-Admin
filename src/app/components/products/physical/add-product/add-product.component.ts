@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { product } from 'src/app/shared/models/product';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-product',
@@ -13,6 +14,8 @@ export class AddProductComponent implements OnInit {
   public productForm: FormGroup;
   public counter: number = 1;
   files: File[] = [];
+  variantsArray = [];
+  variantDummyValue = "";
 
   public url = [{
     img: "assets/images/user.png",
@@ -102,6 +105,11 @@ export class AddProductComponent implements OnInit {
     this.createForm();
   }
 
+  onSubmit() {
+    console.log("this.productForm: ", this.productForm.value)
+    console.log("this.variantsArray: ", this.variantsArray)
+  }
+
   createForm() {
     this.productForm = this.fb.group({
       title: [''],
@@ -130,48 +138,51 @@ export class AddProductComponent implements OnInit {
       variants: this.fb.array([]),
       // Change
       isWarranty: [true],
-      warrantyPeriod: [null], // number,
-      variantDummyValue: [null]
+      warrantyPeriod: [null], // number
     })
   }
 
   collapseVariantImageArea(index) {
-    console.log("index: ", index)
-    // this.isCollapsed = !this.isCollapsed;
-    let currentFormValue = this.productForm.value;
-    currentFormValue.variants[index].collapse = !currentFormValue.variants[index].collapse;
-    this.productForm.patchValue(currentFormValue);
+    this.variantsArray[index].collapse = !this.variantsArray[index].collapse;
   }
 
   variantSelectFieldChangeHandler() {
-    this.variantsArray.push(this.fb.group({
-      variantColor: [this.productForm.value.variantDummyValue],
+    this.variantsArray.push({
+      variantColor: this.variantDummyValue,
       images: [],
-      collapse: false,
-      tempFile: []
-    }));
-    this.productForm.controls['variantDummyValue'].reset();
+      imagesPreview: [],
+      collapse: false
+    });
+    this.variantDummyValue = null;
   }
 
   deleteVariant(index) {
-    console.log("index: ", index)
-    this.variantsArray.removeAt(index)
+    this.variantsArray.splice(index, 1)
   }
 
-  get variantsArray(): FormArray {
-    return this.productForm.get("variants") as FormArray
+  variantImageAdded(file, index, e) {
+    var mimeType = e.target.files[0].type;
+    console.log(mimeType)
+    if (mimeType.match(/image\/*/) == null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please upload an image only!'
+      })
+      return;
+    }
+    this.variantsArray[index].images.push(file)
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      this.variantsArray[index].imagesPreview.push(event.target.result)
+    }
   }
 
-  variantImageAdded(index) {
-    // console.log(this.productForm.controls['tempFile'])
-    // this.variantsArray[index].images.push(this.productForm.controls['tempFile'])
-    // this.productForm.controls['tempFile'].reset();
-    console.log("index: ", index)
-    console.log("this.variantsArray: ", this.productForm.controls['variants'])
-  }
-
-  onVariantImageRemove(event) {
-    console.log("removing... ", event)
+  onVariantImageRemove(arrayIndex, fileIndex) {
+    this.variantsArray[arrayIndex].images.splice(fileIndex, 1)
+    this.variantsArray[arrayIndex].imagesPreview.splice(fileIndex, 1)
   }
 
   increment() {
@@ -182,24 +193,6 @@ export class AddProductComponent implements OnInit {
     this.counter -= 1;
   }
 
-  //FileUpload
-  readUrl(event: any, i) {
-    if (event.target.files.length === 0)
-      return;
-    //Image upload validation
-    var mimeType = event.target.files[0].type;
-    if (mimeType.match(/image\/*/) == null) {
-      return;
-    }
-    // Image upload
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (_event) => {
-      this.url[i].img = reader.result.toString();
-    }
-  }
-
   ngOnInit() {
   }
-
 }
