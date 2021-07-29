@@ -12,6 +12,8 @@ import { product } from 'src/app/shared/models/product';
 export class AddProductComponent implements OnInit {
   public productForm: FormGroup;
   public counter: number = 1;
+  files: File[] = [];
+
   public url = [{
     img: "assets/images/user.png",
   },
@@ -58,7 +60,6 @@ export class AddProductComponent implements OnInit {
       },
     ]
   };
-
   public collectionsData = [
     "Collection 1",
     "Collection 2",
@@ -87,7 +88,6 @@ export class AddProductComponent implements OnInit {
     "Green",
     "White"
   ]
-
   public dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: 'item_id',
@@ -135,14 +135,20 @@ export class AddProductComponent implements OnInit {
     })
   }
 
-  collapseVariantImageArea() {
-    this.isCollapsed = !this.isCollapsed;
+  collapseVariantImageArea(index) {
+    console.log("index: ", index)
+    // this.isCollapsed = !this.isCollapsed;
+    let currentFormValue = this.productForm.value;
+    currentFormValue.variants[index].collapse = !currentFormValue.variants[index].collapse;
+    this.productForm.patchValue(currentFormValue);
   }
 
   variantSelectFieldChangeHandler() {
     this.variantsArray.push(this.fb.group({
       variantColor: [this.productForm.value.variantDummyValue],
-      images: []
+      images: [],
+      collapse: false,
+      tempFile: []
     }));
     this.productForm.controls['variantDummyValue'].reset();
   }
@@ -156,26 +162,17 @@ export class AddProductComponent implements OnInit {
     return this.productForm.get("variants") as FormArray
   }
 
-  onVariantImageSelect(event) {
-    console.log("selected... ", event)
+  variantImageAdded(index) {
+    // console.log(this.productForm.controls['tempFile'])
+    // this.variantsArray[index].images.push(this.productForm.controls['tempFile'])
+    // this.productForm.controls['tempFile'].reset();
+    console.log("index: ", index)
+    console.log("this.variantsArray: ", this.productForm.controls['variants'])
   }
 
   onVariantImageRemove(event) {
     console.log("removing... ", event)
   }
-
-  files: File[] = [];
-
-	onSelect(event) {
-		console.log("here");
-		console.log(event);
-		this.files.push(...event.addedFiles);
-	}
-
-	onRemove(event) {
-		console.log(event);
-		this.files.splice(this.files.indexOf(event), 1);
-	}
 
   increment() {
     this.counter += 1;

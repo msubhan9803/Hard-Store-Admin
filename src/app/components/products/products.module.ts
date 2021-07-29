@@ -25,6 +25,7 @@ import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { FilePickerModule } from 'ngx-awesome-uploader';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -46,7 +47,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     NgbModule,
     DropzoneModule,
     GalleryModule.forRoot(),
-    SharedModule
+    SharedModule,
+    FilePickerModule
   ],
   providers: [
     {

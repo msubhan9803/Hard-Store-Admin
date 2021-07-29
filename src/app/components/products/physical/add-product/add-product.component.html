@@ -1,7 +1,7 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
 
-  <!-- <div class="custom-dropzone" id="images-dropzone-{{arrayIndex}}" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+  <!-- <div class="custom-dropzone" id="images-dropzone-1" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
     <ngx-dropzone-label>
       <div>
         <h2>Add Images</h2>
@@ -334,7 +334,6 @@
 
                 <!-- Variants for loop -->
                 <div *ngIf="this.productForm.value.variants.length > 0">
-
                   <div formArrayName="variants">
                     <div class="product-variant-details row  align-items-center mt-2 mb-2"
                       *ngFor="let variant of this.variantsArray.value; let arrayIndex = index">
@@ -354,29 +353,40 @@
 
                       <div class="col-md-6">
                         <div class="float-left m-2">
-                          <button class="btn-toggle" (click)="collapseVariantImageArea()"
-                            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-                            Toggle
-                          </button>
+                          <i class="fa fa-trash text-black" (click)="deleteVariant(arrayIndex)"></i>
                         </div>
                         <div class="float-left m-2">
-                          <i class="fa fa-trash text-black" (click)="deleteVariant(arrayIndex)"></i>
+                          <button class="btn-toggle" (click)="collapseVariantImageArea(arrayIndex)"
+                            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+                            Collapse
+                          </button>
                         </div>
                       </div>
 
-                      <div class="variant col-12">
-                        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                          <div class="card">
-                            <div class="custom-dropzone" id="images-dropzone-{{arrayIndex}}" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
-                              <ngx-dropzone-label>
-                                <div>
-                                  <h2>Add Images</h2>
+                      <div class="col-md-6" [formGroupName]="arrayIndex">
+                        <div class="variant col-12">
+                          <div #collapse="ngbCollapse" [(ngbCollapse)]="this.productForm.value.variants[arrayIndex].collapse">
+                          <!-- <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed"> -->
+                            <div class="card">
+                              <div class="container m-2 p-2 bg-light">
+                                <div class="row border m-2 p-3 bg-white">
+                                  <p>
+                                    Drag and drop pictures below to upload.Add at least 3 images of your product from
+                                    different angles.Maximum 8 pictures. Size between 500x500 and 2000x2000 px. Obscene
+                                    image is strictly prohibited.
+                                  </p>
+
+                                  <!-- <input style="display: none;" type="file" id="variant-img-{{arrayIndex}}" accept="image/*" #file
+                                  (change)="variantImageAdded(file.files)">
+
+                                <button class="btn btn-outline-light btn-upload-custom" (click)="file.click()">
+                                  <i class="fa fa-upload" style="color: #069;" aria-hidden="true"></i>
+                                  Upload
+                                </button> -->
+                                  <input type="file" formControlName="tempFile"
+                                    (change)="variantImageAdded(arrayIndex)" />
                                 </div>
-                              </ngx-dropzone-label>
-                              <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
-                                [file]="f" [removable]="true" (removed)="onRemove(f)">
-                                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                              </ngx-dropzone-image-preview>
+                              </div>
                             </div>
                           </div>
                         </div>
