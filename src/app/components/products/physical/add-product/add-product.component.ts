@@ -16,6 +16,16 @@ export class AddProductComponent implements OnInit {
   files: File[] = [];
   variantsArray = [];
   variantDummyValue = "";
+  skuArray = [
+    {
+      availability: true,
+      watch_strap_color: "Blue",
+      special_price: 2400,
+      quantity: 25,
+      seller_sku: "available-blue-2400-25",
+      free_items: 0
+    }
+  ];
 
   public url = [{
     img: "assets/images/user.png",
@@ -101,6 +111,48 @@ export class AddProductComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  public skuTableSettings = {
+    // add: {
+    //   confirmCreate: true
+    // },
+    // edit: {
+    //   confirmSave: true
+    // },
+    // delete: {
+    //   confirmDelete: true
+    // },
+    columns: {
+      availability: {
+        title: 'Availability',
+        type: 'custom',
+        width: '10px',
+        // filter: {
+        //   type: 'checkbox',
+        //   config: {
+        //     true: 'Yes',
+        //     false: 'No',
+        //     resetText: 'clear',
+        //   }
+        // }
+      },
+      watch_strap_color: {
+        title: 'Watch Strap Color',
+      },
+      special_price: {
+        title: 'Special Price'
+      },
+      quantity: {
+        title: 'Quantity'
+      },
+      seller_sku: {
+        title: 'Seller SKU'
+      },
+      free_items: {
+        title: 'Free Items'
+      }
+    },
+  };
+
   constructor(private fb: FormBuilder) {
     this.createForm();
   }
@@ -108,6 +160,7 @@ export class AddProductComponent implements OnInit {
   onSubmit() {
     console.log("this.productForm: ", this.productForm.value)
     console.log("this.variantsArray: ", this.variantsArray)
+    console.log("this.skuArray: ", this.skuArray)
   }
 
   createForm() {
@@ -183,6 +236,23 @@ export class AddProductComponent implements OnInit {
   onVariantImageRemove(arrayIndex, fileIndex) {
     this.variantsArray[arrayIndex].images.splice(fileIndex, 1)
     this.variantsArray[arrayIndex].imagesPreview.splice(fileIndex, 1)
+  }
+
+  onCreateConfirmSKU(e) {
+    this.skuArray.push(e.newData);
+    console.log(this.skuArray)
+  }
+  onEditConfirmSKU(e) {
+    console.log(e)
+    // this.categoriesService.addProduct(e).subscribe(res => {
+    //   console.log("addCategory: ", res);
+    // })
+  }
+  onDeleteConfirmSKU(e) {
+    console.log(e)
+    // this.categoriesService.addCategory(e).subscribe(res => {
+    //   console.log("addCategory: ", res);
+    // })
   }
 
   increment() {
