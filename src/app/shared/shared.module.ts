@@ -21,6 +21,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ProductService } from './service/product.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
   providers: [
     NavService,
     CategoryService,
+    ProductService,
     EnvironmentUrlService,
     WINDOW_PROVIDERS
   ],

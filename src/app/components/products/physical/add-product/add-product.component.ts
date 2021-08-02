@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { LocalDataSource } from 'ng2-smart-table';
 import { product } from 'src/app/shared/models/product';
+import { CategoryService } from 'src/app/shared/service/category.service';
+import { ProductService } from 'src/app/shared/service/product.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,35 +16,28 @@ import Swal from 'sweetalert2';
 export class AddProductComponent implements OnInit {
   public productForm: FormGroup;
   public counter: number = 1;
+  source: LocalDataSource;
   files: File[] = [];
   variantsArray = [];
   variantDummyValue = "";
-  skuArray = [
-    {
-      availability: true,
-      watch_strap_color: "Blue",
-      special_price: 2400,
-      quantity: 25,
-      seller_sku: "available-blue-2400-25",
-      free_items: 0
-    }
-  ];
+  skuArray = [];
 
-  public url = [{
-    img: "assets/images/user.png",
-  },
-  {
-    img: "assets/images/user.png",
-  },
-  {
-    img: "assets/images/user.png",
-  },
-  {
-    img: "assets/images/user.png",
-  },
-  {
-    img: "assets/images/user.png",
-  }
+  public url = [
+    {
+      img: "assets/images/user.png",
+    },
+    {
+      img: "assets/images/user.png",
+    },
+    {
+      img: "assets/images/user.png",
+    },
+    {
+      img: "assets/images/user.png",
+    },
+    {
+      img: "assets/images/user.png",
+    }
   ];
   public isCollapsed = false;
 
@@ -112,55 +108,57 @@ export class AddProductComponent implements OnInit {
   };
 
   public skuTableSettings = {
-    // add: {
-    //   confirmCreate: true
-    // },
-    // edit: {
-    //   confirmSave: true
-    // },
-    // delete: {
-    //   confirmDelete: true
-    // },
+    hideSubHeader: true,
+    actions: {
+      add: false,
+      edit: true,
+      delete: false,
+      position: 'right'
+    },
     columns: {
-      availability: {
-        title: 'Availability',
-        type: 'custom',
-        width: '10px',
-        // filter: {
-        //   type: 'checkbox',
-        //   config: {
-        //     true: 'Yes',
-        //     false: 'No',
-        //     resetText: 'clear',
-        //   }
-        // }
-      },
-      watch_strap_color: {
+      watchStrapColor: {
         title: 'Watch Strap Color',
       },
-      special_price: {
+      specialPrice: {
         title: 'Special Price'
       },
-      quantity: {
-        title: 'Quantity'
+      stock: {
+        title: 'Stock'
       },
-      seller_sku: {
+      price: {
+        title: 'Price'
+      },
+      sellerSku: {
         title: 'Seller SKU'
       },
-      free_items: {
+      freeItems: {
         title: 'Free Items'
       }
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private productsService: ProductService,
+  ) {
     this.createForm();
+    this.source = new LocalDataSource();
+    this.source.load(this.skuArray);
   }
 
   onSubmit() {
     console.log("this.productForm: ", this.productForm.value)
     console.log("this.variantsArray: ", this.variantsArray)
     console.log("this.skuArray: ", this.skuArray)
+
+    let payload = this.productForm.value;
+    payload.variants = this.variantsArray;
+    payload.skuArray = this.skuArray;
+
+    console.log("payload: ", JSON.stringify(payload))
+    this.productsService.addProduct(payload).subscribe(res => {
+      console.log("addProduct: ", res);
+    })
   }
 
   createForm() {
@@ -174,7 +172,6 @@ export class AddProductComponent implements OnInit {
       // Change
       category_id: [''],
       sale: [null],
-      stock: [null],
       new: [true],
       tags: [],
       Watch_Case_Shape: [''],
@@ -192,6 +189,7 @@ export class AddProductComponent implements OnInit {
       // Change
       isWarranty: [true],
       warrantyPeriod: [null], // number
+      skuArray: [[]] as Array<Object>
     })
   }
 
@@ -201,35 +199,63 @@ export class AddProductComponent implements OnInit {
 
   variantSelectFieldChangeHandler() {
     this.variantsArray.push({
+      variantIndex: this.variantsArray.length,
       variantColor: this.variantDummyValue,
       images: [],
       imagesPreview: [],
-      collapse: false
+      collapse: false,
+      isThumbnailImageIndex: null,
+      isAvailable: true
     });
+    this.skuArray.push({
+      variantIndex: this.variantsArray.length - 1,
+      watchStrapColor: this.variantDummyValue,
+      specialPrice: "",
+      stock: "",
+      price: "",
+      sellerSku: "",
+      freeItems: "",
+    });
+    this.source.refresh();
     this.variantDummyValue = null;
+  }
+
+  editVariant(index) {
+    this.skuArray = this.skuArray.filter(sku => {
+      if (sku.variantIndex == index) {
+        sku.watchStrapColor = this.variantsArray[index].variantColor;
+      }
+      return sku;
+    })
+    this.source.load(this.skuArray)
   }
 
   deleteVariant(index) {
     this.variantsArray.splice(index, 1)
+    this.skuArray = this.skuArray.filter(sku => sku.variantIndex != index);
+    this.source.load(this.skuArray)
   }
 
-  variantImageAdded(file, index, e) {
-    var mimeType = e.target.files[0].type;
-    console.log(mimeType)
-    if (mimeType.match(/image\/*/) == null) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please upload an image only!'
-      })
-      return;
-    }
-    this.variantsArray[index].images.push(file)
+  variantImageAdded(files, index, e) {
+    console.log("files: ", files)
+    for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
+      const file = files[fileIndex];
+      var mimeType = e.target.files[0].type;
 
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (event) => {
-      this.variantsArray[index].imagesPreview.push(event.target.result)
+      if (mimeType.match(/image\/*/) == null) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please upload an image only!'
+        })
+        return;
+      }
+
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        this.variantsArray[index].imagesPreview.push(event.target.result)
+      }
     }
   }
 
@@ -238,9 +264,15 @@ export class AddProductComponent implements OnInit {
     this.variantsArray[arrayIndex].imagesPreview.splice(fileIndex, 1)
   }
 
+  setImageAsImageThumbnail(imageIndex, variantIndex) {
+    console.log("imageIndex: ", imageIndex)
+    console.log("variantIndex: ", variantIndex)
+
+    this.variantsArray[variantIndex].isThumbnailImageIndex = imageIndex;
+  }
+
   onCreateConfirmSKU(e) {
     this.skuArray.push(e.newData);
-    console.log(this.skuArray)
   }
   onEditConfirmSKU(e) {
     console.log(e)
