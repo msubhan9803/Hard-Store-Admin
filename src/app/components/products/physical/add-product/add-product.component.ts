@@ -190,27 +190,27 @@ export class AddProductComponent implements OnInit {
       description: [''],
       // Change
       brand: [''],
-      collections: [],
+      // collections: [],
       // Change
       // category_id: [''],
       sale: [null],
       new: [true],
-      tags: [],
-      Watch_Case_Shape: [''],
-      Glass: [''],
-      Watch_Feature: [],
-      Model: [''],
-      Dial_Size: [''],
-      Watch_Case_Size: [''],
-      Movement: [''],
-      Watch_Movement_Country: [''],
-      Strap_Material: [''],
-      water_resistance: [true],
-      Color_Family: [],
+      tags: [""],
+      // Watch_Case_Shape: [''],
+      // Glass: [''],
+      // Watch_Feature: [],
+      // Model: [''],
+      // Dial_Size: [''],
+      // Watch_Case_Size: [''],
+      // Movement: [''],
+      // Watch_Movement_Country: [''],
+      // Strap_Material: [''],
+      // water_resistance: [true],
+      // Color_Family: [],
       variants: this.fb.array([]),
       // Change
-      isWarranty: [true],
-      warrantyPeriod: [null], // number
+      // isWarranty: [true],
+      // warrantyPeriod: [null], // number
       skuArray: [[]] as Array<Object>
     })
   }
