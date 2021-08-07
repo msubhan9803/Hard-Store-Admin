@@ -24,18 +24,19 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Type : </label>
-                      <select class="form-control digits" formControlName="type" id="exampleFormControlSelect1">
-                        <option>Business</option>
-                        <option>Casual</option>
+                      <label for="exampleFormControlSelect1">Brand : </label>
+                      <select class="form-control digits" formControlName="brand" id="exampleFormControlSelect1">
+                        <option>Brand 1</option>
+                        <option>Brand 2</option>
+                        <option>Brand 3</option>
                       </select>
-                      <div *ngIf="productForm.controls.type.touched && productForm.controls.type.errors?.required"
+                      <div *ngIf="productForm.controls.brand.touched && productForm.controls.brand.errors?.required"
                         class="text text-danger">
                         Title Name is required.
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <!-- <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleFormControlSelect1">Category : </label>
                       <select class="form-control digits" id="exampleFormControlSelect1">
@@ -45,21 +46,33 @@
                         <option>Extra Large</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
+                  <!-- <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Category : </label>
+                      <select class="form-control digits" id="exampleFormControlSelect1">
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                        <option>Extra Large</option>
+                      </select>
+                    </div>
+                  </div> -->
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card">
+          <!-- </div> -->
+          <!-- <div class="card"> -->
           <div class="card-header">
             <h5>Product Description</h5>
           </div>
           <div class="card-body">
-            <div class="row product-adding">
+            <div class="row product-adding" style="min-height: 300px;">
               <div class="col-xl-12">
-                <div class="product-basic-details row">
-                  <angular-editor [placeholder]="'Enter text here...'" formControlName="description"></angular-editor>
+                <div class="product-basic-details">
+                  <angular-editor [config]="config" [placeholder]="'Enter text here...'" formControlName="description">
+                  </angular-editor>
                 </div>
               </div>
             </div>
@@ -69,7 +82,7 @@
 
         <!-- We can split <form></form> by wrapping content like this multiple times -->
         <!-- <form class="needs-validation" [formGroup]="productForm" novalidate> -->
-        <div class="card">
+        <!-- <div class="card">
           <div class="card-header">
             <h5>Other Details</h5>
           </div>
@@ -302,7 +315,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </form>
 
       <div class="card">
@@ -319,8 +332,10 @@
                   *ngFor="let variant of this.variantsArray; let arrayIndex = index">
                   <div class="col-md-6">
                     <label for="exampleFormControlSelect1">Variant : </label>
-                    <ng-select [(ngModel)]="this.variantsArray[arrayIndex].variantColor" (change)="editVariant(arrayIndex)" [items]="variantsColorData">
-                    </ng-select>
+                    <!-- <ng-select [(ngModel)]="this.variantsArray[arrayIndex].variantColor"
+                      (change)="editVariant(arrayIndex)" [items]="variantsColorData">
+                    </ng-select> -->
+                    <input class="form-control" id="validationCustom01" (change)="editVariant(arrayIndex)" type="text" [(ngModel)]="this.variantsArray[arrayIndex].variantColor">
 
                     <div
                       *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"
@@ -432,7 +447,7 @@
 
       <div class="form-group justify-content-center row mb-0 ml-1 mt-3">
         <div class="product-buttons">
-          <button type="button" class="btn btn-primary mr-1">Save as Draft</button>
+          <!-- <button type="button" class="btn btn-primary mr-1">Save as Draft</button> -->
           <button type="button" (click)="onSubmit()" class="btn btn-secondary">Save</button>
           <button type="button" class="btn btn-light">Discard</button>
         </div>

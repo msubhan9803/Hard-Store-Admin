@@ -33,7 +33,7 @@ export class ProductService {
 
   // POST: category/addProduct
   public addProduct(productObj: any) {
-    let url = this._env.urlAddress + 'addProduct';
+    let url = this._env.urlAddress + 'products/addProduct';
     let body = JSON.stringify(productObj);
 
     return this.http.post(url, body);

@@ -45,6 +45,7 @@ export class AddProductComponent implements OnInit {
     editable: true,
     spellcheck: true,
     height: '15rem',
+    width: 'auto',
     minHeight: '5rem',
     placeholder: 'Enter text here...',
     translate: 'no',
@@ -130,10 +131,10 @@ export class AddProductComponent implements OnInit {
       },
       sellerSku: {
         title: 'Seller SKU'
-      },
-      freeItems: {
-        title: 'Free Items'
       }
+      // freeItems: {
+      //   title: 'Free Items'
+      // }
     },
   };
 
@@ -153,24 +154,45 @@ export class AddProductComponent implements OnInit {
 
     let payload = this.productForm.value;
     payload.variants = this.variantsArray;
+    for (let index = 0; index < payload.variants.length; index++) {
+      const variant = payload.variants[index];
+      delete payload.variants[index].collapse;
+    }
     payload.skuArray = this.skuArray;
 
     console.log("payload: ", JSON.stringify(payload))
-    this.productsService.addProduct(payload).subscribe(res => {
-      console.log("addProduct: ", res);
-    })
+    this.productsService.addProduct(payload).subscribe(
+      res => {
+        console.log("addProduct: ", res);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Successfully Added',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      },
+      err => {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    );
   }
 
   createForm() {
     this.productForm = this.fb.group({
       title: [''],
-      type: [''],
+      // type: [''],
       description: [''],
       // Change
-      brand_id: [''],
+      brand: [''],
       collections: [],
       // Change
-      category_id: [''],
+      // category_id: [''],
       sale: [null],
       new: [true],
       tags: [],
@@ -201,7 +223,7 @@ export class AddProductComponent implements OnInit {
     this.variantsArray.push({
       variantIndex: this.variantsArray.length,
       variantColor: this.variantDummyValue,
-      images: [],
+      // images: [],
       imagesPreview: [],
       collapse: false,
       isThumbnailImageIndex: null,
@@ -213,8 +235,8 @@ export class AddProductComponent implements OnInit {
       specialPrice: "",
       stock: "",
       price: "",
-      sellerSku: "",
-      freeItems: "",
+      sellerSku: ""
+      // freeItems: "",
     });
     this.source.refresh();
     this.variantDummyValue = null;
@@ -260,7 +282,7 @@ export class AddProductComponent implements OnInit {
   }
 
   onVariantImageRemove(arrayIndex, fileIndex) {
-    this.variantsArray[arrayIndex].images.splice(fileIndex, 1)
+    // this.variantsArray[arrayIndex].images.splice(fileIndex, 1)
     this.variantsArray[arrayIndex].imagesPreview.splice(fileIndex, 1)
   }
 
