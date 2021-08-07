@@ -32,21 +32,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="exampleFormControlSelect1">Sale : </label>
-                      <select class="form-control" formControlName="sale" id="exampleFormControlSelect1">
-                        <option value="" selected="true">Select</option>
-                        <option value="true">Active</option>
-                        <option value="false">Inactive</option>
-                      </select>
-                      <div
-                        *ngIf="productForm.controls.sale.touched && productForm.controls.sale.errors?.required"
-                        class="text text-danger">
-                        Title Name is required.
-                      </div>
-                    </div>
-                  </div>
                   <!-- <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleFormControlSelect1">Category : </label>
@@ -346,8 +331,7 @@
                     <!-- <ng-select [(ngModel)]="this.variantsArray[arrayIndex].variantColor"
                       (change)="editVariant(arrayIndex)" [items]="variantsColorData">
                     </ng-select> -->
-                    <input class="form-control" id="validationCustom01" (change)="editVariant(arrayIndex)" type="text"
-                      [(ngModel)]="this.variantsArray[arrayIndex].variantColor">
+                    <input class="form-control" id="validationCustom01" (change)="editVariant(arrayIndex)" type="text" [(ngModel)]="this.variantsArray[arrayIndex].variantColor">
 
                     <div
                       *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"

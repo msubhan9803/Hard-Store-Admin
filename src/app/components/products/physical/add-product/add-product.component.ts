@@ -190,10 +190,10 @@ export class AddProductComponent implements OnInit {
       description: [''],
       // Change
       brand: [''],
-      // collections: [],
+      collections: [],
       // Change
       // category_id: [''],
-      sale: [null],
+      sale: [true],
       new: [true],
       tags: [""],
       // Watch_Case_Shape: [''],
