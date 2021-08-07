@@ -148,6 +148,18 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.productForm.invalid) {
+      console.log(this.productForm);
+
+      Swal.fire({
+        icon: 'error',
+        title: "Please fill required fields",
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+      return;
+    }
     console.log("this.productForm: ", this.productForm.value)
     console.log("this.variantsArray: ", this.variantsArray)
     console.log("this.skuArray: ", this.skuArray)
@@ -185,11 +197,11 @@ export class AddProductComponent implements OnInit {
 
   createForm() {
     this.productForm = this.fb.group({
-      title: [''],
+      title: ['', Validators.required],
       // type: [''],
       description: [''],
       // Change
-      brand: [''],
+      brand: ['', Validators.required],
       collections: [],
       // Change
       // category_id: [''],
@@ -226,7 +238,7 @@ export class AddProductComponent implements OnInit {
       // images: [],
       imagesPreview: [],
       collapse: false,
-      isThumbnailImageIndex: null,
+      isThumbnailImageIndex: 0,
       isAvailable: true
     });
     this.skuArray.push({

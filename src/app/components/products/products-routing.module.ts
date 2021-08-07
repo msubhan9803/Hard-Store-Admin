@@ -14,22 +14,22 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      {
-        path: 'physical/category',
-        component: CategoryComponent,
-        data: {
-          title: "Category",
-          breadcrumb: "Category"
-        }
-      },
-      {
-        path: 'physical/sub-category',
-        component: SubCategoryComponent,
-        data: {
-          title: "Sub Category",
-          breadcrumb: "Sub Category"
-        }
-      },
+      // {
+      //   path: 'physical/category',
+      //   component: CategoryComponent,
+      //   data: {
+      //     title: "Category",
+      //     breadcrumb: "Category"
+      //   }
+      // },
+      // {
+      //   path: 'physical/sub-category',
+      //   component: SubCategoryComponent,
+      //   data: {
+      //     title: "Sub Category",
+      //     breadcrumb: "Sub Category"
+      //   }
+      // },
       {
         path: 'physical/product-list',
         component: ProductListComponent,
@@ -39,7 +39,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'physical/product-detail',
+        path: 'physical/product-detail/:id',
         component: ProductDetailComponent,
         data: {
           title: "Product Detail",

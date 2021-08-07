@@ -25,9 +25,14 @@ export class ProductService {
     // });
   }
 
+  // GET: get api url
+  public getImageUrl() {
+    return this._env.imageAddress;
+  }
+
   // GET: category/getProducts
   public getProducts() {
-    let url = this._env.urlAddress + 'category/getProducts';
+    let url = this._env.urlAddress + 'products/getProducts';
     return this.http.get(url);
   }
 

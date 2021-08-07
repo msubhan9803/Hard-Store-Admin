@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 export class EnvironmentUrlService {
 
   public urlAddress: string = environment.urlAddress;
+  public imageAddress: string = environment.imageAddress;
 
   constructor() { }
 

@@ -22,6 +22,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ProductService } from './service/product.service';
+import { NgToggleModule } from 'ng-toggle-button';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ProductService } from './service/product.service';
     AngularEditorModule,
     NgMultiSelectDropDownModule.forRoot(),
     NgSelectModule,
-    NgbModule
+    NgbModule,
+    NgToggleModule
   ],
   providers: [
     NavService,
@@ -56,7 +58,8 @@ import { ProductService } from './service/product.service';
     AngularEditorModule,
     NgMultiSelectDropDownModule,
     NgSelectModule,
-    NgbModule
+    NgbModule,
+    NgToggleModule
   ]
 })
 export class SharedModule { }
