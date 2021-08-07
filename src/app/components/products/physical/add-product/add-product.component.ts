@@ -262,6 +262,7 @@ export class AddProductComponent implements OnInit {
     console.log("files: ", files)
     for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
       const file = files[fileIndex];
+      console.log("file: ", file)
       var mimeType = e.target.files[0].type;
 
       if (mimeType.match(/image\/*/) == null) {
@@ -276,7 +277,11 @@ export class AddProductComponent implements OnInit {
       var reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (event) => {
-        this.variantsArray[index].imagesPreview.push(event.target.result)
+        this.variantsArray[index].imagesPreview.push({
+          fileName: file.name,
+          base64: event.target.result
+        })
+        console.log("this.variantsArray: ", this.variantsArray)
       }
     }
   }
