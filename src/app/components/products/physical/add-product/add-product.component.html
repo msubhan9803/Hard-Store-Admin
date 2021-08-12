@@ -404,7 +404,7 @@
                   <div class="form-group">
                     <label for="exampleFormControlSelect1">Variant : </label>
                     <ng-select [(ngModel)]="variantDummyValue" [items]="variantsColorData"
-                      (close)="variantSelectFieldChangeHandler()">
+                      (close)="variantSelectFieldChangeHandler()" [disabled]="this.variantsArray.length > 0">
                     </ng-select>
 
                     <div

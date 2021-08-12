@@ -183,6 +183,8 @@ export class AddProductComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
+
+        window.location.href = "/products/physical/product-list";
       },
       err => {
         Swal.fire({
@@ -230,6 +232,7 @@ export class AddProductComponent implements OnInit {
   collapseVariantImageArea(index) {
     this.variantsArray[index].collapse = !this.variantsArray[index].collapse;
   }
+
 
   variantSelectFieldChangeHandler() {
     this.variantsArray.push({
