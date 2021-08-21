@@ -1,31 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from 'src/app/shared/service/order.service';
 import { ProductService } from 'src/app/shared/service/product.service';
-import { productDB } from 'src/app/shared/tables/product-list';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  selector: 'app-order-list',
+  templateUrl: './order-list.component.html',
+  styleUrls: ['./order-list.component.scss']
 })
-export class ProductListComponent implements OnInit {
+export class OrderListComponent implements OnInit {
 
-  public product_list = [];
+  public orderList = [];
   public imageAddress = "";
   page = 1;
   pageSize = 10;
 
   constructor(
+    private ordersService: OrderService,
     private productsService: ProductService
   ) { }
 
   ngOnInit() {
     this.imageAddress = this.productsService.getImageUrl();
-    console.log("this.imageAddress: ", this.imageAddress)
 
-    this.productsService.getProducts().subscribe(
+    this.ordersService.getOrders().subscribe(
       (res: []) => {
-        this.product_list = res;
+        this.orderList = res;
+        console.log("this.orderList: ", this.orderList)
       },
       err => {
         Swal.fire({

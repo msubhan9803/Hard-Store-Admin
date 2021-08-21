@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavService } from '../../service/nav.service';
 
 @Component({
@@ -10,11 +11,12 @@ export class HeaderComponent implements OnInit {
   public right_sidebar: boolean = false;
   public open: boolean = false;
   public openNav: boolean = false;
-  public isOpenMobile : boolean;
+  public isOpenMobile: boolean;
 
   @Output() rightSidebarEvent = new EventEmitter<boolean>();
 
-  constructor(public navServices: NavService) { }
+  constructor(public navServices: NavService,
+    private router: Router) { }
 
   collapseSidebar() {
     this.open = !this.open;
@@ -29,7 +31,11 @@ export class HeaderComponent implements OnInit {
     this.openNav = !this.openNav;
   }
 
+  logout() {
+    localStorage.removeItem("EST_Token");
+    this.router.navigate(['/login']);
+  }
 
-  ngOnInit() {  }
+  ngOnInit() { }
 
 }

@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from '../guard/auth.guard';
 
 export const content: Routes = [
   {
     path: 'dashboard',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/dashboard/dashboard.module').then(m => m.DashboardModule),
   },
   {
@@ -10,6 +12,13 @@ export const content: Routes = [
     loadChildren: () => import('../../components/products/products.module').then(m => m.ProductsModule),
     data: {
       breadcrumb: "Products"
+    }
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('../../components/order/orders.module').then(m => m.OrdersModule),
+    data: {
+      breadcrumb: "Orders"
     }
   },
   {

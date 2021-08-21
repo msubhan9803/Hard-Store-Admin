@@ -13,7 +13,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let product of product_list; let arrayIndex = index">
+            <tr class="" *ngFor="let product of product_list | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
               <td class="p-3 w-25">{{ product.title }}</td>
               <td class="p-3">{{ product.brand }}</td>
               <td class="p-3">
@@ -33,6 +33,10 @@
             </tr>
           </tbody>
         </table>
+        <div class="float-right">
+          <ngb-pagination [collectionSize]="this.product_list.length" [(page)]="page" aria-label="Default pagination">
+          </ngb-pagination>
+        </div>
       </div>
     </div>
   </div>

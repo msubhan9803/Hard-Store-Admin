@@ -23,6 +23,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ProductService } from './service/product.service';
 import { NgToggleModule } from 'ng-toggle-button';
+import { AuthGuard } from './guard/auth.guard';
+import { AuthService } from './service/auth.service';
+import { LoginAuthGuard } from './guard/loginAuth.guard';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -43,14 +47,18 @@ import { NgToggleModule } from 'ng-toggle-button';
     NgMultiSelectDropDownModule.forRoot(),
     NgSelectModule,
     NgbModule,
-    NgToggleModule
+    NgToggleModule,
+    NgxPaginationModule
   ],
   providers: [
     NavService,
     CategoryService,
     ProductService,
     EnvironmentUrlService,
-    WINDOW_PROVIDERS
+    WINDOW_PROVIDERS,
+    AuthGuard,
+    LoginAuthGuard,
+    AuthService
   ],
   exports: [
     FeatherIconsComponent,
@@ -59,7 +67,8 @@ import { NgToggleModule } from 'ng-toggle-button';
     NgMultiSelectDropDownModule,
     NgSelectModule,
     NgbModule,
-    NgToggleModule
+    NgToggleModule,
+    NgxPaginationModule
   ]
 })
 export class SharedModule { }
