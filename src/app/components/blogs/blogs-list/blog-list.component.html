@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <div class="float-right mb-2">
+          <button class="btn btn-sm btn-primary btn-out" [routerLink]="['/blogs/blog-detail/addBlog']" type="button">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+        <table class="table table-bordered table-hover shadow">
+          <thead class="thead-light">
+            <tr>
+              <th style="width: 20px;">Sr#</th>
+              <th scope="col">Title</th>
+              <th style="width: 20px;" scope="col">Image</th>
+              <th scope="col">Tags</th>
+              <th scope="col">Description</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let blog of blogList | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
+              <td style="width: 20px;">{{arrayIndex + 1}}</td>
+              <td class="p-3 w-25">{{ blog.title }}</td>
+              <td style="width: 20px;" class="p-3">
+                <img src="{{ this.imageAddress + blog.imgUrl }}" width="150" />
+              </td>
+              <td class="p-3" style="width: 30px;">{{ blog.tags | json }}</td>
+              <td class="p-3" style="width: 30px;">{{ blog.description }}</td>
+              <td class="p-3" style="padding: 3px !important; width: 20px">
+                <button class="btn btn-ghost-info" [routerLink]="['/blogs/blog-detail' , blog._id]" type="button"
+                  title="Click here! for editing">
+                  <i class="fa fa-edit"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="float-right">
+          <ngb-pagination [collectionSize]="this.blogList.length" [(page)]="page" aria-label="Default pagination">
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -32,6 +32,20 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Collections : </label>
+                      <ng-select [items]="collectionsData" formControlName="collections" [addTag]="addTagFn" [hideSelected]="true" multiple="true"
+                        bindLabel="name">
+                      </ng-select>
+
+                      <div
+                        *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
                   <!-- <div class="col-md-4">
                     <div class="form-group">
                       <label for="exampleFormControlSelect1">Category : </label>
@@ -331,7 +345,8 @@
                     <!-- <ng-select [(ngModel)]="this.variantsArray[arrayIndex].variantColor"
                       (change)="editVariant(arrayIndex)" [items]="variantsColorData">
                     </ng-select> -->
-                    <input class="form-control" id="validationCustom01" (change)="editVariant(arrayIndex)" type="text" [(ngModel)]="this.variantsArray[arrayIndex].variantColor">
+                    <input class="form-control" id="validationCustom01" (change)="editVariant(arrayIndex)" type="text"
+                      [(ngModel)]="this.variantsArray[arrayIndex].variantColor">
 
                     <div
                       *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"
@@ -377,7 +392,8 @@
                               *ngFor="let file of this.variantsArray[arrayIndex].imagesPreview; let fileIndex = index"
                               (click)="setImageAsImageThumbnail(fileIndex, arrayIndex)"
                               [ngClass]="{'active-image': this.variantsArray[arrayIndex].isThumbnailImageIndex == fileIndex}">
-                              <img id="img-{{fileIndex}}-{{arrayIndex}}" src="{{file.base64}}" alt="your image" width="100%" />
+                              <img id="img-{{fileIndex}}-{{arrayIndex}}" src="{{file.base64}}" alt="your image"
+                                width="100%" />
                               <!-- <span (click)="onVariantImageRemove(arrayIndex, fileIndex)">x</span> -->
                               <i class="fa fa-1x fa-trash text-danger"
                                 (click)="onVariantImageRemove(arrayIndex, fileIndex)"></i>
@@ -444,7 +460,7 @@
       <div class="form-group justify-content-center row mb-0 ml-1 mt-3">
         <div class="product-buttons">
           <!-- <button type="button" class="btn btn-primary mr-1">Save as Draft</button> -->
-          <button type="button" (click)="onSubmit()" class="btn btn-secondary">Save</button>
+          <button type="button" (click)="onSubmit()" class="btn btn-primary">Save</button>
           <button type="button" class="btn btn-light">Discard</button>
         </div>
       </div>

@@ -148,6 +148,7 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log("this.productForm: ", this.productForm.value)
     if (this.productForm.invalid) {
       console.log(this.productForm);
 
@@ -160,7 +161,6 @@ export class AddProductComponent implements OnInit {
 
       return;
     }
-    console.log("this.productForm: ", this.productForm.value)
     console.log("this.variantsArray: ", this.variantsArray)
     console.log("this.skuArray: ", this.skuArray)
 
@@ -271,6 +271,10 @@ export class AddProductComponent implements OnInit {
     this.variantsArray.splice(index, 1)
     this.skuArray = this.skuArray.filter(sku => sku.variantIndex != index);
     this.source.load(this.skuArray)
+  }
+
+  addTagFn(name) {
+    return name;
   }
 
   variantImageAdded(files, index, e) {

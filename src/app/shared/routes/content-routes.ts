@@ -22,6 +22,13 @@ export const content: Routes = [
     }
   },
   {
+    path: 'blogs',
+    loadChildren: () => import('../../components/blogs/blogs.module').then(m => m.BlogsModule),
+    data: {
+      breadcrumb: "Blogs"
+    }
+  },
+  {
     path: 'sales',
     loadChildren: () => import('../../components/sales/sales.module').then(m => m.SalesModule),
     data: {

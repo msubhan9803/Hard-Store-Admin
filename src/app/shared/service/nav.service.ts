@@ -67,6 +67,11 @@ export class NavService {
       ]
     },
     {
+      title: 'Blogs', icon: 'box', type: 'sub', active: false, children: [
+        { path: '/blogs/blog-list', title: 'Blog List', type: 'link' }
+      ]
+    },
+    {
       title: 'Sales', icon: 'dollar-sign', type: 'sub', active: false, children: [
         { path: '/sales/orders', title: 'Orders', type: 'link' },
         { path: '/sales/transactions', title: 'Transactions', type: 'link' },
