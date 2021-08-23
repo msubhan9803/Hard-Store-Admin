@@ -28,7 +28,6 @@ export class BlogListComponent implements OnInit {
     this.blogsService.getBlogs().subscribe(
       (res: []) => {
         this.blogList = res;
-        console.log("this.blogList: ", this.blogList)
       },
       err => {
         Swal.fire({
@@ -39,5 +38,33 @@ export class BlogListComponent implements OnInit {
         })
       }
     )
+  }
+
+  deleteBlog(id) {
+    console.log(id)
+    Swal.fire({
+      title: 'Are you sure?',
+      showDenyButton: true,
+      confirmButtonText: `Yes`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        let payload = {
+          blog_id: id
+        };
+        this.blogsService.deleteBlog(payload).subscribe(
+          res => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Successfully Deleted',
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+            // window.location.reload();
+          }
+        )
+      }
+    })
   }
 }

@@ -31,9 +31,33 @@ export class BlogService {
     return this.http.get(url);
   }
 
-  // GET: blog/createBlog
+  // GET: blog/getBlogs
+  public getBlogById(id) {
+    let url = this._env.urlAddress + 'blog/getBlogById/' + id;
+    return this.http.get(url);
+  }
+
+  // POST: blog/createBlog
   public createBlog(payload) {
     let url = this._env.urlAddress + 'blog/createBlog';
     return this.http.post(url, payload);
+  }
+
+  // PUT: blog/updateBlog
+  public updateBlog(id, payload) {
+    let url = this._env.urlAddress + 'blog/updateBlog/' + id;
+    return this.http.put(url, payload);
+  }
+
+  // PUT: blog/createBlog
+  public updateBlogImage(id, file, fileName) {
+    let url = this._env.urlAddress + 'blog/UpdateBLogImg/' + id;
+    return this.http.put(url, file, fileName);
+  }
+
+  // DELETE: blog/deleteBlog
+  public deleteBlog(payload) {
+    let url = this._env.urlAddress + 'blog/deleteBlog/';
+    return this.http.delete(url, payload);
   }
 }

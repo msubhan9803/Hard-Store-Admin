@@ -26,11 +26,15 @@
                 <img src="{{ this.imageAddress + blog.imgUrl }}" width="150" />
               </td>
               <td class="p-3" style="width: 30px;">{{ blog.tags | json }}</td>
-              <td class="p-3" style="width: 30px;">{{ blog.description }}</td>
+              <td class="p-3" style="width: 30px;"><span [innerHTML]="blog.description.substring(0, 200)+'...'"></span></td>
               <td class="p-3" style="padding: 3px !important; width: 20px">
-                <button class="btn btn-ghost-info" [routerLink]="['/blogs/blog-detail' , blog._id]" type="button"
+                <button class="btn btn-ghost-info" [routerLink]="['/blogs/blog-detail/' , blog._id]" type="button"
                   title="Click here! for editing">
                   <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-ghost-info" (click)="deleteBlog(blog._id)" type="button"
+                  title="Click here! for editing">
+                  <i class="fa fa-trash"></i>
                 </button>
               </td>
             </tr>

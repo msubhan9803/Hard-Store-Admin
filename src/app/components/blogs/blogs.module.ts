@@ -20,6 +20,7 @@ import { FilePickerModule } from 'ngx-awesome-uploader';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BlogsRoutingModule } from './blogs-routing.module';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { BlogDetailEditComponent } from './blog-detail-edit/blog-detail-edit.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -29,7 +30,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 @NgModule({
   declarations: [
     BlogListComponent,
-    BlogDetailComponent
+    BlogDetailComponent,
+    BlogDetailEditComponent
   ],
   imports: [
     NgxDropzoneModule,

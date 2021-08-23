@@ -41,8 +41,11 @@
                 Upload
               </button>
             </div>
-            <div *ngIf="previewUrl" class="image-preview mt-3">
+            <div *ngIf="previewUrl != undefined" class="image-preview mt-3">
               <img [src]="previewUrl" style="height: 10rem;margin-right:7rem" height="300" class="img-thumbnail" />
+            </div>
+            <div *ngIf="previewUrl == undefined" class="image-preview mt-3">
+              <img [src]="imagePreview" style="height: 10rem;margin-right:7rem" height="300" class="img-thumbnail" />
             </div>
           </div>
         </div>

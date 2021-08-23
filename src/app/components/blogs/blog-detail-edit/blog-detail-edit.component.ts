@@ -6,14 +6,17 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BlogService } from 'src/app/shared/service/blog.service';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from 'src/app/shared/service/product.service';
 
 @Component({
-  selector: 'app-blog-detail',
-  templateUrl: './blog-detail.component.html',
-  styleUrls: ['./blog-detail.component.scss'],
+  selector: 'app-blog-detail-edit',
+  templateUrl: './blog-detail-edit.component.html',
+  styleUrls: ['./blog-detail-edit.component.scss'],
   providers: [NgbRatingConfig]
 })
-export class BlogDetailComponent implements OnInit {
+export class BlogDetailEditComponent implements OnInit {
+  public currentRecId: string;
   public closeResult: string;
   public counter: number = 1;
   blogForm: FormGroup;
@@ -28,6 +31,9 @@ export class BlogDetailComponent implements OnInit {
   public file: any;
   public fileData: File = null;
   public previewUrl: any = undefined;
+  public imageAddress: string;
+
+  public imagePreview = "";
 
   public config: AngularEditorConfig = {
     editable: true,
@@ -67,13 +73,27 @@ export class BlogDetailComponent implements OnInit {
     private modalService: NgbModal,
     private fb: FormBuilder,
     private blogService: BlogService,
-    config: NgbRatingConfig
+    private route: ActivatedRoute,
+    config: NgbRatingConfig,
+    private productsService: ProductService
   ) {
     config.max = 5;
     config.readonly = false;
   }
 
   ngOnInit() {
+    this.currentRecId = this.route.snapshot.paramMap.get('id');
+    this.imageAddress = this.productsService.getImageUrl();
+
+    this.blogService.getBlogById(this.currentRecId).subscribe(
+      (res: any) => {
+        console.log("res: ", res)
+        this.patchForm(res);
+
+        this.imagePreview = this.imageAddress + res.imgUrl;
+        console.log("this.imagePreview: ", this.imagePreview)
+      }
+    )
     this.createForm();
   }
 
@@ -97,10 +117,7 @@ export class BlogDetailComponent implements OnInit {
       return;
     }
 
-    this.blogForm.controls['file'].setValue(this.previewUrl);
-    this.blogForm.controls['filename'].setValue(this.fileData.name);
-
-    this.blogService.createBlog(this.blogForm.value).subscribe(
+    this.blogService.updateBlog(this.currentRecId, this.blogForm.value).subscribe(
       (res: any) => {
         Swal.fire({
           icon: 'success',
@@ -109,7 +126,41 @@ export class BlogDetailComponent implements OnInit {
           timer: 1500
         });
 
-        window.location.href = "/blogs/blog-list";
+        window.location.reload();
+      },
+      err => {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    )
+  }
+
+  onImageChangeSubmit() {
+    let file = this.fileData;
+    if (!file) {
+      Swal.fire({
+        icon: 'error',
+        title: "Please Upload an Image",
+        showConfirmButton: false,
+        timer: 1500
+      })
+      return;
+    }
+
+    this.blogService.updateBlogImage(this.currentRecId, file, file.name).subscribe(
+      (res: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Successfully Added',
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+        window.location.reload();
       },
       err => {
         Swal.fire({
@@ -130,6 +181,17 @@ export class BlogDetailComponent implements OnInit {
       filename: [''],
       tags: [''],
       description: ['', Validators.required]
+    })
+  }
+
+  patchForm(res) {
+    this.blogForm.patchValue({
+      title: res.title,
+      slug: res.slug,
+      file: res.file,
+      filename: res.filename,
+      tags: res.tags,
+      description: res.description
     })
   }
 
@@ -180,6 +242,8 @@ export class BlogDetailComponent implements OnInit {
 
       this.previewUrl = reader.result;
       this.file = this.previewUrl;
+
+      this.onImageChangeSubmit();
     }
   }
 }
