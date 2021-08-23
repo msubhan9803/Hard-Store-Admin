@@ -140,7 +140,7 @@ export class BlogDetailEditComponent implements OnInit {
   }
 
   onImageChangeSubmit() {
-    let file = this.fileData;
+    let file = this.previewUrl;
     if (!file) {
       Swal.fire({
         icon: 'error',
@@ -151,7 +151,14 @@ export class BlogDetailEditComponent implements OnInit {
       return;
     }
 
-    this.blogService.updateBlogImage(this.currentRecId, file, file.name).subscribe(
+    let payload = {
+      fileName: this.fileData.name,
+      file: file
+    };
+
+    console.log("payload: ", payload)
+
+    this.blogService.updateBlogImage(this.currentRecId, payload).subscribe(
       (res: any) => {
         Swal.fire({
           icon: 'success',
@@ -160,7 +167,7 @@ export class BlogDetailEditComponent implements OnInit {
           timer: 1500
         });
 
-        window.location.reload();
+        // window.location.reload();
       },
       err => {
         Swal.fire({

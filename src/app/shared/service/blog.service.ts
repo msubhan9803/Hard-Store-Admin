@@ -50,9 +50,9 @@ export class BlogService {
   }
 
   // PUT: blog/createBlog
-  public updateBlogImage(id, file, fileName) {
+  public updateBlogImage(id, payload) {
     let url = this._env.urlAddress + 'blog/UpdateBLogImg/' + id;
-    return this.http.put(url, file, fileName);
+    return this.http.put(url, payload);
   }
 
   // DELETE: blog/deleteBlog
