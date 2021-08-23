@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col-12">
       <div class="table-responsive">
-        <div class="float-right mb-2">
+        <!-- <div class="float-right mb-2">
           <button class="btn btn-sm btn-primary btn-out" [routerLink]="['/blogs/blog-detail/addBlog']" type="button">
             <i class="fa fa-plus"></i>
           </button>
-        </div>
+        </div> -->
         <table class="table table-bordered table-hover shadow">
           <thead class="thead-light">
             <tr>
@@ -25,8 +25,13 @@
               <td style="width: 20px;" class="p-3">
                 <img src="{{ this.imageAddress + blog.imgUrl }}" width="150" />
               </td>
-              <td class="p-3" style="width: 30px;">{{ blog.tags | json }}</td>
-              <td class="p-3" style="width: 30px;"><span [innerHTML]="blog.description.substring(0, 200)+'...'"></span></td>
+              <td class="p-3" style="width: 30px;">
+                <span class="badge badge-pill badge-primary" *ngFor="let object of blog.tags">
+                  {{ object }}
+                </span>
+              </td>
+              <td class="p-3" style="width: 30px;"><span [innerHTML]="blog.description.substring(0, 200)+'...'"></span>
+              </td>
               <td class="p-3" style="padding: 3px !important; width: 20px">
                 <button class="btn btn-ghost-info" [routerLink]="['/blogs/blog-detail/' , blog._id]" type="button"
                   title="Click here! for editing">

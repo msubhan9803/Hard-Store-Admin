@@ -5,17 +5,40 @@
         <table class="table table-bordered table-hover shadow">
           <thead class="thead-light">
             <tr>
-              <th style="width: 20px;">Sr#</th>
-              <th scope="col">Contact No.</th>
               <th style="width: 20px;" scope="col">Product Count</th>
+
+              <th style="width: 20px;">Sr#</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Phone No.</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>Country</th>
+              <th>Email</th>
+              <th>State</th>
+              <th>PostalCode</th>
+              <th>Product Count</th>
+              <th>Total Amount</th>
               <th scope="col">Order Status</th>
+              <th>Placed On</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let order of orderList | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
               <td style="width: 20px;">{{arrayIndex + 1}}</td>
-              <td class="p-3 w-25">{{ order.phone }}</td>
+              <td class="p-3">{{ order.first_Name }}</td>
+              <td class="p-3">{{ order.last_Name }}</td>
+              <td class="p-3 w-25">{{ order.Address }}</td>
+              <td class="p-3">{{ order.City }}</td>
+              <td class="p-3">{{ order.Country }}</td>
+              <td class="p-3">{{ order.Email }}</td>
+              <td class="p-3">{{ order.State }}</td>
+              <td class="p-3">{{ order.createdAt }}</td>
+              <td class="p-3">{{ order.phone }}</td>
+              <td class="p-3">{{ order.postalCode }}</td>
+              <td class="p-3">{{ order.totalAmount }}</td>
+
               <td style="width: 20px;" class="p-3">{{ order.products.length }}</td>
               <td class="p-3" style="width: 30px;">
                 <button class="btn btn-primary">Update Status</button>

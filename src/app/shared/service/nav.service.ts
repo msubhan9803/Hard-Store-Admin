@@ -68,7 +68,8 @@ export class NavService {
     },
     {
       title: 'Blogs', icon: 'box', type: 'sub', active: false, children: [
-        { path: '/blogs/blog-list', title: 'Blog List', type: 'link' }
+        { path: '/blogs/blog-list', title: 'Blog List', type: 'link' },
+        { path: '/blogs/blog-detail/addBlog', title: 'Add Blog', type: 'link' }
       ]
     },
     {
