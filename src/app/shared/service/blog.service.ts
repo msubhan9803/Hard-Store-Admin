@@ -56,8 +56,8 @@ export class BlogService {
   }
 
   // DELETE: blog/deleteBlog
-  public deleteBlog(payload) {
-    let url = this._env.urlAddress + 'blog/deleteBlog/';
-    return this.http.delete(url, payload);
+  public deleteBlog(id) {
+    let url = this._env.urlAddress + 'blog/deleteBlog/' + id;
+    return this.http.delete(url);
   }
 }

@@ -49,10 +49,7 @@ export class BlogListComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        let payload = {
-          blog_id: id
-        };
-        this.blogsService.deleteBlog(payload).subscribe(
+        this.blogsService.deleteBlog(id).subscribe(
           res => {
             Swal.fire({
               icon: 'success',
