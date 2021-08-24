@@ -5,58 +5,53 @@
         <table class="table table-bordered table-hover shadow">
           <thead class="thead-light">
             <tr>
-              <th style="width: 20px;" scope="col">Product Count</th>
+              <!-- <th style="width: 20px;" scope="col">Product Count</th> -->
 
               <th style="width: 20px;">Sr#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Phone No.</th>
-              <th>Address</th>
-              <th>City</th>
-              <th>Country</th>
-              <th>Email</th>
-              <th>State</th>
-              <th>PostalCode</th>
-              <th>Product Count</th>
-              <th>Total Amount</th>
-              <th scope="col">Order Status</th>
-              <th>Placed On</th>
               <th scope="col">Action</th>
+              <th scope="col">Order Id</th>
+              <th>Customer Name</th>
+              <th style="width: 35px;">Customer Email</th>
+              <th>Contact No.</th>
+              <th>Country</th>
+              <th>Total Product</th>
+              <th>Total Amount</th>
+              <th>Current Status</th>
+              <!-- <th>Order Placed On</th> -->
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let order of orderList | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
               <td style="width: 20px;">{{arrayIndex + 1}}</td>
-              <td class="p-3">{{ order.first_Name }}</td>
-              <td class="p-3">{{ order.last_Name }}</td>
-              <td class="p-3 w-25">{{ order.Address }}</td>
-              <td class="p-3">{{ order.City }}</td>
-              <td class="p-3">{{ order.Country }}</td>
-              <td class="p-3">{{ order.Email }}</td>
-              <td class="p-3">{{ order.State }}</td>
-              <td class="p-3">{{ order.createdAt }}</td>
-              <td class="p-3">{{ order.phone }}</td>
-              <td class="p-3">{{ order.postalCode }}</td>
-              <td class="p-3">{{ order.totalAmount }}</td>
-
-              <td style="width: 20px;" class="p-3">{{ order.products.length }}</td>
-              <td class="p-3" style="width: 30px;">
-                <button class="btn btn-primary">Update Status</button>
-              </td>
               <td class="p-3" style="padding: 3px !important; width: 20px">
-                <button class="btn btn-ghost-info" [routerLink]="['/orders/order-detail' , order._id]" type="button"
+                <button class="btn btn-ghost-info" (click)="this.orderStatusUpdateModalComponent.open()" type="button"
                   title="Click here! for editing">
                   <i class="fa fa-edit"></i>
                 </button>
+                <button class="btn btn-ghost-info" [routerLink]="['/orders/order-detail' , order._id]" type="button"
+                  title="Click here! for editing">
+                  <i class="fa fa-eye"></i>
+                </button>
               </td>
+              <td class="p-3">{{ order._id }}</td>
+              <td class="p-3">{{ order.first_Name }}</td>
+              <td style="width: 35px;" class="p-3">{{ order.Email }}</td>
+              <td class="p-3">{{ order.phone }}</td>
+              <td class="p-3">{{ order.Country }}</td>
+              <td style="width: 20px;" class="p-3">{{ order.products.length }}</td>
+              <td class="p-3">{{ order.totalAmount }}</td>
+              <td class="p-3">{{ order.tracking_Status.current_Status }}</td>
+              <!-- <td class="p-3">{{ order.createdAt | date }}</td> -->
             </tr>
           </tbody>
         </table>
-        <div class="float-right">
-          <ngb-pagination [collectionSize]="this.orderList.length" [(page)]="page" aria-label="Default pagination">
-          </ngb-pagination>
-        </div>
+      </div>
+      <div class="float-right">
+        <ngb-pagination [collectionSize]="this.orderList.length" [(page)]="page" aria-label="Default pagination">
+        </ngb-pagination>
       </div>
     </div>
   </div>
 </div>
+
+<app-order-status-update-modal></app-order-status-update-modal>

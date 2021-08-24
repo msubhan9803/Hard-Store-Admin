@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrderService } from 'src/app/shared/service/order.service';
 import { ProductService } from 'src/app/shared/service/product.service';
 import Swal from 'sweetalert2';
+import { OrderStatusUpdateModalComponent } from '../order-status-update-modal/order-status-update-modal.component';
 
 @Component({
   selector: 'app-order-list',
@@ -14,6 +15,7 @@ export class OrderListComponent implements OnInit {
   public imageAddress = "";
   page = 1;
   pageSize = 10;
+  @ViewChild(OrderStatusUpdateModalComponent) orderStatusUpdateModalComponent: OrderStatusUpdateModalComponent;
 
   constructor(
     private ordersService: OrderService,
