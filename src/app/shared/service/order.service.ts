@@ -25,9 +25,15 @@ export class OrderService {
     // });
   }
 
-  // GET: orders
+  // GET: getOrders
   public getOrders() {
     let url = this._env.urlAddress + 'order/getOrders';
     return this.http.get(url);
+  }
+
+  // GET: updateOrderStatus
+  public updateOrderStatus(payload) {
+    let url = this._env.urlAddress + 'order/updateOrderStatus';
+    return this.http.put(url, payload);
   }
 }

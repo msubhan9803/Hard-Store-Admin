@@ -24,7 +24,7 @@
             <tr *ngFor="let order of orderList | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
               <td style="width: 20px;">{{arrayIndex + 1}}</td>
               <td class="p-3" style="padding: 3px !important; width: 20px">
-                <button class="btn btn-ghost-info" (click)="this.orderStatusUpdateModalComponent.open()" type="button"
+                <button class="btn btn-ghost-info" (click)="this.orderStatusUpdateModalComponent.open(order)" type="button"
                   title="Click here! for editing">
                   <i class="fa fa-edit"></i>
                 </button>

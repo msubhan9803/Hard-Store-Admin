@@ -6,6 +6,8 @@
     </button>
   </div>
   <div class="modal-body">
+    <span class="text-danger mb-2">{{ errorMessage }}</span>
+
     <table class="table table-bordered table-hover shadow">
       <thead class="thead-light">
         <tr>
@@ -15,75 +17,33 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td  style="width: auto;">Order Confirmed</td>
+        <tr *ngFor="let status of this.tracking_Status | keyvalue">
+          <td style="width: auto;">{{ this.capitalizeFirstLetter(status.key.replaceAll('_', " ")) }}</td>
           <td style="width: 20px;">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+              <input [disabled]="this.current_Status != status.key" class="form-check-input" type="checkbox"
+                [checked]="status.value.completed" [(ngModel)]="this.tracking_Status[status.key].completed"
+                id="flexCheckChecked" (change)="this.checkStatusCheckboxVal(status.key)">
             </div>
           </td>
           <td style="width: 20px;">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td  style="width: auto;">Ready From Delivery</td>
-          <td style="width: 20px;">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            </div>
-          </td>
-          <td style="width: 20px;">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td  style="width: auto;">Out For Delivery</td>
-          <td style="width: 20px;">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            </div>
-          </td>
-          <td style="width: 20px;">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td  style="width: auto;">Delivered</td>
-          <td style="width: 20px;">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            </div>
-          </td>
-          <td style="width: 20px;">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td  style="width: auto;">Paid</td>
-          <td style="width: 20px;">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            </div>
-          </td>
-          <td style="width: 20px;">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+              <input [disabled]="this.current_Status != status.key" class="form-check-input" type="checkbox"
+                [checked]="status.value.cancelled" [(ngModel)]="this.tracking_Status[status.key].cancelled"
+                id="flexCheckChecked" (change)="this.checkStatusCheckboxVal(status.key)">
             </div>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <div class="form-group mt-3">
+      <!-- {{ this.capitalizeFirstLetter(this.currentChangedKey.replaceAll('_', " ")) }} -->
+      <input type="text" class="form-control" placeholder="Enter Comment">
+    </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-primary" [disabled]="disableSaveButton"
+      (click)="modal.close('Save click')">Save</button>
   </div>
 </ng-template>
