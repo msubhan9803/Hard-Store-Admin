@@ -18,6 +18,23 @@
         </tr>
       </thead>
       <tbody>
+        <!-- <tr *ngFor="let status of this.tracking_Status | keyvalue">
+          <td style="width: auto;">{{ this.capitalizeFirstLetter(status.key.replaceAll('_', " ")) }}</td>
+          <td style="width: 20px;">
+            <div class="form-check">
+              <input [disabled]="this.current_Status != status.key" class="form-check-input" type="checkbox"
+                [checked]="status.value.completed" [(ngModel)]="this.tracking_Status[status.key].completed"
+                id="flexCheckChecked" (change)="this.checkStatusCheckboxVal(status.key)">
+            </div>
+          </td>
+          <td style="width: 20px;">
+            <div class="form-check">
+              <input [disabled]="this.current_Status != status.key" class="form-check-input" type="checkbox"
+                [checked]="status.value.cancelled" [(ngModel)]="this.tracking_Status[status.key].cancelled"
+                id="flexCheckChecked" (change)="this.checkStatusCheckboxVal(status.key)">
+            </div>
+          </td>
+        </tr> -->
         <tr>
           <td style="width: auto;">Order Confirmed</td>
           <td style="width: 20px;">
