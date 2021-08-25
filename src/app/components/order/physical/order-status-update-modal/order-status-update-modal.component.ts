@@ -21,6 +21,7 @@ export class OrderStatusUpdateModalComponent implements OnInit {
       status: "",
       disabled: false,
       completed: false,
+      inProgress: false,
       cancelled: false
     },
     ready_for_Delivery: {
@@ -28,6 +29,7 @@ export class OrderStatusUpdateModalComponent implements OnInit {
       status: "",
       disabled: false,
       completed: false,
+      inProgress: false,
       cancelled: false
     },
     out_For_Delivery: {
@@ -35,6 +37,7 @@ export class OrderStatusUpdateModalComponent implements OnInit {
       status: "",
       disabled: false,
       completed: false,
+      inProgress: false,
       cancelled: false
     },
     delivered: {
@@ -42,6 +45,7 @@ export class OrderStatusUpdateModalComponent implements OnInit {
       status: "",
       disabled: false,
       completed: false,
+      inProgress: false,
       cancelled: false
     },
     Paid: {
@@ -49,6 +53,7 @@ export class OrderStatusUpdateModalComponent implements OnInit {
       status: "",
       disabled: false,
       completed: false,
+      inProgress: false,
       cancelled: false
     },
   };
@@ -72,14 +77,17 @@ export class OrderStatusUpdateModalComponent implements OnInit {
         let status = {
           date: this.order.tracking_Status[key].date ? this.order.tracking_Status[key].date : null,
           status: this.order.tracking_Status[key].status ? this.order.tracking_Status[key].status : null,
-          disabled: key != this.current_Status ? false : true,
+          disabled: key != this.current_Status ? true : false,
           completed: this.order.tracking_Status[key].status == "completed" ? true : false,
+          inProgress: this.order.tracking_Status[key].status == "inProgress" ? true : false,
           cancelled: this.order.tracking_Status[key].status == "cancelled" ? true : false
         }
 
         this.tracking_Status[key] = status;
       }
     });
+
+    console.log("this.tracking_Status: ", this.tracking_Status)
 
     this.modalService.open(this.orderStatusTemp, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -106,6 +114,8 @@ export class OrderStatusUpdateModalComponent implements OnInit {
     }
 
     if (this.errorMessage == "") {
+      console.log("payload to be generated for: ", this.tracking_Status[this.current_Status])
+
       let payload = {
         orderId: this.order._id,
         current_status: this.current_Status,

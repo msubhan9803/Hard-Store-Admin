@@ -28,7 +28,6 @@ export class OrderListComponent implements OnInit {
     this.ordersService.getOrders().subscribe(
       (res: []) => {
         this.orderList = res;
-        console.log("this.orderList: ", this.orderList)
       },
       err => {
         Swal.fire({
