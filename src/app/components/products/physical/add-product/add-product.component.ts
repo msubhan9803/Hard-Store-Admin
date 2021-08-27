@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 export class AddProductComponent implements OnInit {
   public productForm: FormGroup;
   public counter: number = 1;
+  public isSubmit = false;
   source: LocalDataSource;
   files: File[] = [];
   variantsArray = [];
@@ -71,9 +72,10 @@ export class AddProductComponent implements OnInit {
     ]
   };
   public collectionsData = [
-    "Collection 1",
-    "Collection 2",
-    "Collection 3"
+    "New",
+    "On Sale",
+    "All",
+    "Best Seller",
   ]
   public tagsData = [
     "Tag 1",
@@ -148,7 +150,8 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("this.productForm: ", this.productForm.value)
+    this.isSubmit = true;
+    // console.log("this.productForm: ", this.productForm.value)
     if (this.productForm.invalid) {
       console.log(this.productForm);
 
@@ -161,8 +164,6 @@ export class AddProductComponent implements OnInit {
 
       return;
     }
-    console.log("this.variantsArray: ", this.variantsArray)
-    console.log("this.skuArray: ", this.skuArray)
 
     let payload = this.productForm.value;
     payload.variants = this.variantsArray;
@@ -172,11 +173,9 @@ export class AddProductComponent implements OnInit {
     }
     payload.skuArray = this.skuArray;
 
-    console.log("payload: ", JSON.stringify(payload))
+    // console.log("payload: ", JSON.stringify(payload))
     this.productsService.addProduct(payload).subscribe(
       res => {
-        console.log("addProduct: ", res);
-
         Swal.fire({
           icon: 'success',
           title: 'Successfully Added',
@@ -184,7 +183,7 @@ export class AddProductComponent implements OnInit {
           timer: 1500
         });
 
-        window.location.href = "/products/physical/product-list";
+        window.location.href = "/admin/products/physical/product-list";
       },
       err => {
         Swal.fire({
