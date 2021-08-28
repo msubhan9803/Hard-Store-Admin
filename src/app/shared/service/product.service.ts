@@ -43,4 +43,15 @@ export class ProductService {
 
     return this.http.post(url, productObj);
   }
+
+  // PUT: product/activeSale
+  public activeSale(productId) {
+    let payload = {
+      id: productId
+    }
+    let url = this._env.urlAddress + 'products/activeSale';
+    // let body = JSON.stringify(productObj);
+
+    return this.http.put(url, payload);
+  }
 }

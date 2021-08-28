@@ -38,4 +38,26 @@ export class ProductListComponent implements OnInit {
       }
     )
   }
+
+  activeSale(id) {
+    console.log("sale product id : ", id)
+    Swal.fire({
+      title: 'Are you sure?',
+      showDenyButton: true,
+      confirmButtonText: `Yes`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productsService.activeSale(id).subscribe(
+          res => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Successfully Activated Sale',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+        )
+      }
+    })
+  }
 }
