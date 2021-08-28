@@ -6,28 +6,25 @@
           <div class="col-12">
             <h5 class="text-bold">Title</h5>
             <input class="form-control" id="validationCustom01" type="text" formControlName="title">
-            <div *ngIf="blogForm.controls.title.touched && blogForm.controls.title.errors?.required"
-              class="text text-danger">
-              Title Name is required.
+            <div *ngIf="isSubmit && blogForm.controls.title.errors?.required" class="text text-danger">
+              Title is required.
             </div>
           </div>
           <div class="col-6">
             <h5 class="text-bold">Slug</h5>
             <input class="form-control" id="validationCustom01" type="text" formControlName="slug">
-            <div *ngIf="blogForm.controls.slug.touched && blogForm.controls.slug.errors?.required"
-              class="text text-danger">
-              Slug Name is required.
+            <div *ngIf="isSubmit && blogForm.controls.slug.errors?.required" class="text text-danger">
+              Slug is required.
             </div>
           </div>
           <div class="col-6">
             <label for="exampleFormControlSelect1">Tags: </label>
-            <ng-select [items]="this.blogForm.value.collections" formControlName="tags" [addTag]="addTagFn" [hideSelected]="true"
-              multiple="true" bindLabel="name">
+            <ng-select [items]="this.blogForm.value.collections" formControlName="tags" [addTag]="addTagFn"
+              [hideSelected]="true" multiple="true" bindLabel="name">
             </ng-select>
 
-            <div *ngIf="blogForm.controls.slug.touched && blogForm.controls.slug.errors?.required"
-              class="text text-danger">
-              Slug Name is required.
+            <div *ngIf="isSubmit && blogForm.value.tags.length == 0" class="text text-danger">
+              Atleast 1 tag is required.
             </div>
           </div>
         </div>
@@ -55,6 +52,9 @@
             <div class="product-page-details product-right mb-0">
               <angular-editor [config]="config" [placeholder]="'Enter text here...'" formControlName="description">
               </angular-editor>
+            </div>
+            <div *ngIf="isSubmit && blogForm.controls.description.errors?.required" class="text text-danger">
+              Description is required.
             </div>
           </div>
         </div>

@@ -17,6 +17,7 @@ export class BlogDetailComponent implements OnInit {
   public closeResult: string;
   public counter: number = 1;
   blogForm: FormGroup;
+  public isSubmit = false;
 
   public imagesRect: Image[] = [
     new Image(0, { img: 'assets/images/pro3/2.jpg' }, { img: 'assets/images/pro3/1.jpg' }),
@@ -78,7 +79,15 @@ export class BlogDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.blogForm.controls['file'].invalid) {
+    this.isSubmit = true;
+
+    console.log("here.. : ", this.blogForm)
+
+    if (this.blogForm.value.tags.length == 0) {
+      return;
+    }
+
+    if (!this.fileData) {
       Swal.fire({
         icon: 'error',
         title: "Please Upload an Image",
@@ -87,7 +96,8 @@ export class BlogDetailComponent implements OnInit {
       })
       return;
     }
-    if (!this.blogForm.invalid) {
+
+    if (this.blogForm.invalid) {
       Swal.fire({
         icon: 'error',
         title: "Please fill all fields",
@@ -126,9 +136,9 @@ export class BlogDetailComponent implements OnInit {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
       slug: ['', Validators.required],
-      file: ['', Validators.required],
+      file: [''],
       filename: [''],
-      tags: [''],
+      tags: [[]],
       description: ['', Validators.required]
     })
   }

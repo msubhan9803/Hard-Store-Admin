@@ -53,7 +53,11 @@ export class AddProductComponent implements OnInit {
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
-      ['bold']
+      // ['bold']
+      [
+        'insertImage',
+        'insertVideo'
+      ]
     ],
     customClasses: [
       {
@@ -151,10 +155,43 @@ export class AddProductComponent implements OnInit {
 
   onSubmit() {
     this.isSubmit = true;
-    // console.log("this.productForm: ", this.productForm.value)
-    if (this.productForm.invalid) {
-      console.log(this.productForm);
 
+    if (this.productForm.value.collections.length == 0) {
+      return;
+    }
+
+    if (this.variantsArray.length == 0) {
+      return;
+    }
+
+    if (this.productForm.value.description == "") {
+      return;
+    }
+
+    if (this.skuArray.length == 0) {
+      return;
+    }
+
+    if (
+      // !this.skuArray[0].variantIndex ||
+      // !this.skuArray[0].watchStrapColor ||
+      this.skuArray[0].specialPrice == "" ||
+      this.skuArray[0].stock == "" ||
+      this.skuArray[0].price == "" ||
+      this.skuArray[0].sellerS== ""
+    ) {
+      console.log("this.skuArray: ", this.skuArray)
+      Swal.fire({
+        icon: 'error',
+        title: "Please provide SKU detail",
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+      return;
+    }
+
+    if (this.productForm.invalid) {
       Swal.fire({
         icon: 'error',
         title: "Please fill required fields",
@@ -173,7 +210,7 @@ export class AddProductComponent implements OnInit {
     }
     payload.skuArray = this.skuArray;
 
-    // console.log("payload: ", JSON.stringify(payload))
+    // console.log("payload: ", payload)
     this.productsService.addProduct(payload).subscribe(
       res => {
         Swal.fire({
@@ -183,7 +220,7 @@ export class AddProductComponent implements OnInit {
           timer: 1500
         });
 
-        window.location.href = "/admin/products/physical/product-list";
+        window.location.href = "/products/physical/product-list";
       },
       err => {
         Swal.fire({
@@ -203,7 +240,7 @@ export class AddProductComponent implements OnInit {
       description: [''],
       // Change
       brand: ['', Validators.required],
-      collections: [],
+      collections: [[]],
       // Change
       // category_id: [''],
       sale: [true],
@@ -220,7 +257,7 @@ export class AddProductComponent implements OnInit {
       // Strap_Material: [''],
       // water_resistance: [true],
       // Color_Family: [],
-      variants: this.fb.array([]),
+      variants: [[]],
       // Change
       // isWarranty: [true],
       // warrantyPeriod: [null], // number

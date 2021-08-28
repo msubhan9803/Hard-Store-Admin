@@ -13,12 +13,10 @@
                 <div class="product-basic-details row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="validationCustom01">Title
-                        :</label>
+                      <label for="validationCustom01">Title: </label>
                       <input class="form-control" id="validationCustom01" type="text" formControlName="title">
-                      <div *ngIf="productForm.controls.title.touched && productForm.controls.title.errors?.required"
-                        class="text text-danger">
-                        Title Name is required.
+                      <div *ngIf="isSubmit && productForm.controls.title.errors?.required" class="text text-danger">
+                        Title is required.
                       </div>
                     </div>
                   </div>
@@ -26,23 +24,20 @@
                     <div class="form-group">
                       <label for="exampleFormControlSelect1">Brand : </label>
                       <input class="form-control" id="validationCustom01" formControlName="brand" type="text">
-                      <div *ngIf="productForm.controls.brand.touched && productForm.controls.brand.errors?.required"
-                        class="text text-danger">
-                        Title Name is required.
+                      <div *ngIf="isSubmit && productForm.controls.brand.errors?.required" class="text text-danger">
+                        Brand is required.
                       </div>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleFormControlSelect1">Collections : </label>
-                      <ng-select [items]="collectionsData" formControlName="collections" [addTag]="addTagFn" [hideSelected]="true" multiple="true"
-                        bindLabel="name">
+                      <ng-select [items]="collectionsData" formControlName="collections" [addTag]="addTagFn"
+                        [hideSelected]="true" multiple="true" bindLabel="name">
                       </ng-select>
 
-                      <div
-                        *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"
-                        class="text text-danger">
-                        Title Name is required.
+                      <div *ngIf="isSubmit && productForm.value.collections.length == 0" class="text text-danger">
+                        Select atleast 1 Collection
                       </div>
                     </div>
                   </div>
@@ -83,6 +78,9 @@
                 <div class="product-basic-details">
                   <angular-editor [config]="config" [placeholder]="'Enter text here...'" formControlName="description">
                   </angular-editor>
+                </div>
+                <div *ngIf="isSubmit && productForm.value.description == ''" class="text text-danger">
+                  Please provide description
                 </div>
               </div>
             </div>
@@ -348,11 +346,9 @@
                     <input class="form-control" id="validationCustom01" (change)="editVariant(arrayIndex)" type="text"
                       [(ngModel)]="this.variantsArray[arrayIndex].variantColor">
 
-                    <div
-                      *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"
-                      class="text text-danger">
-                      Title Name is required.
-                    </div>
+                    <!-- <div *ngIf="isSubmit && productForm.controls.collections.errors?.required" class="text text-danger">
+                      Variant is required.
+                    </div> -->
                   </div>
 
                   <div class="col-md-6">
@@ -423,10 +419,8 @@
                       (close)="variantSelectFieldChangeHandler()" [disabled]="this.variantsArray.length > 0">
                     </ng-select>
 
-                    <div
-                      *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"
-                      class="text text-danger">
-                      Title Name is required.
+                    <div *ngIf="isSubmit && this.variantsArray.length == 0" class="text text-danger">
+                      Atleast 1 variant is required
                     </div>
                   </div>
                 </div>
@@ -451,6 +445,9 @@
                 </ng2-smart-table>
               </div>
               <!-- </div> -->
+              <div *ngIf="isSubmit && this.skuArray.length == 0" class="text text-danger">
+                SKU detail is required
+              </div>
             </div>
           </div>
         </div>
