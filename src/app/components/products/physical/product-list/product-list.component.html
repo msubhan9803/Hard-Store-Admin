@@ -21,7 +21,7 @@
                   width="150" />
               </td>
               <td class="p-3" style="width: 30px;">
-                <ng-toggle [value]="true" (click)="activeSale(product._id)" [color]="{unchecked: '#939da2', checked: '#6cf241'}" [width]="35"
+                <ng-toggle [value]="product.sale" (click)="activeSale(product._id)" [color]="{unchecked: '#939da2', checked: '#6cf241'}" [width]="35"
                   [height]="15"></ng-toggle>
               </td>
               <td class="p-3" style="padding: 3px !important; width: 20px">
