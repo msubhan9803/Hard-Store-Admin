@@ -28,6 +28,7 @@ import { AuthService } from './service/auth.service';
 import { LoginAuthGuard } from './guard/loginAuth.guard';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { BlogService } from './service/blog.service';
+import { HelperMethodsService } from './service/helper-methods.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { BlogService } from './service/blog.service';
     AuthGuard,
     LoginAuthGuard,
     AuthService,
-    BlogService
+    BlogService,
+    HelperMethodsService
   ],
   exports: [
     FeatherIconsComponent,

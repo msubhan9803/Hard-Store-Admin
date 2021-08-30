@@ -76,7 +76,7 @@ export class AddProductComponent implements OnInit {
     ]
   };
   public collectionsData = [
-    "New",
+    // "New",
     "On Sale",
     "All",
     "Best Seller",

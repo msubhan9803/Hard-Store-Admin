@@ -36,4 +36,11 @@ export class OrderService {
     let url = this._env.urlAddress + 'order/updateOrderStatus';
     return this.http.put(url, payload);
   }
+
+  // GET: order/getOrderbyId/
+  public getOrderbyId(orderId) {
+    let url = this._env.urlAddress + 'order/getOrderbyId/' + orderId;
+
+    return this.http.get(url);
+  }
 }

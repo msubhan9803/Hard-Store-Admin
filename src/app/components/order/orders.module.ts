@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { OrdersRoutingModule } from './orders-routing.module';
-import { OrderListComponent } from './physical/product-list/order-list.component';
+import { OrderListComponent } from './physical/order-list/order-list.component';
 import { DigitalCategoryComponent } from './digital/digital-category/digital-category.component';
 import { DigitalSubCategoryComponent } from './digital/digital-sub-category/digital-sub-category.component';
 import { DigitalListComponent } from './digital/digital-list/digital-list.component';
@@ -24,6 +24,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FilePickerModule } from 'ngx-awesome-uploader';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { OrderStatusUpdateModalComponent } from './physical/order-status-update-modal/order-status-update-modal.component';
+import { OrderStatusTimelineComponent } from './physical/order-status-timeline/order-status-timeline.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -31,7 +32,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 };
 
 @NgModule({
-  declarations: [OrderListComponent, DigitalCategoryComponent, DigitalSubCategoryComponent, DigitalListComponent, DigitalAddComponent, OrderStatusUpdateModalComponent],
+  declarations: [OrderListComponent, DigitalCategoryComponent, DigitalSubCategoryComponent, DigitalListComponent, DigitalAddComponent, OrderStatusUpdateModalComponent, OrderStatusTimelineComponent],
   imports: [
     NgxDropzoneModule,
     CommonModule,

@@ -28,7 +28,7 @@
                   title="Click here! for editing">
                   <i class="fa fa-edit"></i>
                 </button>
-                <button class="btn btn-ghost-info" [routerLink]="['/orders/order-detail' , order._id]" type="button"
+                <button class="btn btn-ghost-info" (click)="this.orderStatusTimelineComponent.open(order._id )" type="button"
                   title="Click here! for editing">
                   <i class="fa fa-eye"></i>
                 </button>
@@ -40,7 +40,11 @@
               <td class="p-3">{{ order.Country }}</td>
               <td style="width: 20px;" class="p-3">{{ order.products.length }}</td>
               <td class="p-3">{{ order.totalAmount }}</td>
-              <td class="p-3">{{ order.tracking_Status.current_Status }}</td>
+              <td class="p-3">
+                {{ this.helperMethodsService.capitalizeFirstLetter(order.tracking_Status.current_Status.replaceAll('_', " ")) }}:
+                <span class="{{order.tracking_Status[order.tracking_Status.current_Status].status}}"
+                >{{ this.helperMethodsService.capitalizeFirstLetter(order.tracking_Status[order.tracking_Status.current_Status].status) }}</span>
+              </td>
               <!-- <td class="p-3">{{ order.createdAt | date }}</td> -->
             </tr>
           </tbody>
@@ -55,3 +59,4 @@
 </div>
 
 <app-order-status-update-modal></app-order-status-update-modal>
+<app-order-status-timeline></app-order-status-timeline>

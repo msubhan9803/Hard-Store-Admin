@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { HelperMethodsService } from 'src/app/shared/service/helper-methods.service';
 import { OrderService } from 'src/app/shared/service/order.service';
 import { ProductService } from 'src/app/shared/service/product.service';
 import Swal from 'sweetalert2';
+import { OrderStatusTimelineComponent } from '../order-status-timeline/order-status-timeline.component';
 import { OrderStatusUpdateModalComponent } from '../order-status-update-modal/order-status-update-modal.component';
 
 @Component({
@@ -16,10 +18,12 @@ export class OrderListComponent implements OnInit {
   page = 1;
   pageSize = 10;
   @ViewChild(OrderStatusUpdateModalComponent) orderStatusUpdateModalComponent: OrderStatusUpdateModalComponent;
+  @ViewChild(OrderStatusTimelineComponent) orderStatusTimelineComponent: OrderStatusTimelineComponent;
 
   constructor(
     private ordersService: OrderService,
-    private productsService: ProductService
+    private productsService: ProductService,
+    public helperMethodsService: HelperMethodsService
   ) { }
 
   ngOnInit() {

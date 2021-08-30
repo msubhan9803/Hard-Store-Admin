@@ -124,28 +124,42 @@ export class OrderStatusUpdateModalComponent implements OnInit {
         // "comment":"customer not picked it "
       };
 
-      this.orderService.updateOrderStatus(payload).subscribe(
-        (res: any) => {
+      Swal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.orderService.updateOrderStatus(payload).subscribe(
+            (res: any) => {
+              this.modalService.dismissAll();
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Successfully Updated Order',
+                showConfirmButton: false,
+                timer: 1500
+              });
+
+              window.location.reload();
+            },
+            err => {
+              Swal.fire({
+                icon: 'error',
+                title: err.error.message,
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+          )
+        } else if (result.isDismissed) {
           this.modalService.dismissAll();
-
-          Swal.fire({
-            icon: 'success',
-            title: 'Successfully Updated Order',
-            showConfirmButton: false,
-            timer: 1500
-          });
-
-          window.location.reload();
-        },
-        err => {
-          Swal.fire({
-            icon: 'error',
-            title: err.error.message,
-            showConfirmButton: false,
-            timer: 1500
-          })
+          return;
         }
-      )
+      })
     }
   }
 
