@@ -39,15 +39,16 @@ export class ProductListComponent implements OnInit {
     )
   }
 
-  activeSale(id) {
+  activeSale(id, saleVal) {
     console.log("sale product id : ", id)
     Swal.fire({
       title: 'Are you sure?',
       showDenyButton: true,
       confirmButtonText: `Yes`,
+      allowOutsideClick: false
     }).then((result) => {
       if (result.isConfirmed) {
-        this.productsService.activeSale(id).subscribe(
+        this.productsService.activeSale(id, saleVal).subscribe(
           res => {
             Swal.fire({
               icon: 'success',
@@ -55,6 +56,7 @@ export class ProductListComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500
             });
+            window.location.reload();
           }
         )
       }

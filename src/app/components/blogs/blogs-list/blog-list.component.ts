@@ -58,7 +58,7 @@ export class BlogListComponent implements OnInit {
               timer: 1500
             });
 
-            // window.location.reload();
+            window.location.reload();
           }
         )
       }

@@ -45,13 +45,28 @@ export class ProductService {
   }
 
   // PUT: product/activeSale
-  public activeSale(productId) {
+  public activeSale(productId, saleVal) {
     let payload = {
-      id: productId
+      id: productId,
+      sale: saleVal
     }
     let url = this._env.urlAddress + 'products/activeSale';
     // let body = JSON.stringify(productObj);
 
     return this.http.put(url, payload);
+  }
+
+  // GET: products/getProducts
+  public getReviews() {
+    let url = this._env.urlAddress + 'products/getReviews';
+    return this.http.get(url);
+  }
+
+  // GET: products/getProducts
+  public deleteReviews(reviewId) {
+    let url = this._env.urlAddress + 'products/deleteReview/' + reviewId;
+    let body = JSON.stringify(reviewId);
+
+    return this.http.delete(url);
   }
 }

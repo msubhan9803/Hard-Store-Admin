@@ -73,6 +73,11 @@ export class NavService {
       ]
     },
     {
+      title: 'Reviews', icon: 'box', type: 'sub', active: false, children: [
+        { path: '/reviews/review-list', title: 'Review List', type: 'link' }
+      ]
+    },
+    {
       title: 'Sales', icon: 'dollar-sign', type: 'sub', active: false, children: [
         { path: '/sales/orders', title: 'Orders', type: 'link' },
         { path: '/sales/transactions', title: 'Transactions', type: 'link' },

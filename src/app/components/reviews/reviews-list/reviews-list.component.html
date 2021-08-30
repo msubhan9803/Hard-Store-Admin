@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow">
+          <thead class="thead-light">
+            <tr>
+              <!-- <th style="width: 20px;" scope="col">Product Count</th> -->
+
+              <th style="width: 20px;">Sr#</th>
+              <th style="width: 35px;">Actions</th>
+              <th scope="col">Review Id</th>
+              <th scope="col">Product Id</th>
+              <th style="width: 35px;">Review Title</th>
+              <th>Customer Name</th>
+              <th style="width: 35px;">Customer Email</th>
+              <th style="width: 35px;">Rating</th>
+              <th style="width: 35px;">Comment</th>
+              <th style="width: 35px;">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let review of reviewList | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
+              <td style="width: 20px;">{{arrayIndex + 1}}</td>
+              <td class="p-3" style="padding: 3px !important; width: 20px">
+                <button class="btn btn-ghost-info" (click)="deleteReview(review._id)"
+                  type="button" title="Click here! for deleting">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+              <td class="p-3">{{ review._id }}</td>
+              <td class="p-3">{{ review.ProductId }}</td>
+              <td class="p-3">{{ review.Title }}</td>
+              <td class="p-3">{{ review.Name }}</td>
+              <td class="p-3">{{ review.Email }}</td>
+              <td class="p-3">{{ review.Rating }}</td>
+              <td class="p-3">{{ review.Comment.substring(0, 300)+'...' }}</td>
+              <td class="p-3">{{ review.createdAt | date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="float-right">
+        <ngb-pagination [collectionSize]="this.reviewList.length" [(page)]="page" aria-label="Default pagination">
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

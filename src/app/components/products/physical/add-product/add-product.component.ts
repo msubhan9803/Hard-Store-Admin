@@ -210,7 +210,7 @@ export class AddProductComponent implements OnInit {
     }
     payload.skuArray = this.skuArray;
 
-    console.log("payload: ", payload)
+    // console.log("payload: ", payload)
     this.productsService.addProduct(payload).subscribe(
       res => {
         Swal.fire({
