@@ -53,6 +53,7 @@
     "ngx-dropzone-wrapper": "^10.0.1",
     "ngx-owl-carousel-o": "^2.0.3",
     "ngx-pagination": "^5.1.1",
+    "ngx-paypal": "^8.0.0",
     "ngx-slimscroll": "^8.1.0",
     "rxjs": "~6.6.0",
     "screenfull": "^5.0.1",

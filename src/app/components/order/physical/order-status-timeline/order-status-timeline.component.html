@@ -183,7 +183,7 @@
         <table class="table table-bordered table-hover shadow">
           <thead class="thead-light">
             <tr>
-              <th scope="col">Title</th>
+              <th scope="col">Item</th>
               <th scope="col">Amount</th>
               <th scope="col">Quantity</th>
               <th scope="col">Price</th>
@@ -204,6 +204,35 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-body shadow">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="container">
+                  <div class="row mt-2">
+                    <div class="col-6">
+                      <p class="font-weight-bold">Address</p>
+                      <p class="font-weight-bold">City</p>
+                      <p class="font-weight-bold">Country</p>
+                      <p class="font-weight-bold">Postal Code</p>
+                      <p class="font-weight-bold">State</p>
+                    </div>
+                    <div class="col-6">
+                      <p>{{ order?.Address }}</p>
+                      <p>{{ order?.City }}</p>
+                      <p>{{ order?.Country }}</p>
+                      <p>{{ order?.postalCode }}</p>
+                      <p>{{ order?.State }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

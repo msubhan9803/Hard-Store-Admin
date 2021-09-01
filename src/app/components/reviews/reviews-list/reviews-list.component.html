@@ -35,7 +35,7 @@
               <td class="p-3">{{ review.Name }}</td>
               <td class="p-3">{{ review.Email }}</td>
               <td class="p-3">{{ review.Rating }}</td>
-              <td class="p-3">{{ review.Comment.substring(0, 300)+'...' }}</td>
+              <td class="p-3">{{ review.Comment.substring(0, 50)+'...' }}</td>
               <td class="p-3">{{ review.createdAt | date }}</td>
             </tr>
           </tbody>
