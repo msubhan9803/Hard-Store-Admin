@@ -67,6 +67,12 @@ export class NavService {
       ]
     },
     {
+      title: 'Faq', icon: 'box', type: 'sub', active: false, children: [
+        { path: '/faq/faq-list', title: 'Faq List', type: 'link' },
+        { path: '/faq/add-faq', title: 'Add Faq', type: 'link' }
+      ]
+    },
+    {
       title: 'Blogs', icon: 'box', type: 'sub', active: false, children: [
         { path: '/blogs/blog-list', title: 'Blog List', type: 'link' },
         { path: '/blogs/blog-detail/addBlog', title: 'Add Blog', type: 'link' }

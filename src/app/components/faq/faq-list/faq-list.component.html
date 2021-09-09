@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <select class="form-control">
+            <option selected value="Shipping">Shipping</option>
+            <option value="Product">Product</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover shadow">
+              <thead class="thead-light">
+                <tr>
+                  <th style="width: 20px;">Sr#</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Question</th>
+                  <th scope="col">Answer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let faq of dummyData | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
+                  <td style="width: 20px;">{{arrayIndex + 1}}</td>
+                  <td class="p-3" style="padding: 3px !important; width: 20px">
+                    <button class="btn btn-ghost-info" (click)="this.orderStatusUpdateModalComponent.open(faq)"
+                      type="button" title="Click here! for editing">
+                      <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn btn-ghost-info" (click)="this.orderStatusTimelineComponent.open(faq._id )"
+                      type="button" title="Click here! for editing">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                  </td>
+                  <td class="p-3">{{ faq.question.length > 200 ? faq.question.substring(0, 200)+'...' : faq.question }}
+                  </td>
+                  <td class="p-3">{{ faq.answer.substring(0, 200)+'...' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="float-right">
+            <ngb-pagination [collectionSize]="this.dummyData.length" [(page)]="page" aria-label="Default pagination">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-order-status-update-modal></app-order-status-update-modal>
+    <app-order-status-timeline></app-order-status-timeline>
+
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <form class="needs-validation" [formGroup]="faqForm" novalidate>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-row">
+                    <div class="col-md-3 mt-2">
+                      <label class="text-bold">Type</label>
+                      <select formControlName="type" class="form-control">
+                        <option selected value="Shipping">Shipping</option>
+                        <option value="Product">Product</option>
+                      </select>
+                      <div *ngIf="isSubmit && faqForm.controls.type.errors?.required" class="text text-danger">
+                        Type is required.
+                      </div>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                      <label for="review">Question</label>
+                      <textarea class="form-control" formArrayName="question" placeholder="Write Question"
+                        id="exampleFormControlTextarea1" rows="6"></textarea>
+                      <div *ngIf="isSubmit && faqForm.controls.question.errors?.required" class="text text-danger">
+                        Question is required.
+                      </div>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                      <label for="review">Answer</label>
+                      <textarea class="form-control" formArrayName="answer" placeholder="Write Answer"
+                        id="exampleFormControlTextarea1" rows="6"></textarea>
+                      <div *ngIf="isSubmit && faqForm.value.answer.length == 0" class="text text-danger">
+                        Answer 1 tag is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row justify-content-end mt-4">
+                <button type="button" (click)="onSubmit()" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-light" [routerLink]="['/blogs/blog-list']">Discard</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
