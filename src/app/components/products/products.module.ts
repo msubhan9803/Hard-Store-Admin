@@ -26,6 +26,7 @@ import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FilePickerModule } from 'ngx-awesome-uploader';
+import { ProductEditComponent } from './physical/product-edit/product-edit.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -35,7 +36,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 
 
 @NgModule({
-  declarations: [CategoryComponent, SubCategoryComponent, ProductListComponent, AddProductComponent, DigitalCategoryComponent, DigitalSubCategoryComponent, DigitalListComponent, DigitalAddComponent, ProductDetailComponent],
+  declarations: [CategoryComponent, SubCategoryComponent, ProductListComponent, AddProductComponent, DigitalCategoryComponent, DigitalSubCategoryComponent, DigitalListComponent, DigitalAddComponent, ProductDetailComponent, ProductEditComponent],
   imports: [
     NgxDropzoneModule,
     CommonModule,

@@ -9,6 +9,7 @@ import { DigitalSubCategoryComponent } from './digital/digital-sub-category/digi
 import { DigitalListComponent } from './digital/digital-list/digital-list.component';
 import { DigitalAddComponent } from './digital/digital-add/digital-add.component';
 import { ProductDetailComponent } from './physical/product-detail/product-detail.component';
+import { ProductEditComponent } from './physical/product-edit/product-edit.component';
 
 const routes: Routes = [
   {
@@ -50,8 +51,16 @@ const routes: Routes = [
         path: 'physical/add-product',
         component: AddProductComponent,
         data: {
-          title: "Add Products",
+          title: "Add Product",
           breadcrumb: "Add Product"
+        }
+      },
+      {
+        path: 'physical/edit-product/:id',
+        component: ProductEditComponent,
+        data: {
+          title: "Edit Product",
+          breadcrumb: "Edit Product"
         }
       },
       {

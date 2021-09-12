@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { category } from '../models/category';
 import { EnvironmentUrlService } from './enviroment-url.service';
 
 @Injectable({
@@ -30,13 +29,19 @@ export class ProductService {
     return this._env.imageAddress;
   }
 
-  // GET: category/getProducts
+  // GET: products/getProducts
   public getProducts() {
     let url = this._env.urlAddress + 'products/getProducts';
     return this.http.get(url);
   }
 
-  // POST: category/addProduct
+  // GET: products/getProductById
+  public getProductById(id) {
+    let url = this._env.urlAddress + 'products/getProductById/' + id;
+    return this.http.get(url);
+  }
+
+  // POST: products/addProduct
   public addProduct(productObj: any) {
     let url = this._env.urlAddress + 'products/addProduct';
     // let body = JSON.stringify(productObj);
