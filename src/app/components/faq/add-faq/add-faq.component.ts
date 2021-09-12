@@ -6,6 +6,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BlogService } from 'src/app/shared/service/blog.service';
+import { ProductService } from 'src/app/shared/service/product.service';
 
 @Component({
   selector: 'app-add-faq',
@@ -68,6 +69,7 @@ export class AddFaqComponent implements OnInit {
     private modalService: NgbModal,
     private fb: FormBuilder,
     private blogService: BlogService,
+    private productService: ProductService,
     config: NgbRatingConfig
   ) {
     config.max = 5;
@@ -81,22 +83,6 @@ export class AddFaqComponent implements OnInit {
   onSubmit() {
     this.isSubmit = true;
 
-    console.log("here.. : ", this.faqForm)
-
-    if (this.faqForm.value.tags.length == 0) {
-      return;
-    }
-
-    if (!this.fileData) {
-      Swal.fire({
-        icon: 'error',
-        title: "Please Upload an Image",
-        showConfirmButton: false,
-        timer: 1500
-      })
-      return;
-    }
-
     if (this.faqForm.invalid) {
       Swal.fire({
         icon: 'error',
@@ -107,10 +93,7 @@ export class AddFaqComponent implements OnInit {
       return;
     }
 
-    this.faqForm.controls['file'].setValue(this.previewUrl);
-    this.faqForm.controls['filename'].setValue(this.fileData.name);
-
-    this.blogService.createBlog(this.faqForm.value).subscribe(
+    this.productService.addFaq(this.faqForm.value).subscribe(
       (res: any) => {
         Swal.fire({
           icon: 'success',
@@ -119,7 +102,7 @@ export class AddFaqComponent implements OnInit {
           timer: 1500
         });
 
-        window.location.href = "/blogs/blog-list";
+        window.location.href = "/faq/faq-list";
       },
       err => {
         Swal.fire({
@@ -134,7 +117,7 @@ export class AddFaqComponent implements OnInit {
 
   createForm() {
     this.faqForm = this.fb.group({
-      type: ['', Validators.required],
+      type: ['Shipping', Validators.required],
       question: ['', Validators.required],
       answer: ['']
     })

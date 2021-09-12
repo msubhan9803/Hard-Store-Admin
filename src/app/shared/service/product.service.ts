@@ -69,4 +69,32 @@ export class ProductService {
 
     return this.http.delete(url);
   }
+
+  // GET: products/getFaqs
+  public getFaqs() {
+    let url = this._env.urlAddress + 'products/getFaqs';
+    return this.http.get(url);
+  }
+
+  // GET: products/getFaqsByType
+  public getFaqsByType(type) {
+    let url = this._env.urlAddress + 'products/getFaqsByType/' + type;
+    return this.http.get(url);
+  }
+
+  // POST: submitFAQ
+  public addFaq(payload) {
+    let url = this._env.urlAddress + 'products/submitFAQ';
+    // let body = JSON.stringify(productObj);
+
+    return this.http.post(url, payload);
+  }
+
+  // POST: submitFAQ
+  public updateFaqById(payload) {
+    let url = this._env.urlAddress + 'products/updateFaqById';
+    // let body = JSON.stringify(productObj);
+
+    return this.http.put(url, payload);
+  }
 }

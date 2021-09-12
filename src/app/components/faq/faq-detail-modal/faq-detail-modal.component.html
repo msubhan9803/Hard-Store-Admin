@@ -1,0 +1,63 @@
+<ng-template #faqDetailTemp let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="isEdit">Edit Faq Detail</h4>
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="!isEdit">View Faq Detail</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <form class="needs-validation" [formGroup]="faqForm" novalidate>
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="form-row">
+                        <div class="col-md-6 mt-2">
+                          <label class="text-bold">Type</label>
+                          <select formControlName="type" class="form-control">
+                            <option selected value="shipping">Shipping</option>
+                            <option value="product">Product</option>
+                          </select>
+                          <div *ngIf="isSubmit && faqForm.controls.type.errors?.required" class="text text-danger">
+                            Type is required.
+                          </div>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                          <label for="review">Question</label>
+                          <textarea class="form-control" formControlName="question" placeholder="Write Question"
+                            id="exampleFormControlTextarea1" rows="6"></textarea>
+                          <div *ngIf="isSubmit && faqForm.controls.question.errors?.required" class="text text-danger">
+                            Question is required.
+                          </div>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                          <label for="review">Answer</label>
+                          <textarea class="form-control" formControlName="answer" placeholder="Write Answer"
+                            id="exampleFormControlTextarea1" rows="6"></textarea>
+                          <div *ngIf="isSubmit && faqForm.value.answer.length == 0" class="text text-danger">
+                            Answer tag is required.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row justify-content-end mt-4">
+                    <button *ngIf="isEdit" type="button" (click)="onSubmit()" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">Discard</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-template>

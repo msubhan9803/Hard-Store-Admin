@@ -19,9 +19,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FilePickerModule } from 'ngx-awesome-uploader';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { OrderStatusUpdateModalComponent } from './order-status-update-modal/order-status-update-modal.component';
-import { OrderStatusTimelineComponent } from './order-status-timeline/order-status-timeline.component';
 import { AddFaqComponent } from './add-faq/add-faq.component';
+import { FaqDetailModalModalComponent } from './faq-detail-modal/faq-detail-modal.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -29,19 +28,17 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 };
 
 @NgModule({
-  declarations: [FaqListComponent, AddFaqComponent, OrderStatusUpdateModalComponent, OrderStatusTimelineComponent],
+  declarations: [FaqListComponent, AddFaqComponent, FaqDetailModalModalComponent],
   imports: [
+    SharedModule,
     NgxDropzoneModule,
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     CKEditorModule,
     FaqRoutingModule,
     Ng2SmartTableModule,
     NgbModule,
     DropzoneModule,
     GalleryModule.forRoot(),
-    SharedModule,
     FilePickerModule,
     NgxPaginationModule
   ],

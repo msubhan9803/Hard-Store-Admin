@@ -3,9 +3,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3 mb-3">
-          <select class="form-control">
-            <option selected value="Shipping">Shipping</option>
-            <option value="Product">Product</option>
+          <select [(ngModel)]="faqType" class="form-control" (change)="onTypeChange()">
+            <option selected value="shipping">Shipping</option>
+            <option value="product">Product</option>
           </select>
         </div>
 
@@ -22,35 +22,33 @@
               </thead>
               <tbody>
                 <tr
-                  *ngFor="let faq of dummyData | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
-                  <td style="width: 20px;">{{arrayIndex + 1}}</td>
+                  *ngFor="let faq of faqList | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
+                  <td style="width: 20px;">{{ page > 1 ? (10 * (page - 1)) + arrayIndex + 1 : arrayIndex + 1 }}</td>
                   <td class="p-3" style="padding: 3px !important; width: 20px">
-                    <button class="btn btn-ghost-info" (click)="this.orderStatusUpdateModalComponent.open(faq)"
+                    <button class="btn btn-ghost-info" (click)="this.faqDetailModalModalComponent.open(faq, true)"
                       type="button" title="Click here! for editing">
                       <i class="fa fa-edit"></i>
                     </button>
-                    <button class="btn btn-ghost-info" (click)="this.orderStatusTimelineComponent.open(faq._id )"
+                    <button class="btn btn-ghost-info" (click)="this.faqDetailModalModalComponent.open(faq, false)"
                       type="button" title="Click here! for editing">
                       <i class="fa fa-eye"></i>
                     </button>
                   </td>
                   <td class="p-3">{{ faq.question.length > 200 ? faq.question.substring(0, 200)+'...' : faq.question }}
                   </td>
-                  <td class="p-3">{{ faq.answer.substring(0, 200)+'...' }}</td>
+                  <td class="p-3">{{ faq.answer.length > 2000 ? faq.answer.substring(0, 200)+'...' : faq.answer }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="float-right">
-            <ngb-pagination [collectionSize]="this.dummyData.length" [(page)]="page" aria-label="Default pagination">
+            <ngb-pagination [collectionSize]="this.faqList.length" [(page)]="page" aria-label="Default pagination">
             </ngb-pagination>
           </div>
         </div>
       </div>
     </div>
-
-    <app-order-status-update-modal></app-order-status-update-modal>
-    <app-order-status-timeline></app-order-status-timeline>
-
   </div>
 </div>
+
+<app-faq-detail-modal></app-faq-detail-modal>

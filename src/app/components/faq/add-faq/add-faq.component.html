@@ -11,8 +11,8 @@
                     <div class="col-md-3 mt-2">
                       <label class="text-bold">Type</label>
                       <select formControlName="type" class="form-control">
-                        <option selected value="Shipping">Shipping</option>
-                        <option value="Product">Product</option>
+                        <option selected value="shipping">Shipping</option>
+                        <option value="product">Product</option>
                       </select>
                       <div *ngIf="isSubmit && faqForm.controls.type.errors?.required" class="text text-danger">
                         Type is required.
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-12 mt-2">
                       <label for="review">Question</label>
-                      <textarea class="form-control" formArrayName="question" placeholder="Write Question"
+                      <textarea class="form-control" formControlName="question" placeholder="Write Question"
                         id="exampleFormControlTextarea1" rows="6"></textarea>
                       <div *ngIf="isSubmit && faqForm.controls.question.errors?.required" class="text text-danger">
                         Question is required.
@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-md-12 mt-2">
                       <label for="review">Answer</label>
-                      <textarea class="form-control" formArrayName="answer" placeholder="Write Answer"
+                      <textarea class="form-control" formControlName="answer" placeholder="Write Answer"
                         id="exampleFormControlTextarea1" rows="6"></textarea>
                       <div *ngIf="isSubmit && faqForm.value.answer.length == 0" class="text text-danger">
                         Answer 1 tag is required.
