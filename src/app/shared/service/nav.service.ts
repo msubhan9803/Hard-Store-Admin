@@ -41,7 +41,7 @@ export class NavService {
       path: '/dashboard/default', title: 'Dashboard', icon: 'home', type: 'link', badgeType: 'primary', active: false
     },
     {
-      title: 'Products', icon: 'box', type: 'sub', active: false, children: [
+      title: 'Products', icon: 'shopping-bag', type: 'sub', active: false, children: [
         // {
         // 	title: 'Physical', type: 'sub', children: [
         // { path: '/products/physical/category', title: 'Category', type: 'link' },
@@ -62,16 +62,28 @@ export class NavService {
       ]
     },
     {
-      title: 'Orders', icon: 'box', type: 'sub', active: false, children: [
+      title: 'Orders', icon: 'dollar-sign', type: 'sub', active: false, children: [
         { path: '/orders/order-list', title: 'Order List', type: 'link' }
       ]
     },
+
     {
-      title: 'Faq', icon: 'box', type: 'sub', active: false, children: [
-        { path: '/faq/faq-list', title: 'Faq List', type: 'link' },
-        { path: '/faq/add-faq', title: 'Add Faq', type: 'link' }
+      title: 'General', icon: 'compass', type: 'sub', active: false, children: [
+        {
+          title: 'Faq', icon: 'question-circle', type: 'sub', active: false, children: [
+            { path: '/faq/faq-list', title: 'Faq List', type: 'link' },
+            { path: '/faq/add-faq', title: 'Add Faq', type: 'link' }
+          ]
+        },
+        { path: '/update-currency', title: 'Update Currency Rate', type: 'link' }
       ]
     },
+    // {
+    //   title: 'Faq', icon: 'box', type: 'sub', active: false, children: [
+    //     { path: '/faq/faq-list', title: 'Faq List', type: 'link' },
+    //     { path: '/faq/add-faq', title: 'Add Faq', type: 'link' }
+    //   ]
+    // },
     {
       title: 'Blogs', icon: 'box', type: 'sub', active: false, children: [
         { path: '/blogs/blog-list', title: 'Blog List', type: 'link' },
@@ -79,8 +91,13 @@ export class NavService {
       ]
     },
     {
-      title: 'Reviews', icon: 'box', type: 'sub', active: false, children: [
+      title: 'Reviews', icon: 'check-square', type: 'sub', active: false, children: [
         { path: '/reviews/review-list', title: 'Review List', type: 'link' }
+      ]
+    },
+    {
+      title: 'Queries', icon: 'info', type: 'sub', active: false, children: [
+        { path: '/queries', title: 'Queries List', type: 'link' }
       ]
     },
     {

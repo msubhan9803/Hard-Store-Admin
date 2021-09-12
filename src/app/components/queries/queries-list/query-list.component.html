@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow">
+          <thead class="thead-light">
+            <tr>
+              <th style="width: 20px;">Sr#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">PhoneNumber</th>
+              <th scope="col">Message</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let query of queryList | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
+              <td style="width: 20px;">{{ page > 1 ? (10 * (page - 1)) + arrayIndex + 1 : arrayIndex + 1 }}</td>
+              <td class="p-3">{{ query.Name }}</td>
+              <td class="p-3">{{ query.PhoneNumber }}</td>
+              <td class="p-3">{{ query.Email }}</td>
+              <td class="p-3"><span [innerHTML]="query.Message.substring(0, 200)+'...'"></span>
+              </td>
+              <td>
+                <button class="btn btn-ghost-info" type="button"
+                  title="Click here to view detail" (click)="this.queryDetailComponent.open(query)">
+                  <i class="fa fa-eye"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="float-right">
+          <ngb-pagination [collectionSize]="this.queryList.length" [(page)]="page" aria-label="Default pagination">
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-query-detail></app-query-detail>

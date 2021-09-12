@@ -1,0 +1,59 @@
+<ng-template #orderStatusTimeline let-modal>
+  <div class="modal-body">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="container mt-3">
+      <div class="page-header">
+        <h3 id="timeline">Query Detail</h3>
+      </div>
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="container">
+                  <div class="row mt-2">
+                    <div class="col-4">
+                      <p class="font-weight-bold">Name</p>
+                    </div>
+                    <div class="col-8">
+                      <p>{{ queryDetail?.Name }}</p>
+                    </div>
+                  </div>
+
+                  <div class="row mt-2">
+                    <div class="col-4">
+                      <p class="font-weight-bold">Email</p>
+                    </div>
+                    <div class="col-8">
+                      <p>{{ queryDetail?.Email }}</p>
+                    </div>
+                  </div>
+
+                  <div class="row mt-2">
+                    <div class="col-4">
+                      <p class="font-weight-bold">Phone Number</p>
+                    </div>
+                    <div class="col-8">
+                      <p>{{ queryDetail?.PhoneNumber }}</p>
+                    </div>
+                  </div>
+
+                  <div class="row mt-2">
+                    <div class="col-4">
+                      <p class="font-weight-bold">Message</p>
+                    </div>
+                    <div class="col-8" style="height: 300px; overflow-y: scroll;">
+                      <p>{{ queryDetail?.Message }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

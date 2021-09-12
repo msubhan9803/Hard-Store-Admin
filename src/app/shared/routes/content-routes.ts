@@ -29,6 +29,13 @@ export const content: Routes = [
     }
   },
   {
+    path: 'update-currency',
+    loadChildren: () => import('../../components/update-currency/update-currency.module').then(m => m.UpdateCurrencyModule),
+    data: {
+      breadcrumb: "Update Currency Rate"
+    }
+  },
+  {
     path: 'blogs',
     loadChildren: () => import('../../components/blogs/blogs.module').then(m => m.BlogsModule),
     data: {
@@ -40,6 +47,13 @@ export const content: Routes = [
     loadChildren: () => import('../../components/reviews/reviews.module').then(m => m.ReviewsModule),
     data: {
       breadcrumb: "Blogs"
+    }
+  },
+  {
+    path: 'queries',
+    loadChildren: () => import('../../components/queries/queries.module').then(m => m.QueriesModule),
+    data: {
+      breadcrumb: "Queries"
     }
   },
   {

@@ -29,6 +29,8 @@ import { LoginAuthGuard } from './guard/loginAuth.guard';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { BlogService } from './service/blog.service';
 import { HelperMethodsService } from './service/helper-methods.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from './service/user.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { HelperMethodsService } from './service/helper-methods.service';
     NgSelectModule,
     NgbModule,
     NgToggleModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     NavService,
@@ -62,7 +66,8 @@ import { HelperMethodsService } from './service/helper-methods.service';
     LoginAuthGuard,
     AuthService,
     BlogService,
-    HelperMethodsService
+    HelperMethodsService,
+    UserService
   ],
   exports: [
     FeatherIconsComponent,
@@ -72,7 +77,9 @@ import { HelperMethodsService } from './service/helper-methods.service';
     NgSelectModule,
     NgbModule,
     NgToggleModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

@@ -19,6 +19,7 @@ export class OrderListComponent implements OnInit {
   pageSize = 10;
   @ViewChild(OrderStatusUpdateModalComponent) orderStatusUpdateModalComponent: OrderStatusUpdateModalComponent;
   @ViewChild(OrderStatusTimelineComponent) orderStatusTimelineComponent: OrderStatusTimelineComponent;
+  math = Math;
 
   constructor(
     private ordersService: OrderService,

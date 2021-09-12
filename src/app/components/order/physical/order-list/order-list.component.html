@@ -22,7 +22,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let order of orderList | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
-              <td style="width: 20px;">{{arrayIndex + 1}}</td>
+              <td style="width: 20px;">{{ page > 1 ? (10 * (page - 1)) + arrayIndex + 1 : arrayIndex + 1 }}</td>
               <td class="p-3" style="padding: 3px !important; width: 20px">
                 <button class="btn btn-ghost-info" (click)="this.orderStatusUpdateModalComponent.open(order)" type="button"
                   title="Click here! for editing">
