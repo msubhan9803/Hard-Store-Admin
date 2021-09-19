@@ -31,6 +31,7 @@ import { BlogService } from './service/blog.service';
 import { HelperMethodsService } from './service/helper-methods.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './service/user.service';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { UserService } from './service/user.service';
     NgToggleModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TimeagoModule.forRoot()
   ],
   providers: [
     NavService,
@@ -79,7 +81,8 @@ import { UserService } from './service/user.service';
     NgToggleModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TimeagoModule
   ]
 })
 export class SharedModule { }
