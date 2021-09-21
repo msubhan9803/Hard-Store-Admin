@@ -1,0 +1,56 @@
+<ng-template #updateCurrencyTemplate let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Order Status Timeline</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <form class="needs-validation" [formGroup]="currencyForm" (submit)="onSubmit()" novalidate>
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12 mt-4">
+                      <h5 class="text-bold">Dollar Value</h5>
+                      <input class="form-control" id="validationCustom01" type="number" formControlName="Dollar"
+                        (change)="recalculate()" disabled>
+                      <div *ngIf="isSubmit && currencyForm.controls.Dollar.errors?.required" class="text text-danger">
+                        Field is required.
+                      </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                      <h5 class="text-bold">AED Value</h5>
+                      <input class="form-control" id="validationCustom01" type="number" formControlName="AED"
+                        (change)="recalculate()">
+                      <div *ngIf="isSubmit && currencyForm.controls.AED.errors?.required" class="text text-danger">
+                        Field is required.
+                      </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                      <h5 class="text-bold">Conversion Rate</h5>
+                      <input class="form-control" id="validationCustom01" type="number" formControlName="conversionRate"
+                        (change)="recalculate()" disabled>
+                      <div *ngIf="isSubmit && currencyForm.controls.conversionRate.errors?.required"
+                        class="text text-danger">
+                        Field is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row justify-content-end mt-4">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">Discard</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

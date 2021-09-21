@@ -4,8 +4,6 @@ import { UpdateCurrencyRoutingModule } from './update-currency-routing.module';
 import { UpdateCurrencyComponent } from './update-currency/update-currency.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
-
 @NgModule({
   declarations: [
     UpdateCurrencyComponent
@@ -16,4 +14,5 @@ import { SharedModule } from 'src/app/shared/shared.module';
     UpdateCurrencyRoutingModule
   ]
 })
+
 export class UpdateCurrencyModule { }

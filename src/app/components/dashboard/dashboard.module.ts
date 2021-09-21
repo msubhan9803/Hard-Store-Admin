@@ -11,7 +11,9 @@ import { ChartistModule } from 'ng-chartist';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [
+    DashboardComponent
+  ],
   imports: [
     CommonModule,
     DashboardRoutingModule,

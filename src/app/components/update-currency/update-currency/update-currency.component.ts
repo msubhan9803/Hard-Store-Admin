@@ -85,8 +85,6 @@ export class UpdateCurrencyComponent implements OnInit {
   onSubmit() {
     this.isSubmit = true;
 
-    console.log("here.. : ", this.currencyForm)
-
     if (this.currencyForm.invalid) {
       Swal.fire({
         icon: 'error',

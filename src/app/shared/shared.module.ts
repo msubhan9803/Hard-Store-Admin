@@ -32,6 +32,7 @@ import { HelperMethodsService } from './service/helper-methods.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './service/user.service';
 import { TimeagoModule } from 'ngx-timeago';
+import { UpdateCurrencyModalComponent } from '../components/update-currency/update-currency-modal/update-currency-modal.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import { TimeagoModule } from 'ngx-timeago';
     SidebarComponent,
     ContentLayoutComponent,
     BreadcrumbComponent,
-    RightSidebarComponent
+    RightSidebarComponent,
+
+    UpdateCurrencyModalComponent
   ],
   imports: [
     CommonModule,
@@ -82,7 +85,8 @@ import { TimeagoModule } from 'ngx-timeago';
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
-    TimeagoModule
+    TimeagoModule,
+    UpdateCurrencyModalComponent
   ]
 })
 export class SharedModule { }

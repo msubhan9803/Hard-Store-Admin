@@ -220,7 +220,7 @@ export class AddProductComponent implements OnInit {
           timer: 1500
         });
 
-        window.location.href = "/products/physical/product-list";
+        window.location.href = "/admin/#/products/physical/product-list";
       },
       err => {
         Swal.fire({

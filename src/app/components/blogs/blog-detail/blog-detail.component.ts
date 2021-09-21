@@ -119,7 +119,7 @@ export class BlogDetailComponent implements OnInit {
           timer: 1500
         });
 
-        window.location.href = "/blogs/blog-list";
+        window.location.href = "/admin/#/blogs/blog-list";
       },
       err => {
         Swal.fire({

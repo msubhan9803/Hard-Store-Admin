@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as chartData from '../../shared/data/chart';
 import { doughnutData, pieData } from '../../shared/data/chart';
+import { UpdateCurrencyModalComponent } from '../update-currency/update-currency-modal/update-currency-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -66,7 +67,7 @@ export class DashboardComponent implements OnInit {
 
   public chart3 = chartData.chart3;
 
-
+  @ViewChild(UpdateCurrencyModalComponent) updateCurrencyModalComponent: UpdateCurrencyModalComponent;
 
   // events
   public chartClicked(e: any): void {
@@ -75,6 +76,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.updateCurrencyModalComponent.open();
+    }, 1000)
   }
 
 }

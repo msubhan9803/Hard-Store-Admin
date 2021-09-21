@@ -9,6 +9,7 @@ export const content: Routes = [
   },
   {
     path: 'products',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/products/products.module').then(m => m.ProductsModule),
     data: {
       breadcrumb: "Products"
@@ -16,6 +17,7 @@ export const content: Routes = [
   },
   {
     path: 'orders',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/order/orders.module').then(m => m.OrdersModule),
     data: {
       breadcrumb: "Orders"
@@ -23,6 +25,7 @@ export const content: Routes = [
   },
   {
     path: 'faq',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/faq/faq.module').then(m => m.FaqModule),
     data: {
       breadcrumb: "Faq"
@@ -30,6 +33,7 @@ export const content: Routes = [
   },
   {
     path: 'update-currency',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/update-currency/update-currency.module').then(m => m.UpdateCurrencyModule),
     data: {
       breadcrumb: "Update Currency Rate"
@@ -37,6 +41,7 @@ export const content: Routes = [
   },
   {
     path: 'blogs',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/blogs/blogs.module').then(m => m.BlogsModule),
     data: {
       breadcrumb: "Blogs"
@@ -44,6 +49,7 @@ export const content: Routes = [
   },
   {
     path: 'reviews',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/reviews/reviews.module').then(m => m.ReviewsModule),
     data: {
       breadcrumb: "Blogs"
@@ -51,6 +57,7 @@ export const content: Routes = [
   },
   {
     path: 'queries',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/queries/queries.module').then(m => m.QueriesModule),
     data: {
       breadcrumb: "Queries"
@@ -58,6 +65,7 @@ export const content: Routes = [
   },
   {
     path: 'sales',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/sales/sales.module').then(m => m.SalesModule),
     data: {
       breadcrumb: "Sales"
@@ -65,6 +73,7 @@ export const content: Routes = [
   },
   {
     path: 'coupons',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/coupons/coupons.module').then(m => m.CouponsModule),
     data: {
       breadcrumb: "Coupons"
@@ -72,6 +81,7 @@ export const content: Routes = [
   },
   {
     path: 'pages',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/pages/pages.module').then(m => m.PagesModule),
     data: {
       breadcrumb: "Pages"
@@ -79,10 +89,12 @@ export const content: Routes = [
   },
   {
     path: 'media',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/media/media.module').then(m => m.MediaModule),
   },
   {
     path: 'menus',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/menus/menus.module').then(m => m.MenusModule),
     data: {
       breadcrumb: "Menus"
@@ -90,6 +102,7 @@ export const content: Routes = [
   },
   {
     path: 'users',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/users/users.module').then(m => m.UsersModule),
     data: {
       breadcrumb: "Users"
@@ -97,6 +110,7 @@ export const content: Routes = [
   },
   {
     path: 'vendors',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/vendors/vendors.module').then(m => m.VendorsModule),
     data: {
       breadcrumb: "Vendors"
@@ -104,6 +118,7 @@ export const content: Routes = [
   },
   {
     path: 'localization',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/localization/localization.module').then(m => m.LocalizationModule),
     data: {
       breadcrumb: "Localization"
@@ -111,10 +126,12 @@ export const content: Routes = [
   },
   {
     path: 'reports',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/reports/reports.module').then(m => m.ReportsModule),
   },
   {
     path: 'settings',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/setting/setting.module').then(m => m.SettingModule),
     data: {
       breadcrumb: "Settings"
@@ -122,6 +139,7 @@ export const content: Routes = [
   },
   {
     path: 'invoice',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../components/invoice/invoice.module').then(m => m.InvoiceModule),
     data: {
       breadcrumb: "Invoice"

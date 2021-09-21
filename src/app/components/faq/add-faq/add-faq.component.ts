@@ -102,7 +102,7 @@ export class AddFaqComponent implements OnInit {
           timer: 1500
         });
 
-        window.location.href = "/faq/faq-list";
+        window.location.href = "/admin/#/faq/faq-list";
       },
       err => {
         Swal.fire({

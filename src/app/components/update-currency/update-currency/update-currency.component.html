@@ -8,7 +8,7 @@
               <div class="row">
                 <div class="col-12 mt-4">
                   <h5 class="text-bold">Dollar Value</h5>
-                  <input class="form-control" id="validationCustom01" type="number" formControlName="Dollar" (change)="recalculate()">
+                  <input class="form-control" disabled id="validationCustom01" type="number" formControlName="Dollar" (change)="recalculate()">
                   <div *ngIf="isSubmit && currencyForm.controls.Dollar.errors?.required" class="text text-danger">
                     Field is required.
                   </div>
