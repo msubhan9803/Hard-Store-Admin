@@ -17,6 +17,7 @@
               <th>Total Product</th>
               <th>Total Amount</th>
               <th>Current Status</th>
+              <th scope="col">Source</th>
               <!-- <th>Order Placed On</th> -->
             </tr>
           </thead>
@@ -45,6 +46,7 @@
                 <span class="{{order.tracking_Status[order.tracking_Status.current_Status].status}}"
                 >{{ this.helperMethodsService.capitalizeFirstLetter(order.tracking_Status[order.tracking_Status.current_Status].status) }}</span>
               </td>
+              <td>{{order.source}}</td>
               <!-- <td class="p-3">{{ order.createdAt | date }}</td> -->
             </tr>
           </tbody>

@@ -43,4 +43,11 @@ export class OrderService {
 
     return this.http.get(url);
   }
+
+  // POST: order/createOrder
+  public createOrderAPI(productObj: any) {
+    let url = this._env.urlAddress + 'order/createOrder';
+
+    return this.http.post(url, productObj);
+  }
 }

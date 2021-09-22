@@ -63,7 +63,8 @@ export class NavService {
     },
     {
       title: 'Orders', icon: 'dollar-sign', type: 'sub', active: false, children: [
-        { path: '/orders/order-list', title: 'Order List', type: 'link' }
+        { path: '/orders/order-list', title: 'Order List', type: 'link' },
+        { path: '/orders/create-order', title: 'Create Order', type: 'link' }
       ]
     },
 

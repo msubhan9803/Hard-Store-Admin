@@ -25,6 +25,7 @@ import { FilePickerModule } from 'ngx-awesome-uploader';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { OrderStatusUpdateModalComponent } from './physical/order-status-update-modal/order-status-update-modal.component';
 import { OrderStatusTimelineComponent } from './physical/order-status-timeline/order-status-timeline.component';
+import { AddOrderComponent } from './physical/add-order/add-order.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -32,7 +33,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 };
 
 @NgModule({
-  declarations: [OrderListComponent, DigitalCategoryComponent, DigitalSubCategoryComponent, DigitalListComponent, DigitalAddComponent, OrderStatusUpdateModalComponent, OrderStatusTimelineComponent],
+  declarations: [OrderListComponent, DigitalCategoryComponent, DigitalSubCategoryComponent, DigitalListComponent, DigitalAddComponent, OrderStatusUpdateModalComponent, OrderStatusTimelineComponent, AddOrderComponent],
   imports: [
     NgxDropzoneModule,
     CommonModule,
