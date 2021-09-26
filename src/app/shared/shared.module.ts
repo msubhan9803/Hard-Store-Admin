@@ -33,6 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './service/user.service';
 import { TimeagoModule } from 'ngx-timeago';
 import { UpdateCurrencyModalComponent } from '../components/update-currency/update-currency-modal/update-currency-modal.component';
+import { DiscountPipe } from './pipes/discount.pipe';
+import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { UpdateCurrencyModalComponent } from '../components/update-currency/upda
     ContentLayoutComponent,
     BreadcrumbComponent,
     RightSidebarComponent,
-
+    DiscountPipe,
+    AedToDollarPipe,
     UpdateCurrencyModalComponent
   ],
   imports: [
@@ -86,6 +89,8 @@ import { UpdateCurrencyModalComponent } from '../components/update-currency/upda
     FormsModule,
     ReactiveFormsModule,
     TimeagoModule,
+    DiscountPipe,
+    AedToDollarPipe,
     UpdateCurrencyModalComponent
   ]
 })

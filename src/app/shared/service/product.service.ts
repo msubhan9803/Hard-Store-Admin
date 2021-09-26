@@ -23,6 +23,7 @@ export class ProductService {
     //   'GroupId': `${SecutiryGroupId}`
     // });
   }
+  public Currency = { name: 'AED', currency: 'AED', price: 1 } // Default Currency
 
   // GET: get api url
   public getImageUrl() {

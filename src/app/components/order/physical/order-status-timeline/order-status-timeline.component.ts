@@ -4,6 +4,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperMethodsService } from 'src/app/shared/service/helper-methods.service';
 import { OrderService } from 'src/app/shared/service/order.service';
 import { ProductService } from 'src/app/shared/service/product.service';
+import { UserService } from 'src/app/shared/service/user.service';
 import Swal from 'sweetalert2';
 import { monthNames } from '../../../../shared/data/other'
 
@@ -73,16 +74,21 @@ export class OrderStatusTimelineComponent implements OnInit {
   public product_List = [];
   public themeFooterLogo: string = 'assets/images/logo-new.png';
   public total = 0;
+  public conversionRate;
 
   constructor(
     private modalService: NgbModal,
     private orderService: OrderService,
-    private productService: ProductService,
+    public productService: ProductService,
+    private userService: UserService,
     public helperMethodsService: HelperMethodsService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.imageAddress = this.productService.getImageUrl();
+    await this.userService.getCurrency().toPromise().then((res: any) => {
+      this.conversionRate = res.conversionRate;
+    })
   }
 
   open(orderId) {
@@ -92,6 +98,7 @@ export class OrderStatusTimelineComponent implements OnInit {
     this.orderService.getOrderbyId(this.orderId).subscribe(
       async (res: any) => {
         this.order = res;
+        console.log("current order: ", this.order)
         Object.entries(res.tracking_Status).forEach(([key, value]) => {
           if (key != "current_Status") {
             let status = {
@@ -109,12 +116,6 @@ export class OrderStatusTimelineComponent implements OnInit {
         });
 
         this.product_List = res.products;
-
-        this.total = 0;
-        this.product_List.forEach(product => {
-          this.total += (product.unit_Cost - (product.unit_Cost - product.discount)) * product.quantity;
-        })
-
         this.showTimeLine = true;
         this.showProducts = true;
       },

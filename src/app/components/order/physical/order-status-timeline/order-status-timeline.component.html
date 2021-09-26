@@ -24,12 +24,13 @@
                 this.tracking_Status.order_Confirmed.date.getDate() || null }}</div>
               <div class="timeline-balloon-date-day">{{
                 monthNames[this.tracking_Status.order_Confirmed.date.getMonth()] || null }}</div>
-              </div>
             </div>
-            <div class="timeline-panel">
+          </div>
+          <div class="timeline-panel">
             <div class="timeline-heading">
               <h4 class="timeline-title">Order Confirmed</h4>
-              <span class="text-muted" *ngIf="this.tracking_Status.order_Confirmed.status == 'completed'">{{ this.tracking_Status.order_Confirmed.date  | timeago:live}}</span>
+              <span class="text-muted" *ngIf="this.tracking_Status.order_Confirmed.status == 'completed'">{{
+                this.tracking_Status.order_Confirmed.date | timeago:live}}</span>
               <p>
                 <span class="text-muted">
                   {{ this.tracking_Status.order_Confirmed.comment || "" }}
@@ -63,7 +64,8 @@
           <div class="timeline-panel">
             <div class="timeline-heading">
               <h4 class="timeline-title">Ready For Delivery</h4>
-              <span class="text-muted" *ngIf="this.tracking_Status.ready_for_Delivery.status == 'completed'">{{ this.tracking_Status.ready_for_Delivery.date  | timeago:live}}</span>
+              <span class="text-muted" *ngIf="this.tracking_Status.ready_for_Delivery.status == 'completed'">{{
+                this.tracking_Status.ready_for_Delivery.date | timeago:live}}</span>
               <p>
                 <span class="text-muted">
                   {{ this.tracking_Status.ready_for_Delivery.comment || "" }}
@@ -98,7 +100,8 @@
           <div class="timeline-panel">
             <div class="timeline-heading">
               <h4 class="timeline-title">Out For Delivery</h4>
-              <span class="text-muted" *ngIf="this.tracking_Status.out_For_Delivery.status == 'completed'">{{ this.tracking_Status.out_For_Delivery.date  | timeago:live}}</span>
+              <span class="text-muted" *ngIf="this.tracking_Status.out_For_Delivery.status == 'completed'">{{
+                this.tracking_Status.out_For_Delivery.date | timeago:live}}</span>
               <p>
                 <span class="text-muted">
                   {{ this.tracking_Status.out_For_Delivery.comment || "" }}
@@ -132,7 +135,8 @@
           <div class="timeline-panel">
             <div class="timeline-heading">
               <h4 class="timeline-title">Delivered</h4>
-              <span class="text-muted" *ngIf="this.tracking_Status.delivered.status == 'completed'">{{ this.tracking_Status.delivered.date  | timeago:live}}</span>
+              <span class="text-muted" *ngIf="this.tracking_Status.delivered.status == 'completed'">{{
+                this.tracking_Status.delivered.date | timeago:live}}</span>
               <p>
                 <span class="text-muted">
                   {{ this.tracking_Status.delivered.comment || "" }}
@@ -166,7 +170,8 @@
           <div class="timeline-panel">
             <div class="timeline-heading">
               <h4 class="timeline-title">Paid</h4>
-              <span class="text-muted" *ngIf="this.tracking_Status.Paid.status == 'completed'">{{ this.tracking_Status.Paid.date  | timeago:live}}</span>
+              <span class="text-muted" *ngIf="this.tracking_Status.Paid.status == 'completed'">{{
+                this.tracking_Status.Paid.date | timeago:live}}</span>
               <p>
                 <span class="text-muted">
                   {{ this.tracking_Status.Paid.comment || "" }}
@@ -202,10 +207,10 @@
           <tbody>
             <tr class="" *ngFor="let product of product_List; let arrayIndex = index">
               <td class="p-3 w-25">{{ product.product_name }}</td>
-              <td class="p-3">AED {{ product.unit_Cost }}</td>
+              <td class="p-3">AED {{ product.unit_Cost | aedToDollar: this.conversionRate }}</td>
               <td class="p-3">{{ product.quantity }}</td>
-              <td class="p-3">AED {{ product.unit_Cost - product.discount }}</td>
-              <td class="p-3">AED {{ (product.unit_Cost - (product.unit_Cost - product.discount)) * product.quantity }}
+              <td class="p-3">AED {{ product.discount | aedToDollar: this.conversionRate }}</td>
+              <td class="p-3">AED {{ product.sub_Total | aedToDollar: this.conversionRate }}
               </td>
               <!-- <td class="p-3">
                   <img src="{{ this.imageAddress + product_List[arrayIndex].variants[0].imagesPreview[0] }}"
@@ -224,22 +229,24 @@
                 <b>Total</b>
               </div>
               <div class="col-6">
-                AED {{total}}
+                AED {{order?.totalAmount | aedToDollar: this.conversionRate}}
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="page-header mt-4">
-        <h3 id="timeline">Shipping Address</h3>
-      </div>
       <div class="card mt-4">
         <div class="card-body shadow">
           <div class="container">
             <div class="row">
               <div class="col-md-6">
                 <div class="container">
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 id="timeline">Shipping Address</h3>
+                    </div>
+                  </div>
                   <div class="row mt-2">
                     <div class="col-6">
                       <p class="font-weight-bold">Address</p>
@@ -254,6 +261,40 @@
                       <p>{{ order?.Country }}</p>
                       <p>{{ order?.postalCode }}</p>
                       <p>{{ order?.State }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12">
+                      <h3 id="timeline">Customer Details</h3>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col-6">
+                      <p class="font-weight-bold">First Name</p>
+                      <p class="font-weight-bold">Last Name</p>
+                      <p class="font-weight-bold">Email</p>
+                      <p class="font-weight-bold">Country</p>
+                      <p class="font-weight-bold">Phone</p>
+                      <p class="font-weight-bold">Address</p>
+                      <p class="font-weight-bold">Town/City</p>
+                      <p class="font-weight-bold">State</p>
+                      <p class="font-weight-bold">Postal Code</p>
+                    </div>
+                    <div class="col-6">
+                      <p>{{ order?.first_Name }}</p>
+                      <p>{{ order?.last_Name }}</p>
+                      <p>{{ order?.Email }}</p>
+                      <p>{{ order?.Country }}</p>
+                      <p>{{ order?.phone }}</p>
+                      <p>{{ order?.Address }}</p>
+                      <p>{{ order?.City }}</p>
+                      <p>{{ order?.State }}</p>
+                      <p>{{ order?.postalCode }}</p>
                     </div>
                   </div>
                 </div>
