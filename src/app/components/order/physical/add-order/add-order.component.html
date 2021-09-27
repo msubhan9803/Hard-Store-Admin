@@ -187,11 +187,11 @@
                     <tbody>
                       <tr class="" *ngFor="let product of product_List; let arrayIndex = index">
                         <!-- <td class="p-3">{{product.id}}</td> -->
-                        <td class="p-3">{{product.name}}</td>
-                        <td class="p-3">AED {{product.unitCost | aedToDollar: this.conversionRate}}</td>
+                        <td class="p-3">{{product.product_name}}</td>
+                        <td class="p-3">AED {{product.unit_Cost | aedToDollar: this.conversionRate}}</td>
                         <td class="p-3">{{product.quantity}}</td>
                         <td class="p-3">AED {{product.discount | aedToDollar: this.conversionRate}}</td>
-                        <td class="p-3">AED {{product.subTotal | aedToDollar: this.conversionRate}}</td>
+                        <td class="p-3">AED {{product.sub_Total | aedToDollar: this.conversionRate}}</td>
                         <td class="p-3" style="padding: 3px !important; width: 20px">
                           <button class="btn btn-ghost-info" (click)="deleteProduct(arrayIndex)" type="button"
                             title="Click here! for deleting">

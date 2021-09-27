@@ -122,6 +122,15 @@ export class AddOrderComponent implements OnInit {
     checkoutFormValue.Country = this.checkoutForm.value.Country.name ? this.checkoutForm.value.Country.name : this.checkoutForm.value.Country;
     checkoutFormValue.paymentStatus = true;
 
+    // Setting total
+    let total = 0;
+    for (let index = 0; index < this.product_List.length; index++) {
+      const product = this.product_List[index];
+      total = total + product.sub_Total;
+    }
+    this.checkoutForm.value.totalAmount = total;
+    this.checkoutForm.value.products = this.product_List;
+
     this.orderService.createOrderAPI(checkoutFormValue).subscribe(
       res => {
         Swal.fire({
