@@ -10,17 +10,18 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-product-create-order.component.scss']
 })
 export class AddProductCreateOrderComponent implements OnInit {
-  @Input() selectedProduct ={
+  @Input() selectedProduct = {
     id: "",
-    name: "",
+    product_name: "",
     variant: "",
     sellerSku: "",
-    unitCost: null,
+    unit_Cost: null,
     quantity: null,
     discount: null,
-    subTotal: null,
+    sub_Total: null,
     imageUrl: ""
   };
+
   @Output() addProductEvent = new EventEmitter<string>();
   public order: any;
   @ViewChild('orderStatusTemp') orderStatusTemp: TemplateRef<any>;
@@ -33,13 +34,13 @@ export class AddProductCreateOrderComponent implements OnInit {
   proudctsList = [];
   product = {
     id: "",
-    name: "",
+    product_name: "",
     variant: "",
     sellerSku: "",
-    unitCost: null,
+    unit_Cost: null,
     quantity: null,
     discount: null,
-    subTotal: null,
+    sub_Total: null,
     imageUrl: ""
   }
 
@@ -56,11 +57,27 @@ export class AddProductCreateOrderComponent implements OnInit {
   }
 
   open() {
+    this.resetState();
     this.modalService.open(this.orderStatusTemp, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  resetState() {
+    this.selectedProductName = "";
+    this.product = {
+      id: "",
+      product_name: "",
+      variant: "",
+      sellerSku: "",
+      unit_Cost: null,
+      quantity: null,
+      discount: null,
+      sub_Total: null,
+      imageUrl: ""
+    }
   }
 
   onSubmit() {
@@ -69,24 +86,29 @@ export class AddProductCreateOrderComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
+  closeModal() {
+    this.resetState();
+    this.modalService.dismissAll();
+  }
+
   handleProductSelection() {
     let product = this.proudctsList.find(product => product.title == this.selectedProductName);
 
     this.productService.getProductById(product._id).subscribe((res: any) => {
       this.product.id = res._id;
-      this.product.name = res.title;
+      this.product.product_name = res.title;
       this.product.variant = res.skuArray[0].watchStrapColor;
       this.product.sellerSku = res.skuArray[0].sellerSku;
-      this.product.unitCost = parseFloat(res.skuArray[0].price);
+      this.product.unit_Cost = parseFloat(res.skuArray[0].price);
       this.product.quantity = 1;
-      this.product.discount = res.sale ? this.product.unitCost - parseFloat(res.skuArray[0].specialPrice) : 0;
+      this.product.discount = res.sale ? this.product.unit_Cost - parseFloat(res.skuArray[0].specialPrice) : 0;
       this.product.imageUrl = res.variants[0].imagesPreview[0];
-      this.product.subTotal = (this.product.unitCost - this.product.discount) * this.product.quantity;
+      this.product.sub_Total = (this.product.unit_Cost - this.product.discount) * this.product.quantity;
     })
   }
 
   onQuantityChange() {
-    this.product.subTotal = (this.product.unitCost - this.product.discount) * this.product.quantity;
+    this.product.sub_Total = (this.product.unit_Cost - this.product.discount) * this.product.quantity;
   }
 
   private getDismissReason(reason: any): string {

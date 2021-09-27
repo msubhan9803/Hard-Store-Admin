@@ -154,7 +154,20 @@ export class AddOrderComponent implements OnInit {
   addProductHandler(value) {
     if (value !== "") {
       let product = JSON.parse(value)
-      console.log(product)
+      let productIndex = -1;
+      let foundProduct = {};
+
+      for (let index = 0; index < this.product_List.length; index++) {
+        const currentPr = this.product_List[index];
+        if (currentPr.id == product.id) {
+          productIndex = index;
+          foundProduct = currentPr;
+        }
+      }
+      if (productIndex !== -1) {
+        this.product_List[productIndex].quantity = this.product_List[productIndex].quantity + product.quantity;
+        return;
+      }
       this.product_List.push(product);
     }
   }
@@ -173,6 +186,10 @@ export class AddOrderComponent implements OnInit {
 
   onDeleteConfirmSKU(e) {
     console.log(e)
+  }
+
+  deleteProduct(index) {
+    this.product_List.splice(index, 1);
   }
 
   createForm() {

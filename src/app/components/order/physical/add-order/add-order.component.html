@@ -168,28 +168,36 @@
                     (createConfirm)="onCreateConfirmSKU($event)" (edit)="onEditConfirmSKU($event)"
                     (delete)="onDeleteConfirmSKU($event)">
                   </ng2-smart-table> -->
-                  <div class="float-right">
-                    <button class="btn btn-primary p-2" (click)="this.addProductCreateOrderComponent.open()"><i class="fa fa-plus"></i></button>
+                  <div class="float-right py-2">
+                    <button class="btn btn-primary" (click)="this.addProductCreateOrderComponent.open()"><i
+                        class="fa fa-plus"></i></button>
                   </div>
                   <table class="table table-bordered table-hover shadow">
                     <thead class="thead-light">
                       <tr>
-                        <th scope="col">Product Id</th>
+                        <!-- <th scope="col">Product Id</th> -->
                         <th scope="col">Product Name</th>
                         <th scope="col">Unit Cost</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Discount</th>
                         <th scope="col">Sub Total</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr class="" *ngFor="let product of product_List; let arrayIndex = index">
-                        <td class="p-3">{{product.id}}</td>
+                        <!-- <td class="p-3">{{product.id}}</td> -->
                         <td class="p-3">{{product.name}}</td>
                         <td class="p-3">AED {{product.unitCost | aedToDollar: this.conversionRate}}</td>
                         <td class="p-3">{{product.quantity}}</td>
                         <td class="p-3">AED {{product.discount | aedToDollar: this.conversionRate}}</td>
                         <td class="p-3">AED {{product.subTotal | aedToDollar: this.conversionRate}}</td>
+                        <td class="p-3" style="padding: 3px !important; width: 20px">
+                          <button class="btn btn-ghost-info" (click)="deleteProduct(arrayIndex)" type="button"
+                            title="Click here! for deleting">
+                            <i class="fa fa-trash"></i>
+                          </button>
+                        </td>
                         <!-- <td class="p-3">{{product.imageUrl}}</td> -->
                         <!-- <td class="p-3">{{product.sellerSku}}</td> -->
                         <!-- <td class="p-3">{{product.variant}}</td> -->
@@ -216,4 +224,5 @@
   </div>
 </div>
 
-<app-add-product-create-order selectedProduct="selectedProduct" (addProductEvent)="addProductHandler($event)"></app-add-product-create-order>
+<app-add-product-create-order selectedProduct="selectedProduct" (addProductEvent)="addProductHandler($event)">
+</app-add-product-create-order>
