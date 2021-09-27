@@ -119,7 +119,7 @@
                               *ngFor="let file of this.variantsArray[arrayIndex].imagesPreview; let fileIndex = index"
                               (click)="setImageAsImageThumbnail(fileIndex, arrayIndex)"
                               [ngClass]="{'active-image': this.variantsArray[arrayIndex].isThumbnailImageIndex == fileIndex}">
-                              <img id="img-{{fileIndex}}-{{arrayIndex}}" src="{{file.base64}}" alt="your image"
+                              <img id="img-{{fileIndex}}-{{arrayIndex}}" src="{{this.imageAddress + file}}" alt="your image"
                                 width="100%" />
                               <i class="fa fa-1x fa-trash text-danger"
                                 (click)="onVariantImageRemove(arrayIndex, fileIndex)"></i>

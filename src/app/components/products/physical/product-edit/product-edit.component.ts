@@ -165,6 +165,10 @@ export class ProductEditComponent implements OnInit {
       (res: any) => {
         this.patchForm(res);
         console.log("proudct details: ", res)
+        this.variantsArray = res.variants;
+        console.log("this.variantsArray: ", this.variantsArray)
+        this.source.load(res.skuArray)
+        console.log("this.skuArray: ", this.skuArray)
       }
     )
   }

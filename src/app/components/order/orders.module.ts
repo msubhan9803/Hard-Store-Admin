@@ -26,6 +26,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { OrderStatusUpdateModalComponent } from './physical/order-status-update-modal/order-status-update-modal.component';
 import { OrderStatusTimelineComponent } from './physical/order-status-timeline/order-status-timeline.component';
 import { AddOrderComponent } from './physical/add-order/add-order.component';
+import { AddProductCreateOrderComponent } from './physical/add-product-create-order/add-product-create-order.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -33,7 +34,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 };
 
 @NgModule({
-  declarations: [OrderListComponent, DigitalCategoryComponent, DigitalSubCategoryComponent, DigitalListComponent, DigitalAddComponent, OrderStatusUpdateModalComponent, OrderStatusTimelineComponent, AddOrderComponent],
+  declarations: [OrderListComponent, DigitalCategoryComponent, DigitalSubCategoryComponent, DigitalListComponent, DigitalAddComponent, OrderStatusUpdateModalComponent, OrderStatusTimelineComponent, AddOrderComponent, AddProductCreateOrderComponent],
   imports: [
     NgxDropzoneModule,
     CommonModule,

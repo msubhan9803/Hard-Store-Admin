@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -8,7 +8,9 @@ import { CategoryService } from 'src/app/shared/service/category.service';
 import { CheckoutService } from 'src/app/shared/service/checkout.service';
 import { OrderService } from 'src/app/shared/service/order.service';
 import { ProductService } from 'src/app/shared/service/product.service';
+import { UserService } from 'src/app/shared/service/user.service';
 import Swal from 'sweetalert2';
+import { AddProductCreateOrderComponent } from '../add-product-create-order/add-product-create-order.component';
 
 @Component({
   selector: 'app-add-order',
@@ -23,6 +25,20 @@ export class AddOrderComponent implements OnInit {
   public countryList = [];
   source: LocalDataSource;
   proudctsArray = [];
+  public conversionRate;
+  product_List = [];
+  @ViewChild(AddProductCreateOrderComponent) addProductCreateOrderComponent: AddProductCreateOrderComponent;
+  selectedProduct = {
+    id: "",
+    name: "",
+    variant: "",
+    sellerSku: "",
+    unitCost: null,
+    quantity: null,
+    discount: null,
+    subTotal: null,
+    imageUrl: ""
+  }
 
   public dropdownSettings: IDropdownSettings = {
     singleSelection: false,
@@ -73,6 +89,7 @@ export class AddOrderComponent implements OnInit {
     private fb: FormBuilder,
     private productsService: ProductService,
     private orderService: OrderService,
+    private userService: UserService,
     private checkoutService: CheckoutService
   ) {
     this.createForm();
@@ -80,8 +97,11 @@ export class AddOrderComponent implements OnInit {
     this.source.load(this.proudctsArray);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.countryList = this.checkoutService.countryList.filter(item => item.name);
+    await this.userService.getCurrency().toPromise().then((res: any) => {
+      this.conversionRate = res.conversionRate;
+    })
   }
 
   async onSubmit() {
@@ -129,6 +149,14 @@ export class AddOrderComponent implements OnInit {
     this.checkoutForm.reset();
     this.checkoutForm.controls['Country'].setValue('United Arab Emirates')
     this.checkoutForm.controls['DailCode'].setValue('+971')
+  }
+
+  addProductHandler(value) {
+    if (value !== "") {
+      let product = JSON.parse(value)
+      console.log(product)
+      this.product_List.push(product);
+    }
   }
 
   onChange($event) {

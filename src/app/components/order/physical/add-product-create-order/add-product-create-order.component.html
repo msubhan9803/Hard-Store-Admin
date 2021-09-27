@@ -1,0 +1,109 @@
+<ng-template #orderStatusTemp let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Order Status</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="product-basic-details row">
+            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+              <div class="field-label">Product Name</div>
+              <select class="form-control" [(ngModel)]="selectedProductName" name="source" id="source"
+                (change)="handleProductSelection()">
+                <option *ngFor="let product of proudctsList" value="{{product.title}}">{{product.title}}</option>
+              </select>
+              <!-- <div *ngIf="checkoutForm.controls.first_Name.touched && checkoutForm.controls.first_Name.errors?.required"
+                class="text text-danger">
+                First Name is required.
+              </div> -->
+            </div>
+
+            <div class="container" *ngIf="this.product.name !== ''">
+              <div class="row">
+                <div class="col-md-6">
+                  <img src="{{this.imageAddress + product.imageUrl}}" width="160" />
+                </div>
+              </div>
+              <div class="row px-3">
+                <div class="col-6">
+                  <b>Product Id</b>
+                </div>
+                <div class="col-6">
+                  {{product.id}}
+                </div>
+              </div>
+              <div class="row px-3">
+                <div class="col-6">
+                  <b>Product Name</b>
+                </div>
+                <div class="col-6">
+                  {{product.name}}
+                </div>
+              </div>
+              <div class="row px-3">
+                <div class="col-6">
+                  <b>Variant</b>
+                </div>
+                <div class="col-6">
+                  {{product.variant}}
+                </div>
+              </div>
+              <div class="row px-3">
+                <div class="col-6">
+                  <b>Seller Sku</b>
+                </div>
+                <div class="col-6">
+                  {{product.sellerSku}}
+                </div>
+              </div>
+              <div class="row px-3">
+                <div class="col-6">
+                  <b>Unit Cost</b>
+                </div>
+                <div class="col-6 text-right">
+                  AED {{product.unitCost}}
+                </div>
+              </div>
+              <div class="row px-3">
+                <div class="col-6">
+                  <b>Quantity</b>
+                </div>
+                <div class="col-6  text-right">
+                  <input class="form-control text-right" type="number" (change)="onQuantityChange()"
+                    [(ngModel)]="product.quantity">
+                </div>
+              </div>
+              <div class="row px-3">
+                <div class="col-6">
+                  <b>Discount</b>
+                </div>
+                <div class="col-6 text-right">
+                  AED {{product.discount}}
+                </div>
+              </div>
+              <div class="row px-3">
+                <div class="col-6">
+                  <b>Total</b>
+                </div>
+                <div class="col-6 text-right">
+                  AED {{product.subTotal}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row justify-content-end row mb-0 m-3" *ngIf="this.product.name !== ''">
+        <div class="product-buttons">
+          <button type="button" (click)="onSubmit()" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-light" (click)="modal.dismiss('Cross click')">Discard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

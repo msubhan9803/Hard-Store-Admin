@@ -36,6 +36,12 @@ export class ProductService {
     return this.http.get(url);
   }
 
+  // GET: products/getProductsName
+  public getProductsName() {
+    let url = this._env.urlAddress + 'products/getProductsName';
+    return this.http.get(url);
+  }
+
   // GET: products/getProductById
   public getProductById(id) {
     let url = this._env.urlAddress + 'products/getProductById/' + id;
