@@ -22,16 +22,16 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Brand : </label>
+                      <label for="exampleFormControlSelect1">Brand: </label>
                       <input class="form-control" id="validationCustom01" formControlName="brand" type="text">
                       <div *ngIf="isSubmit && productForm.controls.brand.errors?.required" class="text text-danger">
                         Brand is required.
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Collections : </label>
+                      <label for="exampleFormControlSelect1">Collections: </label>
                       <ng-select [items]="collectionsData" formControlName="collections" [addTag]="addTagFn"
                         [hideSelected]="true" multiple="true" bindLabel="name">
                       </ng-select>
@@ -41,10 +41,99 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Sale: </label>
+                      <select class="form-control" formControlName="sale" aria-label="Default select example">
+                        <option selected value="">Please Select</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                      <div *ngIf="isSubmit && productForm.controls.sale.errors?.required" class="text text-danger">
+                        Field is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Tags: </label>
+                      <ng-select formControlName="tags" [addTag]="addTagFn" [hideSelected]="true" multiple="true"
+                        bindLabel="name">
+                      </ng-select>
+
+                      <div *ngIf="isSubmit && productForm.value.tags.length == 0" class="text text-danger">
+                        Select atleast 1 Tag
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Is New: </label>
+                      <select class="form-control" formControlName="new" aria-label="Default select example">
+                        <option selected value="">Please Select</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                      <div *ngIf="isSubmit && productForm.controls.new.errors?.required" class="text text-danger">
+                        Field is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Category: </label>
+                      <select class="form-control" formControlName="categoryId" aria-label="Default select example">
+                        <option selected value="">Please Select</option>
+                        <option value="Men">Men</option>
+                        <option value="Women">Women</option>
+                        <option value="Enlargement Device">Enlargement Device</option>
+                        <option value="Power Honey">Power Honey</option>
+                      </select>
+                      <div *ngIf="isSubmit && productForm.controls.categoryId.errors?.required"
+                        class="text text-danger">
+                        Field is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Price: </label>
+                      <input class="form-control" id="validationCustom01" formControlName="price"
+                        style="text-align: right;" #price type="number" min="0"
+                        oninput="javascript: if(this.value < 0) { this.value = 0 };">
+                      <div *ngIf="isSubmit && productForm.controls.price.errors?.required" class="text text-danger">
+                        Price is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Discount: </label>
+                      <input class="form-control" id="validationCustom01" formControlName="discount"
+                        style="text-align: right;" type="number" min="0"
+                        oninput="javascript: if(this.value < 0) { this.value = 0 };">
+                      <div *ngIf="isSubmit && productForm.controls.discount.errors?.required" class="text text-danger">
+                        Discount is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Quantity: </label>
+                      <input class="form-control" id="validationCustom01" formControlName="quantity"
+                        style="text-align: right;" type="number" min="0"
+                        oninput="javascript: if(this.value < 0) { this.value = 0 };">
+                      <div *ngIf="isSubmit && productForm.controls.quantity.errors?.required" class="text text-danger">
+                        Quantity is required.
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- </div> -->
+          <!-- <div class="card"> -->
           <div class="card-header">
             <h5>Product Description</h5>
           </div>
@@ -62,96 +151,291 @@
             </div>
           </div>
         </div>
-      </form>
+        <!-- </form> -->
 
-      <div class="card">
-        <div class="card-header">
-          <h5>Variant Details</h5>
-        </div>
-        <div class="card-body">
-          <div class="row product-adding">
-            <div class="col-xl-12">
-
-              <!-- Variants for loop -->
-              <div *ngIf="this.variantsArray.length > 0">
-                <div class="product-variant-details row align-items-end justify-content-center mt-2 mb-2"
-                  *ngFor="let variant of this.variantsArray; let arrayIndex = index">
+        <!-- We can split <form></form> by wrapping content like this multiple times -->
+        <!-- <form class="needs-validation" [formGroup]="productForm" novalidate> -->
+        <!-- <div class="card">
+          <div class="card-header">
+            <h5>Other Details</h5>
+          </div>
+          <div class="card-body">
+            <div class="row product-adding">
+              <div class="col-xl-12">
+                <div class="product-other-details row">
                   <div class="col-md-6">
-                    <label for="exampleFormControlSelect1">Variant : </label>
-                    <input class="form-control" id="validationCustom01" (change)="editVariant(arrayIndex)" type="text"
-                      [(ngModel)]="this.variantsArray[arrayIndex].variantColor">
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="float-left m-2">
-                      <i class="fa fa-trash text-black" (click)="deleteVariant(arrayIndex)"></i>
-                    </div>
-                    <div class="float-left m-2">
-                      <button class="btn-toggle" (click)="collapseVariantImageArea(arrayIndex)"
-                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-                        Collapse
-                      </button>
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Brand : </label>
+                      <select class="form-control" formControlName="brand_id" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Brand 1</option>
+                        <option>Brand 2</option>
+                        <option>Brand 3</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.brand_id.touched && productForm.controls.brand_id.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Collections : </label>
+                      <ng-multiselect-dropdown formControlName="collections" [placeholder]="'Select Collection'"
+                        [settings]="dropdownSettings" [data]="collectionsData">
+                      </ng-multiselect-dropdown>
 
-                  <div class="variant mt-3 col-12">
-                    <div #collapse="ngbCollapse" [(ngbCollapse)]="this.variantsArray[arrayIndex].collapse">
-                      <div class="card">
-                        <div class="container m-2 p-2 bg-light">
-                          <div class="row border m-2 p-3 bg-white">
-                            <p>
-                              Click Upload button to upload. Add at least 3 images of your product from
-                              different angles.Maximum 8 pictures. Size between 500x500 and 2000x2000 px. Obscene
-                              image is strictly prohibited.
-                            </p>
+                      <div
+                        *ngIf="productForm.controls.collections.touched && productForm.controls.collections.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">New : </label>
+                      <select class="form-control" formControlName="new" id="exampleFormControlSelect1">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                      </select>
+                      <div *ngIf="productForm.controls.new.touched && productForm.controls.new.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Tags : </label>
+                      <ng-multiselect-dropdown formControlName="tags" [placeholder]="'Select Tags'"
+                        [settings]="dropdownSettings" [data]="tagsData">
+                      </ng-multiselect-dropdown>
 
-                            <input style="display: none;" type="file" id="variant-img-{{arrayIndex}}" accept="image/*"
-                              #file (change)="variantImageAdded(file.files, arrayIndex, $event)" multiple>
+                      <div *ngIf="productForm.controls.tags.touched && productForm.controls.tags.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Watch Case Shape : </label>
+                      <select class="form-control" formControlName="Watch_Case_Shape" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Round</option>
+                        <option>Square</option>
+                        <option>Rectangle</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Watch_Case_Shape.touched && productForm.controls.Watch_Case_Shape.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Glass : </label>
+                      <select class="form-control" formControlName="Glass" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Sappire Crystal Glass</option>
+                        <option>Mineral</option>
+                        <option>Plexiglass</option>
+                      </select>
+                      <div *ngIf="productForm.controls.Glass.touched && productForm.controls.Glass.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Watch Feature : </label>
+                      <ng-multiselect-dropdown formControlName="Watch_Feature" [placeholder]="'Select Watch Features'"
+                        [settings]="dropdownSettings" [data]="watchFeaturesData">
+                      </ng-multiselect-dropdown>
 
-                            <button class="btn btn-outline-light btn-upload-custom" (click)="file.click()">
-                              <i class="fa fa-upload" style="color: #069;" aria-hidden="true"></i>
-                              Upload
-                            </button>
-                          </div>
+                      <div
+                        *ngIf="productForm.controls.Watch_Feature.touched && productForm.controls.Watch_Feature.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="validationCustom01">Model
+                        :</label>
+                      <input class="form-control" id="validationCustom01" type="text" formControlName="Model" required>
+                      <div *ngIf="productForm.controls.Model.touched && productForm.controls.Model.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Dial Size : </label>
+                      <select class="form-control" formControlName="Dial_Size" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>34mm</option>
+                        <option>22mm</option>
+                        <option>18mm</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Dial_Size.touched && productForm.controls.Dial_Size.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Watch Case Size : </label>
+                      <select class="form-control" formControlName="Watch_Case_Size" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Under 20mm</option>
+                        <option>21mm to 24mm</option>
+                        <option>30mm to 34mm</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Watch_Case_Size.touched && productForm.controls.Watch_Case_Size.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Color Family : </label>
+                      <ng-select formControlName="Color_Family" [items]="colorFamilyData"
+                        [placeholder]="'Select Color Family'">
+                      </ng-select>
 
-                          <div class="row border m-2 p-3 bg-white">
-                            <div class="variant-img-wrapper"
-                              *ngFor="let file of this.variantsArray[arrayIndex].imagesPreview; let fileIndex = index"
-                              (click)="setImageAsImageThumbnail(fileIndex, arrayIndex)"
-                              [ngClass]="{'active-image': this.variantsArray[arrayIndex].isThumbnailImageIndex == fileIndex}">
-                              <img id="img-{{fileIndex}}-{{arrayIndex}}" src="{{this.imageAddress + file}}" alt="your image"
-                                width="100%" />
-                              <i class="fa fa-1x fa-trash text-danger"
-                                (click)="onVariantImageRemove(arrayIndex, fileIndex)"></i>
-                            </div>
-                          </div>
-
-                          <div class="row border m-2 p-3 bg-white">
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" [(ngModel)]="this.variantsArray[arrayIndex].isAvailable"
-                                class="custom-control-input" id="customSwitch1">
-                              <label class="custom-control-label text-primary" for="customSwitch1">Is available?</label>
-                            </div>
-                          </div>
-                        </div>
+                      <div
+                        *ngIf="productForm.controls.Color_Family.touched && productForm.controls.Color_Family.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Movement : </label>
+                      <select class="form-control" formControlName="Movement" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Automatic</option>
+                        <option>Digital</option>
+                        <option>Quartz</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Movement.touched && productForm.controls.Movement.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Watch Movement Country : </label>
+                      <select class="form-control" formControlName="Watch_Movement_Country"
+                        id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Automatic</option>
+                        <option>Digital</option>
+                        <option>Quartz</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Watch_Movement_Country.touched && productForm.controls.Watch_Movement_Country.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Strap : </label>
+                      <select class="form-control" formControlName="Strap_Material" id="exampleFormControlSelect1">
+                        <option value="" selected="true">Select</option>
+                        <option>Steel</option>
+                        <option>Stainless Steel</option>
+                        <option>Brass</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.Strap_Material.touched && productForm.controls.Strap_Material.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Watch water resistance : </label>
+                      <select class="form-control" formControlName="water_resistance" id="exampleFormControlSelect1">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                      <div
+                        *ngIf="productForm.controls.water_resistance.touched && productForm.controls.water_resistance.errors?.required"
+                        class="text text-danger">
+                        Title Name is required.
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div> -->
+      </form>
 
-              <!-- New Variant input field -->
-              <div class="product-basic-details row mt-3">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">Variant : </label>
-                    <ng-select [(ngModel)]="variantDummyValue" [items]="variantsColorData"
-                      (close)="variantSelectFieldChangeHandler()" [disabled]="this.variantsArray.length > 0">
-                    </ng-select>
+      <div class="card">
+        <div class="card-header">
+          <h5>Image Details</h5>
+        </div>
+        <div class="card-body">
+          <div class="row product-adding">
+            <div class="col-xl-12">
+              <!-- Images view -->
+              <div class="variant mt-3 col-12">
+                <div class="card">
+                  <div class="container-fluid bg-light">
+                    <div class="row border bg-white">
+                      <p>
+                        Click Upload button to upload. Add at least 3 images of your product from
+                        different angles.Maximum 8 pictures. Size between 500x500 and 2000x2000 px. Obscene
+                        image is strictly prohibited.
+                      </p>
 
-                    <div *ngIf="isSubmit && this.variantsArray.length == 0" class="text text-danger">
-                      Atleast 1 variant is required
+                      <input style="display: none;" type="file" id="variant-img" accept="image/*" #file
+                        (change)="variantImageAdded(file.files, $event)" multiple>
+
+                      <button class="btn btn-outline-light btn-upload-custom" (click)="file.click()">
+                        <i class="fa fa-upload" style="color: #069;" aria-hidden="true"></i>
+                        Upload
+                      </button>
                     </div>
+
+                    <div class="row border m-2 p-3 bg-white">
+                      <div class="variant-img-wrapper"
+                        *ngFor="let file of this.productForm.value.images; let fileIndex = index"
+                        (click)="setImageAsImageThumbnail(fileIndex)"
+                        [ngClass]="{'active-image': file.IsThmubnail == true}">
+                        <img id="img-{{fileIndex}}" src="{{file.URL ? this.imageAddress + file.URL : file.base64}}" alt="your image" width="100%" height="95%" />
+                        <!-- <span (click)="onVariantImageRemove(arrayIndex, fileIndex)">x</span> -->
+                        <i class="fa fa-1x fa-trash text-danger" (click)="onVariantImageRemove(fileIndex)"></i>
+                      </div>
+                    </div>
+
+                    <!-- <div class="row border m-2 p-3 bg-white">
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" [(ngModel)]="this.variantsArray[arrayIndex].isAvailable"
+                          class="custom-control-input" id="customSwitch1">
+                        <label class="custom-control-label text-primary" for="customSwitch1">Is available?</label>
+                      </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -160,34 +444,31 @@
         </div>
       </div>
 
-      <div class="card">
+      <!-- <div class="card">
         <div class="card-header">
           <h5>SKU Details</h5>
         </div>
         <div class="card-body">
           <div class="row product-adding">
             <div class="col-xl-12">
-              <!-- <div id="batchDelete" class="category-table custom-datatable"> -->
               <div class="table-responsive">
                 <ng2-smart-table [settings]="skuTableSettings" [source]="source"
                   (createConfirm)="onCreateConfirmSKU($event)" (edit)="onEditConfirmSKU($event)"
                   (delete)="onDeleteConfirmSKU($event)">
                 </ng2-smart-table>
               </div>
-              <!-- </div> -->
               <div *ngIf="isSubmit && this.skuArray.length == 0" class="text text-danger">
                 SKU detail is required
               </div>
             </div>
           </div>
         </div>
-      </div>
-
+      </div> -->
 
       <div class="form-group justify-content-center row mb-0 ml-1 mt-3">
         <div class="product-buttons">
           <button type="button" (click)="onSubmit()" class="btn btn-primary">Save</button>
-          <button type="button" class="btn btn-light">Discard</button>
+          <button type="button" class="btn btn-light" (click)="goBack()">Discard</button>
         </div>
       </div>
     </div>

@@ -22,16 +22,16 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Brand : </label>
+                      <label for="exampleFormControlSelect1">Brand: </label>
                       <input class="form-control" id="validationCustom01" formControlName="brand" type="text">
                       <div *ngIf="isSubmit && productForm.controls.brand.errors?.required" class="text text-danger">
                         Brand is required.
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Collections : </label>
+                      <label for="exampleFormControlSelect1">Collections: </label>
                       <ng-select [items]="collectionsData" formControlName="collections" [addTag]="addTagFn"
                         [hideSelected]="true" multiple="true" bindLabel="name">
                       </ng-select>
@@ -41,28 +41,90 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <div class="col-md-4">
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Category : </label>
-                      <select class="form-control digits" id="exampleFormControlSelect1">
-                        <option>Small</option>
-                        <option>Medium</option>
-                        <option>Large</option>
-                        <option>Extra Large</option>
+                      <label for="exampleFormControlSelect1">Sale: </label>
+                      <select class="form-control" formControlName="sale" aria-label="Default select example">
+                        <option selected value="">Please Select</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
                       </select>
+                      <div *ngIf="isSubmit && productForm.controls.sale.errors?.required" class="text text-danger">
+                        Field is required.
+                      </div>
                     </div>
-                  </div> -->
-                  <!-- <div class="col-md-4">
+                  </div>
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Category : </label>
-                      <select class="form-control digits" id="exampleFormControlSelect1">
-                        <option>Small</option>
-                        <option>Medium</option>
-                        <option>Large</option>
-                        <option>Extra Large</option>
-                      </select>
+                      <label for="exampleFormControlSelect1">Tags: </label>
+                      <ng-select formControlName="tags" [addTag]="addTagFn" [hideSelected]="true" multiple="true"
+                        bindLabel="name">
+                      </ng-select>
+
+                      <div *ngIf="isSubmit && productForm.value.tags.length == 0" class="text text-danger">
+                        Select atleast 1 Tag
+                      </div>
                     </div>
-                  </div> -->
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Is New: </label>
+                      <select class="form-control" formControlName="new" aria-label="Default select example">
+                        <option selected value="">Please Select</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                      <div *ngIf="isSubmit && productForm.controls.new.errors?.required" class="text text-danger">
+                        Field is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Category: </label>
+                      <select class="form-control" formControlName="categoryId" aria-label="Default select example">
+                        <option selected value="">Please Select</option>
+                        <option value="Men">Men</option>
+                        <option value="Women">Women</option>
+                        <option value="Enlargement Device">Enlargement Device</option>
+                        <option value="Power Honey">Power Honey</option>
+                      </select>
+                      <div *ngIf="isSubmit && productForm.controls.categoryId.errors?.required"
+                        class="text text-danger">
+                        Field is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Price: </label>
+                      <input class="form-control" id="validationCustom01" formControlName="price" style="text-align: right;" #price type="number"
+                        min="0" oninput="javascript: if(this.value < 0) { this.value = 0 };">
+                      <div *ngIf="isSubmit && productForm.controls.price.errors?.required" class="text text-danger">
+                        Price is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Discount: </label>
+                      <input class="form-control" id="validationCustom01" formControlName="discount" style="text-align: right;" type="number"
+                        min="0" oninput="javascript: if(this.value < 0) { this.value = 0 };">
+                      <div *ngIf="isSubmit && productForm.controls.discount.errors?.required" class="text text-danger">
+                        Discount is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Quantity: </label>
+                      <input class="form-control" id="validationCustom01" formControlName="quantity" style="text-align: right;" type="number"
+                        min="0" oninput="javascript: if(this.value < 0) { this.value = 0 };">
+                      <div *ngIf="isSubmit && productForm.controls.quantity.errors?.required" class="text text-danger">
+                        Quantity is required.
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -328,100 +390,49 @@
 
       <div class="card">
         <div class="card-header">
-          <h5>Variant Details</h5>
+          <h5>Image Details</h5>
         </div>
         <div class="card-body">
           <div class="row product-adding">
             <div class="col-xl-12">
+              <!-- Images view -->
+              <div class="variant mt-3 col-12">
+                <div class="card">
+                  <div class="container-fluid bg-light">
+                    <div class="row border bg-white">
+                      <p>
+                        Click Upload button to upload. Add at least 3 images of your product from
+                        different angles.Maximum 8 pictures. Size between 500x500 and 2000x2000 px. Obscene
+                        image is strictly prohibited.
+                      </p>
 
-              <!-- Variants for loop -->
-              <div *ngIf="this.variantsArray.length > 0">
-                <div class="product-variant-details row align-items-end justify-content-center mt-2 mb-2"
-                  *ngFor="let variant of this.variantsArray; let arrayIndex = index">
-                  <div class="col-md-6">
-                    <label for="exampleFormControlSelect1">Variant : </label>
-                    <!-- <ng-select [(ngModel)]="this.variantsArray[arrayIndex].variantColor"
-                      (change)="editVariant(arrayIndex)" [items]="variantsColorData">
-                    </ng-select> -->
-                    <input class="form-control" id="validationCustom01" (change)="editVariant(arrayIndex)" type="text"
-                      [(ngModel)]="this.variantsArray[arrayIndex].variantColor">
+                      <input style="display: none;" type="file" id="variant-img" accept="image/*" #file
+                        (change)="variantImageAdded(file.files, $event)" multiple>
 
-                    <!-- <div *ngIf="isSubmit && productForm.controls.collections.errors?.required" class="text text-danger">
-                      Variant is required.
-                    </div> -->
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="float-left m-2">
-                      <i class="fa fa-trash text-black" (click)="deleteVariant(arrayIndex)"></i>
-                    </div>
-                    <div class="float-left m-2">
-                      <button class="btn-toggle" (click)="collapseVariantImageArea(arrayIndex)"
-                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-                        Collapse
+                      <button class="btn btn-outline-light btn-upload-custom" (click)="file.click()">
+                        <i class="fa fa-upload" style="color: #069;" aria-hidden="true"></i>
+                        Upload
                       </button>
                     </div>
-                  </div>
 
-                  <div class="variant mt-3 col-12">
-                    <div #collapse="ngbCollapse" [(ngbCollapse)]="this.variantsArray[arrayIndex].collapse">
-                      <div class="card">
-                        <div class="container m-2 p-2 bg-light">
-                          <div class="row border m-2 p-3 bg-white">
-                            <p>
-                              Click Upload button to upload. Add at least 3 images of your product from
-                              different angles.Maximum 8 pictures. Size between 500x500 and 2000x2000 px. Obscene
-                              image is strictly prohibited.
-                            </p>
-
-                            <input style="display: none;" type="file" id="variant-img-{{arrayIndex}}" accept="image/*"
-                              #file (change)="variantImageAdded(file.files, arrayIndex, $event)" multiple>
-
-                            <button class="btn btn-outline-light btn-upload-custom" (click)="file.click()">
-                              <i class="fa fa-upload" style="color: #069;" aria-hidden="true"></i>
-                              Upload
-                            </button>
-                          </div>
-
-                          <div class="row border m-2 p-3 bg-white">
-                            <div class="variant-img-wrapper"
-                              *ngFor="let file of this.variantsArray[arrayIndex].imagesPreview; let fileIndex = index"
-                              (click)="setImageAsImageThumbnail(fileIndex, arrayIndex)"
-                              [ngClass]="{'active-image': this.variantsArray[arrayIndex].isThumbnailImageIndex == fileIndex}">
-                              <img id="img-{{fileIndex}}-{{arrayIndex}}" src="{{file.base64}}" alt="your image"
-                                width="100%" />
-                              <!-- <span (click)="onVariantImageRemove(arrayIndex, fileIndex)">x</span> -->
-                              <i class="fa fa-1x fa-trash text-danger"
-                                (click)="onVariantImageRemove(arrayIndex, fileIndex)"></i>
-                            </div>
-                          </div>
-
-                          <div class="row border m-2 p-3 bg-white">
-                            <div class="custom-control custom-switch">
-                              <input type="checkbox" [(ngModel)]="this.variantsArray[arrayIndex].isAvailable"
-                                class="custom-control-input" id="customSwitch1">
-                              <label class="custom-control-label text-primary" for="customSwitch1">Is available?</label>
-                            </div>
-                          </div>
-                        </div>
+                    <div class="row border m-2 p-3 bg-white">
+                      <div class="variant-img-wrapper"
+                        *ngFor="let file of this.productForm.value.images; let fileIndex = index"
+                        (click)="setImageAsImageThumbnail(fileIndex)"
+                        [ngClass]="{'active-image': file.IsThmubnail == true}">
+                        <img id="img-{{fileIndex}}" src="{{file.base64}}" alt="your image" width="100%" height="95%" />
+                        <!-- <span (click)="onVariantImageRemove(arrayIndex, fileIndex)">x</span> -->
+                        <i class="fa fa-1x fa-trash text-danger" (click)="onVariantImageRemove(fileIndex)"></i>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
 
-              <!-- New Variant input field -->
-              <div class="product-basic-details row mt-3">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">Variant : </label>
-                    <ng-select [(ngModel)]="variantDummyValue" [items]="variantsColorData"
-                      (close)="variantSelectFieldChangeHandler()" [disabled]="this.variantsArray.length > 0">
-                    </ng-select>
-
-                    <div *ngIf="isSubmit && this.variantsArray.length == 0" class="text text-danger">
-                      Atleast 1 variant is required
-                    </div>
+                    <!-- <div class="row border m-2 p-3 bg-white">
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" [(ngModel)]="this.variantsArray[arrayIndex].isAvailable"
+                          class="custom-control-input" id="customSwitch1">
+                        <label class="custom-control-label text-primary" for="customSwitch1">Is available?</label>
+                      </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -430,29 +441,26 @@
         </div>
       </div>
 
-      <div class="card">
+      <!-- <div class="card">
         <div class="card-header">
           <h5>SKU Details</h5>
         </div>
         <div class="card-body">
           <div class="row product-adding">
             <div class="col-xl-12">
-              <!-- <div id="batchDelete" class="category-table custom-datatable"> -->
               <div class="table-responsive">
                 <ng2-smart-table [settings]="skuTableSettings" [source]="source"
                   (createConfirm)="onCreateConfirmSKU($event)" (edit)="onEditConfirmSKU($event)"
                   (delete)="onDeleteConfirmSKU($event)">
                 </ng2-smart-table>
               </div>
-              <!-- </div> -->
               <div *ngIf="isSubmit && this.skuArray.length == 0" class="text text-danger">
                 SKU detail is required
               </div>
             </div>
           </div>
         </div>
-      </div>
-
+      </div> -->
 
       <div class="form-group justify-content-center row mb-0 ml-1 mt-3">
         <div class="product-buttons">

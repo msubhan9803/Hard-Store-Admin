@@ -28,6 +28,7 @@ import { AuthService } from './service/auth.service';
 import { LoginAuthGuard } from './guard/loginAuth.guard';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { BlogService } from './service/blog.service';
+import { DashboardService } from './service/dashboard.service';
 import { HelperMethodsService } from './service/helper-methods.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './service/user.service';
@@ -35,6 +36,7 @@ import { TimeagoModule } from 'ngx-timeago';
 import { UpdateCurrencyModalComponent } from '../components/update-currency/update-currency-modal/update-currency-modal.component';
 import { DiscountPipe } from './pipes/discount.pipe';
 import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
+    BarRatingModule,
     TimeagoModule.forRoot()
   ],
   providers: [
@@ -75,7 +78,8 @@ import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
     AuthService,
     BlogService,
     HelperMethodsService,
-    UserService
+    UserService,
+    DashboardService
   ],
   exports: [
     FeatherIconsComponent,
@@ -91,7 +95,8 @@ import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
     TimeagoModule,
     DiscountPipe,
     AedToDollarPipe,
-    UpdateCurrencyModalComponent
+    UpdateCurrencyModalComponent,
+    BarRatingModule
   ]
 })
 export class SharedModule { }

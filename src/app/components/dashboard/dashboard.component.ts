@@ -1,4 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { DashboardService } from 'src/app/shared/service/dashboard.service';
+import { HelperMethodsService } from 'src/app/shared/service/helper-methods.service';
+import { OrderService } from 'src/app/shared/service/order.service';
+import { ProductService } from 'src/app/shared/service/product.service';
+import Swal from 'sweetalert2';
 import * as chartData from '../../shared/data/chart';
 import { doughnutData, pieData } from '../../shared/data/chart';
 import { UpdateCurrencyModalComponent } from '../update-currency/update-currency-modal/update-currency-modal.component';
@@ -9,10 +14,65 @@ import { UpdateCurrencyModalComponent } from '../update-currency/update-currency
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  public doughnutData = doughnutData;
-  public pieData = pieData;
-  constructor() {
-    Object.assign(this, { doughnutData, pieData })
+  public doughnutData;
+  public sourceDoughnutData;
+  public orderList = [];
+  public imageAddress = "";
+  page = 1;
+  pageSize = 10;
+  public compareToLastMonth;
+  public totalCancelOrders_Amount;
+  public totalCancelOrders_count;
+  public totalDeliveredOrder_Amount;
+  public totalDeliveredOrder_count;
+  public totalOrders_Amount;
+  public totalOrders_count;
+  public totalPendingOrder_Amount;
+  public totalPendingOrders_count;
+  public reviews;
+
+  constructor(
+    private dashboardService: DashboardService,
+    private ordersService: OrderService,
+    private productsService: ProductService,
+    public helperMethodsService: HelperMethodsService
+  ) {
+    // Object.assign(this, { doughnutData, pieData })
+    // Source Doughnut Data
+    // this.dashboardService.salesBySource().subscribe(
+    //   (res: any) => {
+    //     this.sourceDoughnutData = [
+    //       {
+    //         value: res.fb_count_amount,
+    //         count: res.fb_count,
+    //         name: "Facebook"
+    //       },
+    //       {
+    //         value: res.web_count_amount,
+    //         count: res.web_count,
+    //         name: "Web"
+    //       },
+    //       {
+    //         value: res.instagram_count_amount,
+    //         count: res.instagram_count,
+    //         name: "Instagram"
+    //       },
+    //       {
+    //         value: res.whatsApp_count_amount,
+    //         count: res.whatsApp_count,
+    //         name: "Whatsapp"
+    //       }
+    //     ]
+    //   },
+    //   err => {
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: "Something went wrong!",
+    //       showConfirmButton: false,
+    //       timer: 1500
+    //     })
+    //   }
+    // )
   }
 
   // doughnut 2
@@ -79,6 +139,55 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
       this.updateCurrencyModalComponent.open();
     }, 1000)
-  }
+    this.imageAddress = this.productsService.getImageUrl();
 
+    // this.dashboardService.getLatestOrders().subscribe(
+    //   (res: any) => {
+    //     this.orderList = res.latest_5_orders;
+    //   },
+    //   err => {
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: "Something went wrong!",
+    //       showConfirmButton: false,
+    //       timer: 1500
+    //     })
+    //   }
+    // )
+    // this.dashboardService.getTilesData().subscribe(
+    //   (res: any) => {
+    //     this.compareToLastMonth = res.compareToLastMonth;
+    //     this.totalOrders_Amount = res.totalOrders_Amount;
+    //     this.totalOrders_count = res.totalOrders_count;
+    //     this.totalCancelOrders_Amount = res.totalCancelOrders_Amount;
+    //     this.totalCancelOrders_count = res.totalCancelOrders_count;
+    //     this.totalDeliveredOrder_Amount = res.totalDeliveredOrder_Amount;
+    //     this.totalDeliveredOrder_count = res.totalDeliveredOrder_count;
+    //     this.totalPendingOrder_Amount = res.totalPendingOrder_Amount;
+    //     this.totalPendingOrders_count = res.totalPendingOrders_count;
+    //   },
+    //   err => {
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: "Something went wrong!",
+    //       showConfirmButton: false,
+    //       timer: 1500
+    //     })
+    //   }
+    // )
+    // this.dashboardService.getMessages().subscribe(
+    //   (res: any) => {
+    //     console.log("getMessages: ", res)
+    //     this.reviews = res.latest_5_reviews;
+    //   },
+    //   err => {
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: "Something went wrong!",
+    //       showConfirmButton: false,
+    //       timer: 1500
+    //     })
+    //   }
+    // )
+  }
 }

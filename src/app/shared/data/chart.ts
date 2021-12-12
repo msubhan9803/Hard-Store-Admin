@@ -11,21 +11,21 @@ export interface Chart {
 
 export var doughnutData = [
   {
-    value: 100,
-    name: "Frontend"
+    value: 0,
+    name: "Facebook"
 
   },
   {
-    value: 150,
-    name: "Backend"
+    value: 0,
+    name: "Web"
   },
   {
-    value: 150,
-    name: "Api"
+    value: 0,
+    name: "Instagram"
   },
   {
-    value: 100,
-    name: "Issues"
+    value: 0,
+    name: "Whatsapp"
   }
 ];
 
@@ -33,21 +33,24 @@ export var view: any[] = [409, 204];
 
 export var pieData = [
   {
-    value: 300,
-    name: "Frontend"
+    value: 0,
+    name: "Facebook"
 
   },
   {
-    value: 50,
-    name: "Backend"
+    value: 0,
+    name: "Web"
   },
   {
-    value: 100,
-    name: "Api"
+    value: 0,
+    name: "Instagram"
   },
+  {
+    value: 0,
+    name: "Whatsapp"
+  }
 ]
 
-//Options
 export var doughnutChartShowLabels = false;
 export var doughnutChartTooltip = false;
 export var doughnutChartGradient = false;

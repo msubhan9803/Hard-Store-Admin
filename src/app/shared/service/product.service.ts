@@ -32,7 +32,7 @@ export class ProductService {
 
   // GET: products/getProducts
   public getProducts() {
-    let url = this._env.urlAddress + 'products/getProducts';
+    let url = this._env.urlAddress + 'product/GetProducts';
     return this.http.get(url);
   }
 
@@ -44,25 +44,50 @@ export class ProductService {
 
   // GET: products/getProductById
   public getProductById(id) {
-    let url = this._env.urlAddress + 'products/getProductById/' + id;
+    let url = this._env.urlAddress + 'product/GetProductById/' + id;
     return this.http.get(url);
   }
 
   // POST: products/addProduct
   public addProduct(productObj: any) {
-    let url = this._env.urlAddress + 'products/addProduct';
+    let url = this._env.urlAddress + 'product/AddProduct';
     // let body = JSON.stringify(productObj);
 
     return this.http.post(url, productObj);
   }
 
+  // PUT: product/updateProduct
+  public updateProduct(productObj: any) {
+    let url = this._env.urlAddress + 'product/UpdateProduct';
+    // let body = JSON.stringify(productObj);
+
+    return this.http.put(url, productObj);
+  }
+
+  // POST: product/UploadProductImg
+  public updateProductImage(productObj: any) {
+    let url = this._env.urlAddress + 'product/UploadProductImg';
+    // let body = JSON.stringify(productObj);
+
+    return this.http.post(url, productObj);
+  }
+
+  // GET: products/getProducts
+  public removeImageFromProduct(payload) {
+    console.log("removeImageFromProduct payload: ", payload)
+    let url = this._env.urlAddress + 'product/RemoveImageFromProduct';
+    let body = JSON.stringify(payload);
+
+    return this.http.post(url, payload);
+  }
+
   // PUT: product/activeSale
   public activeSale(productId, saleVal) {
     let payload = {
-      id: productId,
+      ProductId: productId,
       sale: saleVal
     }
-    let url = this._env.urlAddress + 'products/activeSale';
+    let url = this._env.urlAddress + 'product/SaleOn';
     // let body = JSON.stringify(productObj);
 
     return this.http.put(url, payload);

@@ -27,13 +27,13 @@ export class UserService {
 
   // GET: user/getCurrency
   public getCurrency() {
-    let url = this._env.urlAddress + 'getCurrency';
+    let url = this._env.urlAddress + 'GetCurrency';
     return this.http.get(url);
   }
 
   // PUT: updateCurrency
   public updateCurrency(payload) {
-    let url = this._env.urlAddress + 'updateCurrency/';
+    let url = this._env.urlAddress + 'UpdateCurrency/';
     return this.http.put(url, payload);
   }
 

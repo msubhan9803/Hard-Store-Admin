@@ -161,16 +161,20 @@ export class ProductEditComponent implements OnInit {
     this.currentRecId = this.route.snapshot.paramMap.get('id');
     this.imageAddress = this.productsService.getImageUrl();
 
+    this.loadData()
+  }
+
+  loadData() {
     this.productsService.getProductById(this.currentRecId).subscribe(
       (res: any) => {
         this.patchForm(res);
         console.log("proudct details: ", res)
-        this.variantsArray = res.variants;
-        console.log("this.variantsArray: ", this.variantsArray)
-        this.source.load(res.skuArray)
-        console.log("this.skuArray: ", this.skuArray)
       }
     )
+  }
+
+  goBack() {
+    window.location.href = "/admin/#/products/physical/product-list";
   }
 
   onSubmit() {
@@ -180,30 +184,14 @@ export class ProductEditComponent implements OnInit {
       return;
     }
 
-    if (this.variantsArray.length == 0) {
-      return;
-    }
-
     if (this.productForm.value.description == "") {
       return;
     }
 
-    if (this.skuArray.length == 0) {
-      return;
-    }
-
-    if (
-      // !this.skuArray[0].variantIndex ||
-      // !this.skuArray[0].watchStrapColor ||
-      this.skuArray[0].specialPrice == "" ||
-      this.skuArray[0].stock == "" ||
-      this.skuArray[0].price == "" ||
-      this.skuArray[0].sellerS== ""
-    ) {
-      console.log("this.skuArray: ", this.skuArray)
+    if (this.productForm.value.images.length == 0) {
       Swal.fire({
         icon: 'error',
-        title: "Please provide SKU detail",
+        title: "Please Add at least 3 images",
         showConfirmButton: false,
         timer: 1500
       })
@@ -223,19 +211,15 @@ export class ProductEditComponent implements OnInit {
     }
 
     let payload = this.productForm.value;
-    payload.variants = this.variantsArray;
-    for (let index = 0; index < payload.variants.length; index++) {
-      const variant = payload.variants[index];
-      delete payload.variants[index].collapse;
-    }
-    payload.skuArray = this.skuArray;
+    payload.ProductId = this.currentRecId;
+    payload.Images = payload.images;
 
     // console.log("payload: ", payload)
-    this.productsService.addProduct(payload).subscribe(
+    this.productsService.updateProduct(payload).subscribe(
       res => {
         Swal.fire({
           icon: 'success',
-          title: 'Successfully Added',
+          title: 'Successfully Updated',
           showConfirmButton: false,
           timer: 1500
         });
@@ -256,44 +240,34 @@ export class ProductEditComponent implements OnInit {
   createForm() {
     this.productForm = this.fb.group({
       title: ['', Validators.required],
-      // type: [''],
-      description: [''],
-      // Change
+      categoryId: ['', Validators.required],
+      description: ['', Validators.required],
       brand: ['', Validators.required],
-      collections: [[]],
-      // Change
-      // category_id: [''],
-      sale: [false],
-      new: [true],
-      tags: [""],
-      // Watch_Case_Shape: [''],
-      // Glass: [''],
-      // Watch_Feature: [],
-      // Model: [''],
-      // Dial_Size: [''],
-      // Watch_Case_Size: [''],
-      // Movement: [''],
-      // Watch_Movement_Country: [''],
-      // Strap_Material: [''],
-      // water_resistance: [true],
-      // Color_Family: [],
-      variants: [[]],
-      // Change
-      // isWarranty: [true],
-      // warrantyPeriod: [null], // number
-      skuArray: [[]] as Array<Object>
+      collections: [''],
+      tags: [''],
+      sale: ['', Validators.required],
+      new: ['', Validators.required],
+      price: ['', Validators.required],
+      discount: ['', Validators.required],
+      quantity: ['', Validators.required],
+      images: ['']
     })
   }
 
   patchForm(res) {
     this.productForm.patchValue({
       title: res.title,
+      categoryId: res.categoryId,
       description: res.description,
       brand: res.brand,
       collections: res.collections,
+      tags: res.tags,
       sale: res.sale,
       new: res.new,
-      tags: res.tags
+      price: res.price,
+      discount: res.discount,
+      quantity: res.quantity,
+      images: res.images
     })
   }
 
@@ -345,11 +319,9 @@ export class ProductEditComponent implements OnInit {
     return name;
   }
 
-  variantImageAdded(files, index, e) {
-    console.log("files: ", files)
+  variantImageAdded(files, e) {
     for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
       const file = files[fileIndex];
-      console.log("file: ", file)
       var mimeType = e.target.files[0].type;
 
       if (mimeType.match(/image\/*/) == null) {
@@ -364,25 +336,74 @@ export class ProductEditComponent implements OnInit {
       var reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (event) => {
-        this.variantsArray[index].imagesPreview.push({
-          fileName: file.name,
-          base64: event.target.result
+        // let isThumbnail = this.productForm.value.images.findIndex(image => image.isThumbnail == true);
+        let isThumbnail = this.productForm.value.images.length == 0 ? true : false
+
+        this.productForm.patchValue({
+          ...this.productForm.value,
+          images: [
+            ...this.productForm.value.images,
+            {
+              base64: event.target.result,
+              ImageName: file.name,
+              IsThmubnail: isThumbnail
+            }
+          ]
         })
-        console.log("this.variantsArray: ", this.variantsArray)
+
+        let payload = {
+          ProductId: this.currentRecId,
+          Images: [
+            {
+              base64: event.target.result,
+              ImageName: file.name,
+              IsThmubnail: isThumbnail
+            }
+          ]
+        }
+
+        console.log("find index: ", this.productForm.value.images.findIndex(image => image.isThumbnail == true))
+        console.log("payload: ", payload)
+        // Sending an API call to update images
+        this.productsService.updateProductImage(payload).subscribe(
+          res => {
+            this.loadData();
+          }
+        )
       }
     }
   }
 
-  onVariantImageRemove(arrayIndex, fileIndex) {
-    // this.variantsArray[arrayIndex].images.splice(fileIndex, 1)
-    this.variantsArray[arrayIndex].imagesPreview.splice(fileIndex, 1)
+  onVariantImageRemove(fileIndex) {
+    let payload = {
+      ProductId: this.currentRecId,
+      ImageId: this.productForm.value.images.find((_, index) => index == fileIndex)._id
+    }
+    this.productsService.removeImageFromProduct(payload).subscribe(
+      res => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Image Deleted Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+        this.productForm.value.images = this.productForm.value.images.filter((_, index) => index != fileIndex)
+      }
+    )
   }
 
-  setImageAsImageThumbnail(imageIndex, variantIndex) {
-    console.log("imageIndex: ", imageIndex)
-    console.log("variantIndex: ", variantIndex)
-
-    this.variantsArray[variantIndex].isThumbnailImageIndex = imageIndex;
+  setImageAsImageThumbnail(fileIndex) {
+    this.productForm.value.images = this.productForm.value.images.map((file, index) => {
+      let temp = file;
+      if (fileIndex == index) {
+        temp.IsThmubnail = true;
+        return temp;
+      } else {
+        temp.IsThmubnail = false;
+        return temp;
+      }
+    });
   }
 
   onCreateConfirmSKU(e) {
