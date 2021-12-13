@@ -110,6 +110,8 @@ export class BlogDetailComponent implements OnInit {
     this.blogForm.controls['file'].setValue(this.previewUrl);
     this.blogForm.controls['filename'].setValue(this.fileData.name);
 
+    let payload = this.blogForm.value;
+    // payload.ImageName = this.blogForm.value.filename;
     this.blogService.createBlog(this.blogForm.value).subscribe(
       (res: any) => {
         Swal.fire({

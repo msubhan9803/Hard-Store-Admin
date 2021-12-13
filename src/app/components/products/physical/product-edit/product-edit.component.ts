@@ -19,6 +19,7 @@ export class ProductEditComponent implements OnInit {
   public productForm: FormGroup;
   public counter: number = 1;
   public isSubmit = false;
+  public categories = [];
   source: LocalDataSource;
   files: File[] = [];
   variantsArray = [];
@@ -162,6 +163,8 @@ export class ProductEditComponent implements OnInit {
     this.imageAddress = this.productsService.getImageUrl();
 
     this.loadData()
+
+    this.productsService.getCategories().subscribe((res: []) => this.categories = res);
   }
 
   loadData() {

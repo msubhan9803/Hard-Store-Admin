@@ -81,6 +81,12 @@ export class ProductService {
     return this.http.post(url, payload);
   }
 
+  // GET: products/getCategories
+  public getCategories() {
+    let url = this._env.urlAddress + 'product/getCategories';
+    return this.http.get(url);
+  }
+
   // PUT: product/activeSale
   public activeSale(productId, saleVal) {
     let payload = {

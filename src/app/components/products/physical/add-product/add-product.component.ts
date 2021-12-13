@@ -17,6 +17,7 @@ export class AddProductComponent implements OnInit {
   public productForm: FormGroup;
   public counter: number = 1;
   public isSubmit = false;
+  public categories = [];
   source: LocalDataSource;
   files: File[] = [];
   variantsArray = [];
@@ -356,5 +357,6 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.productsService.getCategories().subscribe((res: []) => this.categories = res);
   }
 }
