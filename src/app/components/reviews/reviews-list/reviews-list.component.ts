@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductService } from 'src/app/shared/service/product.service';
 import Swal from 'sweetalert2';
 
@@ -15,7 +16,8 @@ export class ReviewsListComponent implements OnInit {
   pageSize = 10;
 
   constructor(
-    private productsService: ProductService
+    private productsService: ProductService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -43,8 +45,10 @@ export class ReviewsListComponent implements OnInit {
       confirmButtonText: `Yes`,
     }).then(async (result) => {
       if (result.isConfirmed) {
+        this.spinner.show();
         await this.productsService.deleteReviews(reviewId).toPromise().then(
           res => {
+            this.spinner.hide();
             console.log("hrere...")
             Swal.fire({
               icon: 'success',
@@ -55,6 +59,7 @@ export class ReviewsListComponent implements OnInit {
             window.location.reload()
           },
           err => {
+            this.spinner.hide();
             Swal.fire({
               icon: 'success',
               title: err.error.message,

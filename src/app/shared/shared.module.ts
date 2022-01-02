@@ -37,6 +37,7 @@ import { UpdateCurrencyModalComponent } from '../components/update-currency/upda
 import { DiscountPipe } from './pipes/discount.pipe';
 import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { BarRatingModule } from 'ngx-bar-rating';
     FormsModule,
     ReactiveFormsModule,
     BarRatingModule,
-    TimeagoModule.forRoot()
+    TimeagoModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [
     NavService,
@@ -96,7 +98,8 @@ import { BarRatingModule } from 'ngx-bar-rating';
     DiscountPipe,
     AedToDollarPipe,
     UpdateCurrencyModalComponent,
-    BarRatingModule
+    BarRatingModule,
+    NgxSpinnerModule
   ]
 })
 export class SharedModule { }

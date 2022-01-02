@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { LocalDataSource } from 'ng2-smart-table';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { product } from 'src/app/shared/models/product';
 import { CategoryService } from 'src/app/shared/service/category.service';
 import { ProductService } from 'src/app/shared/service/product.service';
@@ -148,6 +149,7 @@ export class AddProductComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private productsService: ProductService,
+    private spinner: NgxSpinnerService
   ) {
     this.createForm();
     this.source = new LocalDataSource();
@@ -187,12 +189,13 @@ export class AddProductComponent implements OnInit {
       return;
     }
 
+    this.spinner.show();
     let payload = this.productForm.value;
     payload.Images = payload.images;
 
-    console.log("payload: ", payload)
     this.productsService.addProduct(payload).subscribe(
       res => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'success',
           title: 'Successfully Added',
@@ -203,6 +206,7 @@ export class AddProductComponent implements OnInit {
         window.location.href = "/admin/#/products/physical/product-list";
       },
       err => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'error',
           title: err.error.message,
@@ -219,10 +223,10 @@ export class AddProductComponent implements OnInit {
       categoryId: ['', Validators.required],
       description: ['', Validators.required],
       brand: ['', Validators.required],
-      collections: [''],
+      collections: [['All']],
       tags: [''],
       sale: ['', Validators.required],
-      new: ['', Validators.required],
+      new: ['true', Validators.required],
       price: ['', Validators.required],
       discount: ['', Validators.required],
       quantity: ['', Validators.required],

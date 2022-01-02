@@ -99,35 +99,35 @@ export class ProductService {
     return this.http.put(url, payload);
   }
 
-  // GET: products/getProducts
+  // GET: product/getProducts
   public getReviews() {
-    let url = this._env.urlAddress + 'products/getReviews';
+    let url = this._env.urlAddress + 'product/getReviews';
     return this.http.get(url);
   }
 
-  // GET: products/getProducts
+  // GET: product/getProducts
   public deleteReviews(reviewId) {
-    let url = this._env.urlAddress + 'products/deleteReview/' + reviewId;
+    let url = this._env.urlAddress + 'product/deleteReview/' + reviewId;
     let body = JSON.stringify(reviewId);
 
     return this.http.delete(url);
   }
 
-  // GET: products/getFaqs
+  // GET: product/getFaqs
   public getFaqs() {
-    let url = this._env.urlAddress + 'products/getFaqs';
+    let url = this._env.urlAddress + 'product/getFaqs';
     return this.http.get(url);
   }
 
-  // GET: products/getFaqsByType
+  // GET: product/getFaqsByType
   public getFaqsByType(type) {
-    let url = this._env.urlAddress + 'products/getFaqsByType/' + type;
+    let url = this._env.urlAddress + 'product/getFaqsByType/' + type;
     return this.http.get(url);
   }
 
   // POST: submitFAQ
   public addFaq(payload) {
-    let url = this._env.urlAddress + 'products/submitFAQ';
+    let url = this._env.urlAddress + 'product/submitFAQ';
     // let body = JSON.stringify(productObj);
 
     return this.http.post(url, payload);
@@ -135,7 +135,7 @@ export class ProductService {
 
   // POST: submitFAQ
   public updateFaqById(payload) {
-    let url = this._env.urlAddress + 'products/updateFaqById';
+    let url = this._env.urlAddress + 'product/updateFaqById';
     // let body = JSON.stringify(productObj);
 
     return this.http.put(url, payload);

@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BlogService } from 'src/app/shared/service/blog.service';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/shared/service/product.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-blog-detail-edit',
@@ -75,6 +76,7 @@ export class BlogDetailEditComponent implements OnInit {
     private blogService: BlogService,
     private route: ActivatedRoute,
     config: NgbRatingConfig,
+    private spinner: NgxSpinnerService,
     private productsService: ProductService
   ) {
     config.max = 5;
@@ -117,8 +119,10 @@ export class BlogDetailEditComponent implements OnInit {
       return;
     }
 
+    this.spinner.show();
     this.blogService.updateBlog(this.currentRecId, this.blogForm.value).subscribe(
       (res: any) => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'success',
           title: 'Successfully Added',
@@ -129,6 +133,7 @@ export class BlogDetailEditComponent implements OnInit {
         window.location.reload();
       },
       err => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'error',
           title: err.error.message,

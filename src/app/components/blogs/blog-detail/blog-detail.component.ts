@@ -6,6 +6,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BlogService } from 'src/app/shared/service/blog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-blog-detail',
@@ -68,6 +69,7 @@ export class BlogDetailComponent implements OnInit {
     private modalService: NgbModal,
     private fb: FormBuilder,
     private blogService: BlogService,
+    private spinner: NgxSpinnerService,
     config: NgbRatingConfig
   ) {
     config.max = 5;
@@ -107,6 +109,7 @@ export class BlogDetailComponent implements OnInit {
       return;
     }
 
+    this.spinner.show();
     this.blogForm.controls['file'].setValue(this.previewUrl);
     this.blogForm.controls['filename'].setValue(this.fileData.name);
 
@@ -114,6 +117,7 @@ export class BlogDetailComponent implements OnInit {
     // payload.ImageName = this.blogForm.value.filename;
     this.blogService.createBlog(this.blogForm.value).subscribe(
       (res: any) => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'success',
           title: 'Successfully Added',
@@ -124,6 +128,7 @@ export class BlogDetailComponent implements OnInit {
         window.location.href = "/admin/#/blogs/blog-list";
       },
       err => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'error',
           title: err.error.message,

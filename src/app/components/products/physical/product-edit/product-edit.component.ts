@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { LocalDataSource } from 'ng2-smart-table';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { product } from 'src/app/shared/models/product';
 import { CategoryService } from 'src/app/shared/service/category.service';
 import { ProductService } from 'src/app/shared/service/product.service';
@@ -152,6 +153,7 @@ export class ProductEditComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private productsService: ProductService,
+    private spinner: NgxSpinnerService
   ) {
     this.createForm();
     this.source = new LocalDataSource();
@@ -213,6 +215,7 @@ export class ProductEditComponent implements OnInit {
       return;
     }
 
+    this.spinner.show();
     let payload = this.productForm.value;
     payload.ProductId = this.currentRecId;
     payload.Images = payload.images;
@@ -220,6 +223,7 @@ export class ProductEditComponent implements OnInit {
     // console.log("payload: ", payload)
     this.productsService.updateProduct(payload).subscribe(
       res => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'success',
           title: 'Successfully Updated',
@@ -230,6 +234,7 @@ export class ProductEditComponent implements OnInit {
         window.location.href = "/admin/#/products/physical/product-list";
       },
       err => {
+        this.spinner.hide();
         Swal.fire({
           icon: 'error',
           title: err.error.message,
