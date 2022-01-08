@@ -10,6 +10,7 @@
               <th style="width: 20px;">Sr#</th>
               <th scope="col">Action</th>
               <th scope="col">Order Id</th>
+              <th scope="col">Order Number</th>
               <th>Customer Name</th>
               <th style="width: 35px;">Customer Email</th>
               <th>Contact No.</th>
@@ -35,11 +36,12 @@
                 </button>
               </td>
               <td class="p-3">{{ order._id }}</td>
+              <td class="p-3">{{ order.OrderNumber }}</td>
               <td class="p-3">{{ order.first_Name }}</td>
               <td style="width: 35px;" class="p-3">{{ order.Email }}</td>
               <td class="p-3">{{ order.phone }}</td>
               <td class="p-3">{{ order.Country }}</td>
-              <td style="width: 20px;" class="p-3">{{ order.products.length }}</td>
+              <td style="width: 20px;" class="p-3">{{ order.Products.length }}</td>
               <td class="p-3">{{ order.totalAmount }}</td>
               <td class="p-3">
                 {{ this.helperMethodsService.capitalizeFirstLetter(order.tracking_Status.current_Status.replaceAll('_', " ")) }}:
