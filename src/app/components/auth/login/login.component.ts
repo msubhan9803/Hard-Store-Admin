@@ -25,15 +25,15 @@ export class LoginComponent implements OnInit {
 
   owlcarousel = [
     {
-      title: "Welcome to Uae Slimmers",
+      title: "Welcome to Hard Taker",
       desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
     },
     {
-      title: "Welcome to Uae Slimmers",
+      title: "Welcome to Hard Taker",
       desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
     },
     {
-      title: "Welcome to Uae Slimmers",
+      title: "Welcome to Hard Taker",
       desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
     }
   ]

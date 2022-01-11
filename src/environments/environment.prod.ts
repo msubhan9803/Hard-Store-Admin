@@ -4,6 +4,6 @@ export const environment = {
   // imageAddress: 'https://uaeslimmers.com/uploads/'
   // urlAddress: 'https://134.209.126.244/api/',
   // imageAddress: 'https://134.209.126.244/uploads/',
-  urlAddress: 'http://localhost:7171/api/',
-  imageAddress: 'http://localhost:7171/'
+  urlAddress: 'http://159.223.37.76/api/',
+  imageAddress: 'http://159.223.37.76/uploads/'
 };
