@@ -38,7 +38,7 @@ export class ProductService {
 
   // GET: products/getProductsName
   public getProductsName() {
-    let url = this._env.urlAddress + 'products/getProductsName';
+    let url = this._env.urlAddress + 'product/getProductsName';
     return this.http.get(url);
   }
 

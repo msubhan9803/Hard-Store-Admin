@@ -97,13 +97,11 @@ export class AddProductCreateOrderComponent implements OnInit {
     this.productService.getProductById(product._id).subscribe((res: any) => {
       this.product.id = res._id;
       this.product.product_name = res.title;
-      this.product.variant = res.skuArray[0].watchStrapColor;
-      this.product.sellerSku = res.skuArray[0].sellerSku;
-      this.product.unit_Cost = parseFloat(res.skuArray[0].price);
+      this.product.unit_Cost = parseFloat(res.price);
       this.product.quantity = 1;
-      this.product.discount = res.sale ? this.product.unit_Cost - parseFloat(res.skuArray[0].specialPrice) : 0;
-      this.product.imageUrl = res.variants[0].imagesPreview[0];
-      this.product.sub_Total = (this.product.unit_Cost - this.product.discount) * this.product.quantity;
+      this.product.discount = res.discount;
+      this.product.imageUrl = res.images[0].URL;
+      this.product.sub_Total = res.sale ? (this.product.unit_Cost - this.product.discount) * this.product.quantity :  this.product.unit_Cost * this.product.quantity;
     })
   }
 
