@@ -32,7 +32,7 @@ export class FaqListComponent implements OnInit {
   }
 
   updateFaqList(faqType) {
-    this.productService.getFaqsByType(faqType).subscribe(
+    this.productService.getFaqs().subscribe(
       (res: []) => {
         this.faqList = res;
       },

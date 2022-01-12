@@ -17,7 +17,7 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="form-row">
-                        <div class="col-md-6 mt-2">
+                        <!-- <div class="col-md-6 mt-2">
                           <label class="text-bold">Type</label>
                           <select formControlName="type" class="form-control">
                             <option selected value="shipping">Shipping</option>
@@ -26,20 +26,20 @@
                           <div *ngIf="isSubmit && faqForm.controls.type.errors?.required" class="text text-danger">
                             Type is required.
                           </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-12 mt-2">
                           <label for="review">Question</label>
-                          <textarea class="form-control" formControlName="question" placeholder="Write Question"
+                          <textarea class="form-control" formControlName="Question" placeholder="Write Question"
                             id="exampleFormControlTextarea1" rows="6"></textarea>
-                          <div *ngIf="isSubmit && faqForm.controls.question.errors?.required" class="text text-danger">
+                          <div *ngIf="isSubmit && faqForm.controls.Question.errors?.required" class="text text-danger">
                             Question is required.
                           </div>
                         </div>
                         <div class="col-md-12 mt-2">
                           <label for="review">Answer</label>
-                          <textarea class="form-control" formControlName="answer" placeholder="Write Answer"
+                          <textarea class="form-control" formControlName="Answer" placeholder="Write Answer"
                             id="exampleFormControlTextarea1" rows="6"></textarea>
-                          <div *ngIf="isSubmit && faqForm.value.answer.length == 0" class="text text-danger">
+                          <div *ngIf="isSubmit && faqForm.value.Answer.length == 0" class="text text-danger">
                             Answer tag is required.
                           </div>
                         </div>

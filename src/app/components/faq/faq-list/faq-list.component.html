@@ -2,12 +2,12 @@
   <div class="card-body">
     <div class="container">
       <div class="row">
-        <div class="col-md-3 mb-3">
+        <!-- <div class="col-md-3 mb-3">
           <select [(ngModel)]="faqType" class="form-control" (change)="onTypeChange()">
             <option selected value="shipping">Shipping</option>
             <option value="product">Product</option>
           </select>
-        </div>
+        </div> -->
 
         <div class="col-12">
           <div class="table-responsive">
@@ -34,9 +34,9 @@
                       <i class="fa fa-eye"></i>
                     </button>
                   </td>
-                  <td class="p-3">{{ faq.question.length > 200 ? faq.question.substring(0, 200)+'...' : faq.question }}
+                  <td class="p-3">{{ faq.Question.length > 200 ? faq.Question.substring(0, 200)+'...' : faq.Question }}
                   </td>
-                  <td class="p-3">{{ faq.answer.length > 2000 ? faq.answer.substring(0, 200)+'...' : faq.answer }}</td>
+                  <td class="p-3">{{ faq.Answer.length > 2000 ? faq.Answer.substring(0, 200)+'...' : faq.Answer }}</td>
                 </tr>
               </tbody>
             </table>

@@ -82,18 +82,18 @@ export class FaqDetailModalModalComponent implements OnInit {
   createForm() {
     this.faqForm = this.fb.group({
       id: [''],
-      type: ['Shipping', Validators.required],
-      question: ['', Validators.required],
-      answer: ['']
+      // type: ['Shipping', Validators.required],
+      Question: ['', Validators.required],
+      Answer: ['']
     })
   }
 
   patchForm(res) {
     this.faqForm.patchValue({
       id: res._id,
-      type: res.type,
-      question: res.question,
-      answer: res.answer
+      // type: res.type,
+      Question: res.Question,
+      Answer: res.Answer
     })
   }
 

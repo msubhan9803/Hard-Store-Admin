@@ -115,7 +115,7 @@ export class ProductService {
 
   // GET: product/getFaqs
   public getFaqs() {
-    let url = this._env.urlAddress + 'product/getFaqs';
+    let url = this._env.urlAddress + 'faq/getFaq';
     return this.http.get(url);
   }
 
@@ -127,7 +127,7 @@ export class ProductService {
 
   // POST: submitFAQ
   public addFaq(payload) {
-    let url = this._env.urlAddress + 'product/submitFAQ';
+    let url = this._env.urlAddress + 'faq/createFaq';
     // let body = JSON.stringify(productObj);
 
     return this.http.post(url, payload);
@@ -135,7 +135,7 @@ export class ProductService {
 
   // POST: submitFAQ
   public updateFaqById(payload) {
-    let url = this._env.urlAddress + 'product/updateFaqById';
+    let url = this._env.urlAddress + 'faq/updateFaq';
     // let body = JSON.stringify(productObj);
 
     return this.http.put(url, payload);

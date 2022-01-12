@@ -82,7 +82,7 @@ export class AddFaqComponent implements OnInit {
 
   onSubmit() {
     this.isSubmit = true;
-
+console.log("this.faqForm.value; ", this.faqForm.value)
     if (this.faqForm.invalid) {
       Swal.fire({
         icon: 'error',
@@ -117,9 +117,9 @@ export class AddFaqComponent implements OnInit {
 
   createForm() {
     this.faqForm = this.fb.group({
-      type: ['Shipping', Validators.required],
-      question: ['', Validators.required],
-      answer: ['']
+      // type: ['Shipping', Validators.required],
+      Question: ['', Validators.required],
+      Answer: ['']
     })
   }
 
