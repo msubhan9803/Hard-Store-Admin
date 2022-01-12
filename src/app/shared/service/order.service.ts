@@ -33,13 +33,13 @@ export class OrderService {
 
   // GET: updateOrderStatus
   public updateOrderStatus(payload) {
-    let url = this._env.urlAddress + 'order/updateOrderStatus';
+    let url = this._env.urlAddress + 'order/UpdateOrderStatus';
     return this.http.put(url, payload);
   }
 
   // GET: order/getOrderbyId/
-  public getOrderbyId(orderId) {
-    let url = this._env.urlAddress + 'order/getOrderbyId/' + orderId;
+  public getOrderbyId(orderNumber) {
+    let url = this._env.urlAddress + 'order/GetOrderByOrderNumber/' + orderNumber;
 
     return this.http.get(url);
   }

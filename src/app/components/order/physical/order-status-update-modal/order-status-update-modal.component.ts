@@ -118,7 +118,7 @@ export class OrderStatusUpdateModalComponent implements OnInit {
 
       let payload = {
         orderId: this.order._id,
-        current_status: this.current_Status,
+        current_Status: this.current_Status,
         status: this.tracking_Status[this.current_Status].completed ? "completed" :
           this.tracking_Status[this.current_Status].cancelled ? "cancelled" : ""
         // "comment":"customer not picked it "

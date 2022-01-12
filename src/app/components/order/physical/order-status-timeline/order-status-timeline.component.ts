@@ -115,7 +115,13 @@ export class OrderStatusTimelineComponent implements OnInit {
           }
         });
 
-        this.product_List = res.products;
+        this.product_List = res.Products;
+
+        this.total = 0;
+        this.product_List.forEach(product => {
+          this.total += product.sale ? (product.amount - product.discount) * product.quantity : product.amount * product.quantity;
+        })
+
         this.showTimeLine = true;
         this.showProducts = true;
       },

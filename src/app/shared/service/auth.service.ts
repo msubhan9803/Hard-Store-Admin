@@ -29,7 +29,7 @@ export class AuthService {
     email: string;
     password: string;
   }) {
-    let url = this._env.urlAddress + 'userLogin';
+    let url = this._env.urlAddress + '/user/loginUser';
     let body = payload;
 
     return this.http.post(url, body);
