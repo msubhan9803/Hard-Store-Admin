@@ -6,8 +6,10 @@ export const environment = {
   production: false,
   // urlAddress: 'http://uaeslimmers.com/api/',
   // imageAddress: 'http://uaeslimmers.com/uploads/',
-  urlAddress: 'http://localhost:7171/api/',
-  imageAddress: 'http://localhost:7171/'
+  // urlAddress: 'http://localhost:7171/api/',
+  // imageAddress: 'http://localhost:7171/'
+  urlAddress: 'https://www.hardtaker.com/api/',
+  imageAddress: 'https://www.hardtaker.com/uploads/',
 };
 
 /*
