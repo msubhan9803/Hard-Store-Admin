@@ -5,25 +5,50 @@
         <div class="row m-4">
           <div class="col-12">
             <h5 class="text-bold">Title</h5>
-            <input class="form-control" id="validationCustom01" type="text" formControlName="title">
-            <div *ngIf="isSubmit && blogForm.controls.title.errors?.required" class="text text-danger">
+            <input
+              class="form-control"
+              id="validationCustom01"
+              type="text"
+              formControlName="title"
+            />
+            <div
+              *ngIf="isSubmit && blogForm.controls.title.errors?.required"
+              class="text text-danger"
+            >
               Title is required.
             </div>
           </div>
           <div class="col-6">
             <h5 class="text-bold">Slug</h5>
-            <input class="form-control" id="validationCustom01" type="text" formControlName="slug">
-            <div *ngIf="isSubmit && blogForm.controls.slug.errors?.required" class="text text-danger">
+            <input
+              class="form-control"
+              id="validationCustom01"
+              type="text"
+              formControlName="slug"
+            />
+            <div
+              *ngIf="isSubmit && blogForm.controls.slug.errors?.required"
+              class="text text-danger"
+            >
               Slug is required.
             </div>
           </div>
           <div class="col-6">
             <label for="exampleFormControlSelect1">Tags: </label>
-            <ng-select [items]="this.blogForm.value.collections" formControlName="tags" [addTag]="addTagFn"
-              [hideSelected]="true" multiple="true" bindLabel="name">
+            <ng-select
+              [items]="this.blogForm.value.collections"
+              formControlName="tags"
+              [addTag]="addTagFn"
+              [hideSelected]="true"
+              multiple="true"
+              bindLabel="name"
+            >
             </ng-select>
 
-            <div *ngIf="isSubmit && blogForm.value.tags.length == 0" class="text text-danger">
+            <div
+              *ngIf="isSubmit && blogForm.value.tags.length == 0"
+              class="text text-danger"
+            >
               Atleast 1 tag is required.
             </div>
           </div>
@@ -32,36 +57,78 @@
           <div class="col-12">
             <h5 class="text-bold">Header Image</h5>
             <div>
-              <input style="display: none;" type="file" id="blog-img" #file (change)="fileProgress($event)">
-              <button class="btn btn-outline-light btn-upload-custom" (click)="file.click()">
-                <i class="fa fa-upload" style="color: #069;" aria-hidden="true"></i>
+              <input
+                style="display: none"
+                type="file"
+                id="blog-img"
+                #file
+                (change)="fileProgress($event)"
+              />
+              <button
+                class="btn btn-outline-light btn-upload-custom"
+                (click)="file.click()"
+              >
+                <i
+                  class="fa fa-upload"
+                  style="color: #069"
+                  aria-hidden="true"
+                ></i>
                 Upload
               </button>
             </div>
             <div *ngIf="previewUrl" class="image-preview mt-3">
-              <img [src]="previewUrl" style="height: 10rem;margin-right:7rem" height="300" class="img-thumbnail" />
+              <img
+                [src]="previewUrl"
+                style="height: 10rem; margin-right: 7rem"
+                height="300"
+                class="img-thumbnail"
+              />
             </div>
           </div>
         </div>
 
-        <hr style="width: 75%;" />
+        <hr style="width: 75%" />
 
         <div class="row m-4">
           <div class="col-12">
             <h5 class="text-bold">Blog</h5>
             <div class="product-page-details product-right mb-0">
-              <angular-editor [config]="config" [placeholder]="'Enter text here...'" formControlName="description">
-              </angular-editor>
+              <!-- <angular-editor
+                [config]="config"
+                [placeholder]="'Enter text here...'"
+                formControlName="description"
+              >
+              </angular-editor> -->
+
+              <quill-editor
+                formControlName="description"
+                placeholder="Enter Text"
+                [modules]="modules"
+                (onSelectionChanged)="onSelectionChanged($event)"
+                (onContentChanged)="onContentChanged($event)"
+                [styles]="{ height: '250px' }"
+              ></quill-editor>
             </div>
-            <div *ngIf="isSubmit && blogForm.controls.description.errors?.required" class="text text-danger">
+            <div
+              *ngIf="isSubmit && blogForm.controls.description.errors?.required"
+              class="text text-danger"
+            >
               Description is required.
             </div>
           </div>
         </div>
 
         <div class="row justify-content-end mt-4">
-          <button type="button" (click)="onSubmit()" class="btn btn-primary">Save</button>
-          <button type="button" class="btn btn-light" [routerLink]="['/blogs/blog-list']">Discard</button>
+          <button type="button" (click)="onSubmit()" class="btn btn-primary">
+            Save
+          </button>
+          <button
+            type="button"
+            class="btn btn-light"
+            [routerLink]="['/blogs/blog-list']"
+          >
+            Discard
+          </button>
         </div>
       </div>
     </form>

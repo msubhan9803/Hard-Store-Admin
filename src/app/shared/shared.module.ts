@@ -38,7 +38,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
 import { AedToDollarPipe } from './pipes/aed-to-dollar.pipe';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { QuillModule } from 'ngx-quill';
 @NgModule({
   declarations: [
     ToggleFullscreenDirective,
@@ -67,7 +67,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     BarRatingModule,
     TimeagoModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    QuillModule.forRoot()
   ],
   providers: [
     NavService,
@@ -99,7 +100,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     AedToDollarPipe,
     UpdateCurrencyModalComponent,
     BarRatingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    QuillModule
   ]
 })
 export class SharedModule { }
