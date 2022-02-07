@@ -64,6 +64,14 @@ export class ProductService {
     return this.http.put(url, productObj);
   }
 
+  // DEl: product/deleteProduct
+  public deleteProduct(productId: any) {
+    let url = this._env.urlAddress + 'product/deleteProduct/' + productId;
+    // let body = JSON.stringify(productObj);
+
+    return this.http.delete(url);
+  }
+
   // POST: product/UploadProductImg
   public updateProductImage(productObj: any) {
     let url = this._env.urlAddress + 'product/UploadProductImg';
