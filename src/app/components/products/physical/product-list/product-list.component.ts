@@ -62,4 +62,27 @@ export class ProductListComponent implements OnInit {
       }
     })
   }
+
+  deleteProduct(id) {
+    Swal.fire({
+      title: 'Are you sure?',
+      showDenyButton: true,
+      confirmButtonText: `Yes`,
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productsService.deleteProduct(id).subscribe(
+          res => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Successfully deleted product',
+              showConfirmButton: false,
+              timer: 1500
+            });
+            window.location.reload();
+          }
+        )
+      }
+    })
+  }
 }

@@ -13,28 +13,61 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="" *ngFor="let product of product_list | slice: (page-1) * pageSize : page * pageSize; let arrayIndex = index">
+            <tr
+              class=""
+              *ngFor="
+                let product of product_list
+                  | slice: (page - 1) * pageSize:page * pageSize;
+                let arrayIndex = index
+              "
+            >
               <td class="p-3 w-25">{{ product.title }}</td>
               <td class="p-3">{{ product.brand }}</td>
               <td class="p-3">
-                <img src="{{ this.imageAddress + product.images[0].URL }}"
-                  width="150" />
+                <img
+                  src="{{ this.imageAddress + product.images[0].URL }}"
+                  width="150"
+                />
               </td>
-              <td class="p-3" style="width: 30px;">
-                <ng-toggle [(ngModel)]="product.sale" (click)="activeSale(product._id, !product.sale)" [color]="{unchecked: '#939da2', checked: '#6cf241'}" [width]="35"
-                  [height]="15"></ng-toggle>
+              <td class="p-3" style="width: 30px">
+                <ng-toggle
+                  [(ngModel)]="product.sale"
+                  (click)="activeSale(product._id, !product.sale)"
+                  [color]="{ unchecked: '#939da2', checked: '#6cf241' }"
+                  [width]="35"
+                  [height]="15"
+                ></ng-toggle>
               </td>
               <td class="p-3" style="padding: 3px !important; width: 20px">
-                <button class="btn btn-ghost-info" [routerLink]="['/products/physical/edit-product' , product._id]"
-                  type="button" title="Click here! for editing">
+                <button
+                  class="btn btn-ghost-info"
+                  [routerLink]="[
+                    '/products/physical/edit-product',
+                    product._id
+                  ]"
+                  type="button"
+                  title="Click here! for editing"
+                >
                   <i class="fa fa-edit"></i>
+                </button>
+                <button
+                  class="btn btn-ghost-info"
+                  (click)="deleteProduct(product._id)"
+                  type="button"
+                  title="Delete Product"
+                >
+                  <i class="fa fa-trash"></i>
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
         <div class="float-right">
-          <ngb-pagination [collectionSize]="this.product_list.length" [(page)]="page" aria-label="Default pagination">
+          <ngb-pagination
+            [collectionSize]="this.product_list.length"
+            [(page)]="page"
+            aria-label="Default pagination"
+          >
           </ngb-pagination>
         </div>
       </div>
